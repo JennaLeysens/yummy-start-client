@@ -15,6 +15,14 @@ export default function Recipes() {
   return (
     <div>
       <h1>Recipes</h1>
+      {recipes.map((recipe, i) => {
+        return (
+          <div>
+            {recipe.title}{" "}
+            <img key={i} alt="recipe" height="300px" src={recipe.imageURL} />
+          </div>
+        );
+      })}
     </div>
   );
 }
