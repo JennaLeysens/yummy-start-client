@@ -10,6 +10,12 @@ export default function Recipes() {
   const recipes = useSelector(selectRecipes);
   console.log("all recipes", recipes);
 
+  // const tags = recipes.tags
+  //   ? recipes.tags.map((tag) => {
+  //       return tag.title;
+  //     })
+  //   : null;
+
   useEffect(() => {
     dispatch(fetchRecipes());
   }, [dispatch]);
@@ -31,6 +37,9 @@ export default function Recipes() {
               </Link>
               <div>
                 <strong>{recipe.title}</strong>
+                {recipe.tags.map((tag) => {
+                  return <button>{tag.title}</button>;
+                })}
                 <p>Whipped up by: {recipe.user.name}</p>
                 <span role="img" aria-label="heart">
                   🤍
