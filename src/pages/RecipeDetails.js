@@ -17,6 +17,11 @@ export default function RecipeDetails() {
   return (
     <div>
       <h2>{recipe.title}</h2>
+      {recipe.tags
+        ? recipe.tags.map((tag) => {
+            return <button>{tag.title}</button>;
+          })
+        : null}
       <p>{recipe.description}</p>
       <img alt="recipe" height="500px" src={recipe.imageURL} />
       <p>
