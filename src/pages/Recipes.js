@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import { fetchRecipes } from "../store/Recipes/actions";
 import { selectRecipes } from "../store/Recipes/selectors";
 import "./Recipes.css";
@@ -20,7 +21,14 @@ export default function Recipes() {
         {recipes.map((recipe, i) => {
           return (
             <div className="recipe">
-              <img key={i} alt="recipe" height="250px" src={recipe.imageURL} />{" "}
+              <Link to={`/recipes/${recipe.id}`}>
+                <img
+                  key={i}
+                  alt="recipe"
+                  height="250px"
+                  src={recipe.imageURL}
+                />
+              </Link>
               <div>
                 <strong>{recipe.title}</strong>
                 <p>Whipped up by: {recipe.user.name}</p>
