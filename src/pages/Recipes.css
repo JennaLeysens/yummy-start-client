@@ -1,0 +1,20 @@
+.container {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  text-align: center;
+}
+.recipe {
+  margin: 1em;
+  width: 250px;
+  height: 250px;
+
+  padding: 3px;
+  background-size: cover;
+}
+
+.overlay {
+  background: rgba(116, 114, 114, 0.6);
+  padding: 0.6rem;
+  color: white;
+}

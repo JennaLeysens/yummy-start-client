@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchRecipes } from "../store/recipes/actions";
 import { selectRecipes } from "../store/recipes/selectors";
+import "./Recipes.css";
 
 export default function Recipes() {
   const dispatch = useDispatch();
@@ -15,14 +16,18 @@ export default function Recipes() {
   return (
     <div>
       <h1>Recipes</h1>
-      {recipes.map((recipe, i) => {
-        return (
-          <div>
-            {recipe.title}{" "}
-            <img key={i} alt="recipe" height="300px" src={recipe.imageURL} />
-          </div>
-        );
-      })}
+      <div className="container">
+        {recipes.map((recipe, i) => {
+          return (
+            <div className="recipe">
+              <img key={i} alt="recipe" height="250px" src={recipe.imageURL} />{" "}
+              <div className="overlay">
+                <strong>{recipe.title}</strong>
+              </div>
+            </div>
+          );
+        })}{" "}
+      </div>
     </div>
   );
 }
