@@ -19,7 +19,14 @@ export default function RecipeDetails() {
       <h2>{recipe.title}</h2>
       <p>{recipe.description}</p>
       <img alt="recipe" height="500px" src={recipe.imageURL} />
-      <p>Whipped up by: {recipe.user ? recipe.user.name : null}</p>
+      <p>
+        Whipped up by: {recipe.user ? recipe.user.name : null}
+        <span role="img" aria-label="heart">
+          🤍
+        </span>
+        {recipe.likes}
+      </p>
+
       <p>{recipe.ingredients}</p>
       <p>{recipe.method}</p>
     </div>
