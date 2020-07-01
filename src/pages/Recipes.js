@@ -3,18 +3,31 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { fetchRecipes } from "../store/Recipes/actions";
 import { selectRecipes } from "../store/Recipes/selectors";
+import { fetchTags } from "../store/Tags/actions";
+import { selectTags } from "../store/Tags/selectors";
 import "./Recipes.css";
 
 export default function Recipes() {
   const dispatch = useDispatch();
   const recipes = useSelector(selectRecipes);
   console.log("all recipes", recipes);
+  const tags = useSelector(selectTags);
 
-  // const tags = recipes.tags
-  //   ? recipes.tags.map((tag) => {
-  //       return tag.title;
-  //     })
-  //   : null;
+  const allTags = recipes
+    ? recipes.map((rec) => {
+        return rec.tags;
+      })
+    : null;
+
+  console.log(allTags.flat());
+  // const recTags = newArray.map((tag) => {
+  //   return tag.title;
+  // });
+  // console.log("grdfdfd", recTags);
+
+  useEffect(() => {
+    dispatch(fetchTags());
+  }, [dispatch]);
 
   useEffect(() => {
     dispatch(fetchRecipes());
@@ -23,6 +36,11 @@ export default function Recipes() {
   return (
     <div>
       <h1>Recipes</h1>
+      {tags
+        ? tags.map((tag) => {
+            return <button>{tag.title}</button>;
+          })
+        : null}
       <div className="container">
         {recipes.map((recipe, i) => {
           return (
