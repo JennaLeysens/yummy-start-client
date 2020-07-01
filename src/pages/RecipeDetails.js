@@ -14,5 +14,14 @@ export default function RecipeDetails() {
     dispatch(fetchOneRecipe(id));
   }, [dispatch, id]);
 
-  return <div>{recipe.title}</div>;
+  return (
+    <div>
+      <h2>{recipe.title}</h2>
+      <p>{recipe.description}</p>
+      <img alt="recipe" height="500px" src={recipe.imageURL} />
+      <p>Whipped up by: {recipe.user ? recipe.user.name : null}</p>
+      <p>{recipe.ingredients}</p>
+      <p>{recipe.method}</p>
+    </div>
+  );
 }
