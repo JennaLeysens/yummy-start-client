@@ -14,5 +14,5 @@ export default function RecipeDetails() {
     dispatch(fetchOneRecipe(id));
   }, [dispatch, id]);
 
-  return <div></div>;
+  return <div>{recipe.title}</div>;
 }
