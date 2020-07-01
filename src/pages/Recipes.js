@@ -32,6 +32,10 @@ export default function Recipes() {
               <div>
                 <strong>{recipe.title}</strong>
                 <p>Whipped up by: {recipe.user.name}</p>
+                <span role="img" aria-label="heart">
+                  🤍
+                </span>
+                {recipe.likes}
               </div>
             </div>
           );
