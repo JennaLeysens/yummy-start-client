@@ -20,9 +20,10 @@ export default function Recipes() {
         {recipes.map((recipe, i) => {
           return (
             <div className="recipe">
-              <img key={i} alt="recipe" height="250px" src={recipe.imageURL} />{" "}
-              <div className="overlay">
+              <img key={i} alt="recipe" height="350px" src={recipe.imageURL} />{" "}
+              <div>
                 <strong>{recipe.title}</strong>
+                <p>Whipped up by: {recipe.user.name}</p>
               </div>
             </div>
           );
