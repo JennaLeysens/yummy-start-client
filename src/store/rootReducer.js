@@ -1,5 +1,5 @@
 import { combineReducers } from "redux";
-import recipesSliceReducer from "./recipes/reducer";
+import recipesSliceReducer from "./Recipes/reducer";
 
 const reducer = combineReducers({
   recipes: recipesSliceReducer,
