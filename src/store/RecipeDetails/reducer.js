@@ -9,6 +9,11 @@ export default function oneRecipeSliceReducer(state = initialState, action) {
         ...state,
         recipe: action.payload,
       };
+    case "ADD_LIKE":
+      return {
+        ...state,
+        recipe: { ...state.recipe, likes: state.recipe.recipe + 1 },
+      };
     default:
       return state;
   }
