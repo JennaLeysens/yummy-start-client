@@ -1,14 +1,51 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { fetchRecipes } from "../store/Recipes/actions";
 import { selectRecipes } from "../store/Recipes/selectors";
+import { fetchTags } from "../store/Tags/actions";
+import { selectTags } from "../store/Tags/selectors";
 import "./Recipes.css";
 
 export default function Recipes() {
   const dispatch = useDispatch();
   const recipes = useSelector(selectRecipes);
   console.log("all recipes", recipes);
+  const tags = useSelector(selectTags);
+  const [sortLikes, setSortLikes] = useState();
+  const [filter, setFilter] = useState();
+
+  const compareLikes = (recipeA, recipeB) => {
+    return recipeB.likes - recipeA.likes;
+  };
+
+  // // const sortedProducts = recipes.sort(compareLikes);
+  // console.log("LLLL", sortedProducts);
+
+  const allTags = recipes
+    ? recipes.map((rec) => {
+        return rec.tags;
+      })
+    : null;
+
+  const theTags = allTags.flat().map((tag) => {
+    return tag.recipeTags;
+  });
+  console.log(theTags);
+
+  const filteredRecipes = recipes.filter((recipe) =>
+    recipe.tags.some((tag) => tag.id === 1)
+  );
+  console.log("1", filteredRecipes);
+
+  // const recTags = newArray.map((tag) => {
+  //   return tag.title;
+  // });
+  // console.log("grdfdfd", recTags);
+
+  useEffect(() => {
+    dispatch(fetchTags());
+  }, [dispatch]);
 
   useEffect(() => {
     dispatch(fetchRecipes());
@@ -17,6 +54,15 @@ export default function Recipes() {
   return (
     <div>
       <h1>Recipes</h1>
+      {tags
+        ? tags.map((tag) => {
+            return <button>{tag.title}</button>;
+          })
+        : null}
+      <select onChange={() => setSortLikes(recipes.sort(compareLikes))}>
+        <option>Sort by</option>
+        <option value={sortLikes}>Most popular</option>
+      </select>
       <div className="container">
         {recipes.map((recipe, i) => {
           return (
@@ -31,11 +77,17 @@ export default function Recipes() {
               </Link>
               <div>
                 <strong>{recipe.title}</strong>
+                {recipe.tags.map((tag) => {
+                  return <button>{tag.title}</button>;
+                })}
                 <p>Whipped up by: {recipe.user.name}</p>
                 <span role="img" aria-label="heart">
                   🤍
                 </span>
                 {recipe.likes}
+                <p>
+                  <strong>Cooking time:</strong> {recipe.cookingTime}
+                </p>
               </div>
             </div>
           );
