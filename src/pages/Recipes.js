@@ -13,7 +13,7 @@ export default function Recipes() {
   console.log("all recipes", recipes);
   const tags = useSelector(selectTags);
   const [sortLikes, setSortLikes] = useState();
-  const [filter, setFilter] = useState();
+  const [selectedTag, setSelectedTag] = useState();
 
   const compareLikes = (recipeA, recipeB) => {
     return recipeB.likes - recipeA.likes;
@@ -33,9 +33,11 @@ export default function Recipes() {
   });
   console.log(theTags);
 
-  const filteredRecipes = recipes.filter((recipe) =>
-    recipe.tags.some((tag) => tag.id === 1)
-  );
+  const filteredRecipes = selectedTag
+    ? recipes.filter((recipe) =>
+        recipe.tags.some((tag) => tag.id === selectedTag.id)
+      )
+    : recipes;
   console.log("1", filteredRecipes);
 
   // const recTags = newArray.map((tag) => {
@@ -56,15 +58,21 @@ export default function Recipes() {
       <h1>Recipes</h1>
       {tags
         ? tags.map((tag) => {
-            return <button>{tag.title}</button>;
+            return (
+              <button onClick={() => setSelectedTag(tag)}>{tag.title}</button>
+            );
           })
         : null}
-      <select onChange={() => setSortLikes(recipes.sort(compareLikes))}>
+      <select
+        onChange={(event) =>
+          setSortLikes(filteredRecipes.sort(compareLikes), console.log(event))
+        }
+      >
         <option>Sort by</option>
         <option value={sortLikes}>Most popular</option>
       </select>
       <div className="container">
-        {recipes.map((recipe, i) => {
+        {filteredRecipes.map((recipe, i) => {
           return (
             <div className="recipe">
               <Link to={`/recipes/${recipe.id}`}>

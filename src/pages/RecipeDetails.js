@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { fetchOneRecipe } from "../store/RecipeDetails/actions";
+import { fetchOneRecipe, addLike } from "../store/RecipeDetails/actions";
 import { selectRecipe } from "../store/RecipeDetails/selectors";
 
 export default function RecipeDetails() {
@@ -26,10 +26,12 @@ export default function RecipeDetails() {
       <img alt="recipe" height="500px" src={recipe.imageURL} />
       <p>
         Whipped up by: {recipe.user ? recipe.user.name : null}
-        <span role="img" aria-label="heart">
-          🤍
-        </span>
-        {recipe.likes}
+        <button onClick={() => dispatch(addLike())}>
+          <span role="img" aria-label="heart">
+            🤍
+          </span>{" "}
+          {recipe.likes}
+        </button>
       </p>
 
       <p>{recipe.ingredients}</p>
