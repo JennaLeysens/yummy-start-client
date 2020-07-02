@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { fetchRecipes } from "../store/Recipes/actions";
@@ -12,6 +12,15 @@ export default function Recipes() {
   const recipes = useSelector(selectRecipes);
   console.log("all recipes", recipes);
   const tags = useSelector(selectTags);
+  const [sortLikes, setSortLikes] = useState();
+  const [filter, setFilter] = useState();
+
+  const compareLikes = (recipeA, recipeB) => {
+    return recipeB.likes - recipeA.likes;
+  };
+
+  // // const sortedProducts = recipes.sort(compareLikes);
+  // console.log("LLLL", sortedProducts);
 
   const allTags = recipes
     ? recipes.map((rec) => {
@@ -19,7 +28,16 @@ export default function Recipes() {
       })
     : null;
 
-  console.log(allTags.flat());
+  const theTags = allTags.flat().map((tag) => {
+    return tag.recipeTags;
+  });
+  console.log(theTags);
+
+  const filteredRecipes = recipes.filter((recipe) =>
+    recipe.tags.some((tag) => tag.id === 1)
+  );
+  console.log("1", filteredRecipes);
+
   // const recTags = newArray.map((tag) => {
   //   return tag.title;
   // });
@@ -41,6 +59,10 @@ export default function Recipes() {
             return <button>{tag.title}</button>;
           })
         : null}
+      <select onChange={() => setSortLikes(recipes.sort(compareLikes))}>
+        <option>Sort by</option>
+        <option value={sortLikes}>Most popular</option>
+      </select>
       <div className="container">
         {recipes.map((recipe, i) => {
           return (
@@ -63,6 +85,9 @@ export default function Recipes() {
                   🤍
                 </span>
                 {recipe.likes}
+                <p>
+                  <strong>Cooking time:</strong> {recipe.cookingTime}
+                </p>
               </div>
             </div>
           );
