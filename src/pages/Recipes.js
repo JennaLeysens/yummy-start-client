@@ -56,6 +56,7 @@ export default function Recipes() {
   return (
     <div>
       <h1>Recipes</h1>
+      <button onClick={() => setSelectedTag(null)}>All recipes</button>
       {tags
         ? tags.map((tag) => {
             return (
