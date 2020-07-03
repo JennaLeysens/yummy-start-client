@@ -1,5 +1,6 @@
 import axios from "axios";
 import { apiUrl } from "../../config/constants";
+import { selectToken } from "../User/selectors";
 
 export function userLoggedIn(data) {
   return { type: "LOGIN-SUCCESS", payload: data };
@@ -65,14 +66,19 @@ export function addRecipe(
   cookingTime
 ) {
   return async (dispatch, getState) => {
-    const response = await axios.post(`${apiUrl}/recipes`, {
-      title,
-      imageURL,
-      description,
-      ingredients,
-      method,
-      cookingTime,
-    });
+    const token = selectToken(getState());
+    const response = await axios.post(
+      `${apiUrl}/`,
+      {
+        title,
+        imageURL,
+        description,
+        ingredients,
+        method,
+        cookingTime,
+      },
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
     console.log("add recipe", response);
     dispatch(newRecipeAdded(response.data));
   };
