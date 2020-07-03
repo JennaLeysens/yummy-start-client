@@ -27,7 +27,7 @@ export default function Login() {
   return (
     <div>
       <h1>Login</h1>
-
+      <h3>If you want to post a recipe, please login </h3>
       <form>
         Email
         <input value={email} onChange={(e) => setEmail(e.target.value)}></input>

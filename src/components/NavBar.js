@@ -4,10 +4,12 @@ import "./NavBar.css";
 import { logOut } from "../store/User/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { selectToken } from "../store/User/selectors";
+import { selectUser } from "../store/User/selectors";
 
 export default function NavBar() {
   const dispatch = useDispatch();
   const token = useSelector(selectToken);
+  const user = useSelector(selectUser);
 
   return (
     <div>
@@ -43,15 +45,27 @@ export default function NavBar() {
           }}
         >
           Our foodosophy
-        </NavLink>
-        {token ? (
-          <button onClick={() => dispatch(logOut())}>Logout</button>
-        ) : (
-          <Link to="/login">
-            <button>Login</button>
-          </Link>
-        )}
+        </NavLink>{" "}
       </div>
+      {token ? (
+        <div className="NavBar">
+          <NavLink
+            exact
+            to="/myprofile"
+            activeStyle={{
+              fontWeight: "bold",
+            }}
+          >
+            {user.name}'s Kitchen
+          </NavLink>
+          <button onClick={() => dispatch(logOut())}>Logout</button>{" "}
+        </div>
+      ) : (
+        <Link to="/login">
+          <button>Login</button>
+        </Link>
+      )}
+
       <div className="NavBar"></div>
     </div>
   );
