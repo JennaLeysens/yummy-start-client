@@ -95,7 +95,9 @@ export default function Recipes() {
                 {recipe.tags.map((tag) => {
                   return <button>{tag.title}</button>;
                 })}
-                <p>Whipped up by: {recipe.user.name}</p>
+                <p>
+                  <strong>Whipped up by:</strong> {recipe.user.name}
+                </p>
                 <span role="img" aria-label="heart">
                   🤍
                 </span>
