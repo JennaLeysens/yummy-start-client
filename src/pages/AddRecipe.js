@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addRecipe } from "../store/User/actions";
+import { selectToken } from "../store/User/selectors";
+import { useHistory } from "react-router-dom";
 
 export default function AddRecipe() {
   const [title, setTitle] = useState();
@@ -11,6 +13,12 @@ export default function AddRecipe() {
   const [cookingTime, setCookingTime] = useState();
   const [submitted, setSubmitted] = useState(false);
   const dispatch = useDispatch();
+  const token = useSelector(selectToken);
+  const history = useHistory();
+
+  if (!token) {
+    history.push("/login");
+  }
 
   function submitForm(e) {
     e.preventDefault();
@@ -62,12 +70,13 @@ export default function AddRecipe() {
         >
           <option>15</option>
           <option>30</option>
+          <option>45</option>
           <option>60</option>
           <option>90</option>
-          <option>120+</option>
+          <option>120</option>
         </select>
       </form>
-      <button onClick={submitForm}>Post recipe</button>
+      <button onClick={submitForm}>Post recipe</button>{" "}
     </div>
   );
 }

@@ -1,0 +1,13 @@
+.NavBar {
+  display: inline;
+  font-family: "Verdana";
+  color: "grey";
+  padding-left: 6px;
+  padding-right: 6px;
+  background-color: white;
+  border-right: 1px solid #bbb;
+}
+
+.NavBar:last-child {
+  border-right: none;
+}
