@@ -1,15 +1,19 @@
 import axios from "axios";
 import { apiUrl } from "../../config/constants";
 
-export function newRecipeAdded(data) {
-  return { type: "ADD_NEW_RECIPE", payload: data };
-}
-
 export function userLoggedIn(data) {
   return { type: "LOGIN-SUCCESS", payload: data };
 }
 
-export const login = (email, password) => {
+export function userLoggedOut() {
+  return { type: "LOG_OUT" };
+}
+
+export function newRecipeAdded(data) {
+  return { type: "ADD_NEW_RECIPE", payload: data };
+}
+
+export function login(email, password) {
   return async (dispatch, getState) => {
     try {
       const response = await axios.post(`${apiUrl}/login`, {
@@ -26,7 +30,11 @@ export const login = (email, password) => {
       }
     }
   };
-};
+}
+
+export function logOut() {
+  return { type: "LOG_OUT" };
+}
 
 export function addRecipe(
   title,

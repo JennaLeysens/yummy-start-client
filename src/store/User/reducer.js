@@ -10,6 +10,9 @@ export default function userSliceReducer(state = initialState, action) {
     case "LOGIN-SUCCESS":
       localStorage.setItem("token", action.payload.token);
       return { ...state, ...action.payload };
+    case "LOG_OUT":
+      localStorage.removeItem("token");
+      return { ...initialState, token: null };
     case "ADD_NEW_RECIPE":
       return {
         ...state,
