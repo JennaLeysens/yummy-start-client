@@ -6,7 +6,7 @@ export function storeOneRecipe(data) {
 }
 
 export function updateRecipe(data) {
-  return { type: "ADD_LIKET", payload: data };
+  return { type: "ADD_LIKE", payload: data };
 }
 
 export function fetchOneRecipe(id) {
@@ -22,7 +22,7 @@ export function addLike() {
     const recipe = getState().recipe.recipe;
     console.log("add like action", recipe);
     const response = await axios.patch(`${apiUrl}/recipes/like/${recipe.id}`);
-    console.log("like", response);
-    dispatch(updateRecipe(response));
+    console.log("like", response.data);
+    dispatch(updateRecipe(response.data));
   };
 }

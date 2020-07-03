@@ -25,16 +25,21 @@ export default function RecipeDetails() {
       <p>{recipe.description}</p>
       <img alt="recipe" height="500px" src={recipe.imageURL} />
       <p>
-        Whipped up by: {recipe.user ? recipe.user.name : null}
+        <strong>Whipped up by:</strong> {recipe.user ? recipe.user.name : null}{" "}
         <button onClick={() => dispatch(addLike())}>
           <span role="img" aria-label="heart">
             🤍
-          </span>{" "}
+          </span>
           {recipe.likes}
         </button>
       </p>
-
+      <p>
+        <strong>Ingredients</strong>
+      </p>
       <p>{recipe.ingredients}</p>
+      <p>
+        <strong>Method</strong>
+      </p>
       <p>{recipe.method}</p>
     </div>
   );
