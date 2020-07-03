@@ -6,6 +6,8 @@ import { selectRecipes } from "../store/Recipes/selectors";
 import { fetchTags } from "../store/Tags/actions";
 import { selectTags } from "../store/Tags/selectors";
 import "./Recipes.css";
+import { logOut } from "../store/User/actions";
+import { selectToken } from "../store/User/selectors";
 
 export default function Recipes() {
   const dispatch = useDispatch();
@@ -14,6 +16,7 @@ export default function Recipes() {
   const tags = useSelector(selectTags);
   const [sortLikes, setSortLikes] = useState();
   const [selectedTag, setSelectedTag] = useState();
+  const token = useSelector(selectToken);
 
   const compareLikes = (recipeA, recipeB) => {
     return recipeB.likes - recipeA.likes;
@@ -55,7 +58,10 @@ export default function Recipes() {
 
   return (
     <div>
-      <h1>Recipes</h1>
+      <h1>Recipes</h1>{" "}
+      {token ? (
+        <button onClick={() => dispatch(logOut())}>Logout</button>
+      ) : null}
       <button onClick={() => setSelectedTag(null)}>All recipes</button>
       {tags
         ? tags.map((tag) => {
