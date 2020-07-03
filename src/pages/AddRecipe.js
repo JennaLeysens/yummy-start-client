@@ -32,7 +32,7 @@ export default function AddRecipe() {
   return (
     <div>
       <h1>Add your recipe</h1>
-      <form>
+      <form className="form">
         Title
         <input value={title} onChange={(e) => setTitle(e.target.value)}></input>
         Image URL
@@ -55,11 +55,17 @@ export default function AddRecipe() {
           value={method}
           onChange={(e) => setMethod(e.target.value)}
         ></textarea>
-        Cooking time
-        <input
+        Cooking time (minutes)
+        <select
           value={cookingTime}
           onChange={(e) => setCookingTime(e.target.value)}
-        ></input>
+        >
+          <option>15</option>
+          <option>30</option>
+          <option>60</option>
+          <option>90</option>
+          <option>120+</option>
+        </select>
       </form>
       <button onClick={submitForm}>Post recipe</button>
     </div>
