@@ -61,9 +61,14 @@ export default function NavBar() {
           <button onClick={() => dispatch(logOut())}>Logout</button>{" "}
         </div>
       ) : (
-        <Link to="/login">
-          <button>Login</button>
-        </Link>
+        <>
+          <Link to="/signup">
+            <button>Create an account</button>
+          </Link>
+          <Link to="/login">
+            <button>Login</button>
+          </Link>
+        </>
       )}
 
       <div className="NavBar"></div>
