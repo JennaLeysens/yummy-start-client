@@ -6,7 +6,6 @@ import { selectRecipes } from "../store/Recipes/selectors";
 import { fetchTags } from "../store/Tags/actions";
 import { selectTags } from "../store/Tags/selectors";
 import "./Recipes.css";
-import { logOut } from "../store/User/actions";
 import { selectToken } from "../store/User/selectors";
 
 export default function Recipes() {
@@ -62,10 +61,10 @@ export default function Recipes() {
   console.log(filterIngredient);
 
   const searched = filterIngredient
-    ? recipes.filter((recipe) =>
+    ? filteredRecipes.filter((recipe) =>
         recipe.ingredients.some((ingredient) => ingredient.includes(search))
       )
-    : recipes;
+    : filteredRecipes;
   console.log("FILTERED", searched);
 
   useEffect(() => {
@@ -78,7 +77,7 @@ export default function Recipes() {
 
   return (
     <div>
-      <h1>Recipes</h1>{" "}
+      <h1>Recipes</h1>
       <button onClick={() => setSelectedTag(null)}>All recipes</button>
       {tags
         ? tags.map((tag) => {
