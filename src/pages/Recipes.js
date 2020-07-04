@@ -17,6 +17,7 @@ export default function Recipes() {
   const [sortLikes, setSortLikes] = useState();
   const [selectedTag, setSelectedTag] = useState();
   const token = useSelector(selectToken);
+  const [search, setSearch] = useState();
 
   const compareLikes = (recipeA, recipeB) => {
     return recipeB.likes - recipeA.likes;
@@ -47,6 +48,25 @@ export default function Recipes() {
   //   return tag.title;
   // });
   // console.log("grdfdfd", recTags);
+  const ingredients = recipes
+    ? recipes.map((recipe) => {
+        return recipe.ingredients;
+      })
+    : null;
+  console.log("ingredients", ingredients.flat());
+  const allIngredients = ingredients.flat();
+  const joined = allIngredients.join();
+  console.log(joined);
+
+  const filterIngredient = joined.includes(search);
+  console.log(filterIngredient);
+
+  const searched = filterIngredient
+    ? recipes.filter((recipe) =>
+        recipe.ingredients.some((ingredient) => ingredient.includes(search))
+      )
+    : recipes;
+  console.log("FILTERED", searched);
 
   useEffect(() => {
     dispatch(fetchTags());
@@ -59,9 +79,6 @@ export default function Recipes() {
   return (
     <div>
       <h1>Recipes</h1>{" "}
-      {token ? (
-        <button onClick={() => dispatch(logOut())}>Logout</button>
-      ) : null}
       <button onClick={() => setSelectedTag(null)}>All recipes</button>
       {tags
         ? tags.map((tag) => {
@@ -78,8 +95,14 @@ export default function Recipes() {
         <option>Sort by</option>
         <option value={sortLikes}>Most popular</option>
       </select>
+      <input
+        type="text"
+        placeholder="Search by ingredient"
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+      ></input>
       <div className="container">
-        {filteredRecipes.map((recipe, i) => {
+        {searched.map((recipe, i) => {
           return (
             <div className="recipe">
               <Link to={`/recipes/${recipe.id}`}>

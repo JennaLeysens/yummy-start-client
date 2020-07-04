@@ -8,7 +8,11 @@ export default function AddRecipe() {
   const [title, setTitle] = useState();
   const [imageURL, setImageURL] = useState();
   const [description, setDescription] = useState();
-  const [ingredients, setIngredients] = useState();
+  const [ingredient1, setIngredient1] = useState();
+  const [ingredient2, setIngredient2] = useState();
+  const [ingredient3, setIngredient3] = useState();
+  const [ingredient4, setIngredient4] = useState();
+  const [ingredient5, setIngredient5] = useState();
   const [method, setMethod] = useState();
   const [cookingTime, setCookingTime] = useState();
   const [submitted, setSubmitted] = useState(false);
@@ -19,6 +23,14 @@ export default function AddRecipe() {
   if (!token) {
     history.push("/login");
   }
+
+  const ingredients = [
+    ingredient1,
+    ingredient2,
+    ingredient3,
+    ingredient4,
+    ingredient5,
+  ];
 
   function submitForm(e) {
     e.preventDefault();
@@ -55,8 +67,29 @@ export default function AddRecipe() {
         ></textarea>
         Ingredients
         <input
-          value={ingredients}
-          onChange={(e) => setIngredients(e.target.value)}
+          placeholder="Ingredient 1"
+          value={ingredient1}
+          onChange={(e) => setIngredient1(e.target.value)}
+        ></input>
+        <input
+          placeholder="Ingredient 2"
+          value={ingredient2}
+          onChange={(e) => setIngredient2(e.target.value)}
+        ></input>
+        <input
+          placeholder="Ingredient 3"
+          value={ingredient3}
+          onChange={(e) => setIngredient3(e.target.value)}
+        ></input>
+        <input
+          placeholder="Ingredient 4"
+          value={ingredient4}
+          onChange={(e) => setIngredient4(e.target.value)}
+        ></input>
+        <input
+          placeholder="Ingredient 5"
+          value={ingredient5}
+          onChange={(e) => setIngredient5(e.target.value)}
         ></input>
         Method
         <textarea
@@ -68,6 +101,7 @@ export default function AddRecipe() {
           value={cookingTime}
           onChange={(e) => setCookingTime(e.target.value)}
         >
+          <option>Select</option>
           <option>15</option>
           <option>30</option>
           <option>45</option>
