@@ -7,6 +7,8 @@ import { fetchTags } from "../store/Tags/actions";
 import { selectTags } from "../store/Tags/selectors";
 import "./Recipes.css";
 import { selectToken } from "../store/User/selectors";
+import { selectUser } from "../store/User/selectors";
+import { addToFavourites } from "../store/User/actions";
 
 export default function Recipes() {
   const dispatch = useDispatch();
@@ -16,7 +18,9 @@ export default function Recipes() {
   const [sortLikes, setSortLikes] = useState();
   const [selectedTag, setSelectedTag] = useState();
   const token = useSelector(selectToken);
+  const user = useSelector(selectUser);
   const [search, setSearch] = useState();
+  const [id, setId] = useState();
 
   const compareLikes = (recipeA, recipeB) => {
     return recipeB.likes - recipeA.likes;
@@ -34,38 +38,51 @@ export default function Recipes() {
   const theTags = allTags.flat().map((tag) => {
     return tag.recipeTags;
   });
-  console.log(theTags);
 
   const filteredRecipes = selectedTag
     ? recipes.filter((recipe) =>
         recipe.tags.some((tag) => tag.id === selectedTag.id)
       )
     : recipes;
-  console.log("1", filteredRecipes);
 
-  // const recTags = newArray.map((tag) => {
-  //   return tag.title;
-  // });
-  // console.log("grdfdfd", recTags);
   const ingredients = recipes
     ? recipes.map((recipe) => {
         return recipe.ingredients;
       })
     : null;
-  console.log("ingredients", ingredients.flat());
+
   const allIngredients = ingredients.flat();
   const joined = allIngredients.join();
-  console.log(joined);
 
   const filterIngredient = joined.includes(search);
-  console.log(filterIngredient);
 
   const searched = filterIngredient
     ? filteredRecipes.filter((recipe) =>
         recipe.ingredients.some((ingredient) => ingredient.includes(search))
       )
     : filteredRecipes;
-  console.log("FILTERED", searched);
+
+  const userFavs = user.favourites
+    ? user.favourites.map((recipe) => {
+        return recipe.recipeId;
+      })
+    : null;
+  console.log("FAAAAVS", user.favourites);
+
+  const checkFav = (recipe) => {
+    if (userFavs ? userFavs.includes(recipe.id) : null) {
+      return "🍩";
+    } else {
+      return "🥦";
+    }
+  };
+
+  const userId = user.id;
+
+  function favClicked(recipeId) {
+    console.log(recipeId);
+    dispatch(addToFavourites(recipeId));
+  }
 
   useEffect(() => {
     dispatch(fetchTags());
@@ -104,6 +121,16 @@ export default function Recipes() {
         {searched.map((recipe, i) => {
           return (
             <div className="recipe">
+              <div>
+                {token ? (
+                  <button
+                    className="button"
+                    onClick={() => favClicked(recipe.id)}
+                  >
+                    {checkFav(recipe)}
+                  </button>
+                ) : null}
+              </div>
               <Link to={`/recipes/${recipe.id}`}>
                 <img
                   key={i}

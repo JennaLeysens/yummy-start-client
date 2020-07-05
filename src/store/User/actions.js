@@ -1,6 +1,6 @@
 import axios from "axios";
 import { apiUrl } from "../../config/constants";
-import { selectToken } from "../User/selectors";
+import { selectToken, selectUser } from "../User/selectors";
 
 export function userLoggedIn(data) {
   return { type: "LOGIN-SUCCESS", payload: data };
@@ -16,6 +16,9 @@ export function userLoggedOut() {
 
 export function newRecipeAdded(data) {
   return { type: "ADD_NEW_RECIPE", payload: data };
+}
+export function newFavouriteAdded(data) {
+  return { type: "TOGGLE_FAVOURITE_RECIPE", payload: data };
 }
 
 export function login(email, password) {
@@ -107,5 +110,23 @@ export function addRecipe(
     );
     console.log("add recipe", response);
     dispatch(newRecipeAdded(response.data));
+  };
+}
+
+export function addToFavourites(recipeId) {
+  console.log("action", recipeId);
+  return async (dispatch, getState) => {
+    const token = selectToken(getState());
+    const user = selectUser(getState());
+    const response = await axios.post(
+      `${apiUrl}/newfav`,
+      {
+        recipeId,
+        userId: user.id,
+      },
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+    console.log("add fav", response.data);
+    dispatch(newFavouriteAdded(response.data));
   };
 }
