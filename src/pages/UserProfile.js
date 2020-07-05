@@ -38,9 +38,6 @@ export default function UserProfile() {
           ? filteredRecipes.map((recipe, i) => {
               return (
                 <div className="recipe">
-                  <div>
-                    <button>♡</button>
-                  </div>
                   <Link to={`/recipes/${recipe.id}`}>
                     <img
                       key={i}

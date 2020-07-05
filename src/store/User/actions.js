@@ -1,6 +1,6 @@
 import axios from "axios";
 import { apiUrl } from "../../config/constants";
-import { selectToken } from "../User/selectors";
+import { selectToken, selectUser } from "../User/selectors";
 
 export function userLoggedIn(data) {
   return { type: "LOGIN-SUCCESS", payload: data };
@@ -114,16 +114,19 @@ export function addRecipe(
 }
 
 export function addToFavourites(recipeId) {
+  console.log("action", recipeId);
   return async (dispatch, getState) => {
     const token = selectToken(getState());
+    const user = selectUser(getState());
     const response = await axios.post(
       `${apiUrl}/newfav`,
       {
         recipeId,
+        userId: user.id,
       },
       { headers: { Authorization: `Bearer ${token}` } }
     );
-    console.log("add fav", response);
+    console.log("add fav", response.data);
     dispatch(newFavouriteAdded(response.data));
   };
 }

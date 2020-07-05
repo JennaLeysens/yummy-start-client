@@ -20,6 +20,7 @@ export default function Recipes() {
   const token = useSelector(selectToken);
   const user = useSelector(selectUser);
   const [search, setSearch] = useState();
+  const [id, setId] = useState();
 
   const compareLikes = (recipeA, recipeB) => {
     return recipeB.likes - recipeA.likes;
@@ -37,34 +38,29 @@ export default function Recipes() {
   const theTags = allTags.flat().map((tag) => {
     return tag.recipeTags;
   });
-  console.log(theTags);
 
   const filteredRecipes = selectedTag
     ? recipes.filter((recipe) =>
         recipe.tags.some((tag) => tag.id === selectedTag.id)
       )
     : recipes;
-  console.log("1", filteredRecipes);
 
   const ingredients = recipes
     ? recipes.map((recipe) => {
         return recipe.ingredients;
       })
     : null;
-  console.log("ingredients", ingredients.flat());
+
   const allIngredients = ingredients.flat();
   const joined = allIngredients.join();
-  console.log(joined);
 
   const filterIngredient = joined.includes(search);
-  console.log(filterIngredient);
 
   const searched = filterIngredient
     ? filteredRecipes.filter((recipe) =>
         recipe.ingredients.some((ingredient) => ingredient.includes(search))
       )
     : filteredRecipes;
-  console.log("FILTERED", searched);
 
   const userFavs = user.favourites
     ? user.favourites.map((recipe) => {
@@ -80,6 +76,13 @@ export default function Recipes() {
       return "🥦";
     }
   };
+
+  const userId = user.id;
+
+  function favClicked(recipeId) {
+    console.log(recipeId);
+    dispatch(addToFavourites(recipeId));
+  }
 
   useEffect(() => {
     dispatch(fetchTags());
@@ -122,9 +125,7 @@ export default function Recipes() {
                 {token ? (
                   <button
                     className="button"
-                    onClick={() => {
-                      dispatch(addToFavourites);
-                    }}
+                    onClick={() => favClicked(recipe.id)}
                   >
                     {checkFav(recipe)}
                   </button>

@@ -22,17 +22,14 @@ export default function userSliceReducer(state = initialState, action) {
         recipe: action.payload,
       };
     case "TOGGLE_FAVOURITE_RECIPE": {
-      console.log(action);
+      console.log("reducer", action.payload);
       return {
         ...state,
-        user: {
-          ...state.user,
-          favourites: state.user.favourites.includes(action.payload)
-            ? state.user.favourites.filter((id) => {
-                return id !== action.payload;
-              })
-            : state.user.favourites.concat(action.payload),
-        },
+        favourites: state.favourites.includes(action.payload)
+          ? state.favourites.filter((id) => {
+              return id !== action.payload;
+            })
+          : state.favourites.concat(action.payload),
       };
     }
     default:
