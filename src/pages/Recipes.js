@@ -7,6 +7,8 @@ import { fetchTags } from "../store/Tags/actions";
 import { selectTags } from "../store/Tags/selectors";
 import "./Recipes.css";
 import { selectToken } from "../store/User/selectors";
+import { selectUser } from "../store/User/selectors";
+import { addToFavourites } from "../store/User/actions";
 
 export default function Recipes() {
   const dispatch = useDispatch();
@@ -16,6 +18,7 @@ export default function Recipes() {
   const [sortLikes, setSortLikes] = useState();
   const [selectedTag, setSelectedTag] = useState();
   const token = useSelector(selectToken);
+  const user = useSelector(selectUser);
   const [search, setSearch] = useState();
 
   const compareLikes = (recipeA, recipeB) => {
@@ -43,10 +46,6 @@ export default function Recipes() {
     : recipes;
   console.log("1", filteredRecipes);
 
-  // const recTags = newArray.map((tag) => {
-  //   return tag.title;
-  // });
-  // console.log("grdfdfd", recTags);
   const ingredients = recipes
     ? recipes.map((recipe) => {
         return recipe.ingredients;
@@ -66,6 +65,21 @@ export default function Recipes() {
       )
     : filteredRecipes;
   console.log("FILTERED", searched);
+
+  const userFavs = user.favourites
+    ? user.favourites.map((recipe) => {
+        return recipe.recipeId;
+      })
+    : null;
+  console.log("FAAAAVS", user.favourites);
+
+  const checkFav = (recipe) => {
+    if (userFavs ? userFavs.includes(recipe.id) : null) {
+      return "🍩";
+    } else {
+      return "🥦";
+    }
+  };
 
   useEffect(() => {
     dispatch(fetchTags());
@@ -105,7 +119,16 @@ export default function Recipes() {
           return (
             <div className="recipe">
               <div>
-                <button>♡</button>
+                {token ? (
+                  <button
+                    className="button"
+                    onClick={() => {
+                      dispatch(addToFavourites);
+                    }}
+                  >
+                    {checkFav(recipe)}
+                  </button>
+                ) : null}
               </div>
               <Link to={`/recipes/${recipe.id}`}>
                 <img

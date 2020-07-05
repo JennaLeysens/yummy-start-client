@@ -11,3 +11,9 @@
   padding: 3px;
   background-size: cover;
 }
+.button {
+  font-size: x-large;
+  background-color: white;
+  border-radius: 80%;
+  border-color: gray;
+}

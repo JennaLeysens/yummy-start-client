@@ -17,6 +17,9 @@ export function userLoggedOut() {
 export function newRecipeAdded(data) {
   return { type: "ADD_NEW_RECIPE", payload: data };
 }
+export function newFavouriteAdded(data) {
+  return { type: "TOGGLE_FAVOURITE_RECIPE", payload: data };
+}
 
 export function login(email, password) {
   return async (dispatch, getState) => {
@@ -107,5 +110,20 @@ export function addRecipe(
     );
     console.log("add recipe", response);
     dispatch(newRecipeAdded(response.data));
+  };
+}
+
+export function addToFavourites(recipeId) {
+  return async (dispatch, getState) => {
+    const token = selectToken(getState());
+    const response = await axios.post(
+      `${apiUrl}/newfav`,
+      {
+        recipeId,
+      },
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+    console.log("add fav", response);
+    dispatch(newFavouriteAdded(response.data));
   };
 }
