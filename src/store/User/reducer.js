@@ -3,6 +3,7 @@ const initialState = {
   name: null,
   email: null,
   recipe: null,
+  favourites: null,
 };
 
 export default function userSliceReducer(state = initialState, action) {

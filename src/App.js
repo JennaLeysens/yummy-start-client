@@ -9,6 +9,7 @@ import SignUp from "./pages/SignUp";
 import { getUserWithStoredToken } from "./store/User/actions";
 import { useDispatch } from "react-redux";
 import NavBar from "./components/NavBar";
+import UserProfile from "./pages/UserProfile";
 
 function App() {
   const dispatch = useDispatch();
@@ -24,6 +25,7 @@ function App() {
         <Route path="/addrecipe" component={AddRecipe} />
         <Route path="/recipes/:id" component={RecipeDetails} />
         <Route exact path="/" component={Recipes} />{" "}
+        <Route path="/myprofile" component={UserProfile} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={SignUp} />
       </Switch>
