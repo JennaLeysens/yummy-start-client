@@ -17,8 +17,13 @@ export function userLoggedOut() {
 export function newRecipeAdded(data) {
   return { type: "ADD_NEW_RECIPE", payload: data };
 }
+
 export function newFavouriteAdded(data) {
   return { type: "TOGGLE_FAVOURITE_RECIPE", payload: data };
+}
+
+export function favouriteDeleted(id) {
+  return { type: "DELETE_FAVOURITE_RECIPE", payload: id };
 }
 
 export function login(email, password) {
@@ -126,7 +131,19 @@ export function addToFavourites(recipeId) {
       },
       { headers: { Authorization: `Bearer ${token}` } }
     );
-    console.log("add fav", response.data);
-    dispatch(newFavouriteAdded(response.data));
+    console.log("add fav", response.data.newFavourite);
+    dispatch(newFavouriteAdded(response.data.newFavourite));
+  };
+}
+
+export function deleteFavourite(favId) {
+  console.log("action", favId);
+  return async (dispatch, getState) => {
+    const token = selectToken(getState());
+    const response = await axios.delete(`${apiUrl}/favourite/${favId}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    console.log("delete fav", response.data.favourite);
+    dispatch(favouriteDeleted(response.data.favourite));
   };
 }

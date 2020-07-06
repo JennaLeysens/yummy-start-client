@@ -25,11 +25,23 @@ export default function userSliceReducer(state = initialState, action) {
       console.log("reducer", action.payload);
       return {
         ...state,
-        favourites: state.favourites.includes(action.payload)
-          ? state.favourites.filter((id) => {
-              return id !== action.payload;
+        favourites: state.favourites.some(
+          (favourite) => favourite.id === action.payload.recipeId
+        )
+          ? state.favourites.filter((fav) => {
+              return fav !== action.payload;
             })
           : state.favourites.concat(action.payload),
+      };
+    }
+
+    case "DELETE_FAVOURITE_RECIPE": {
+      const FavId = action.payload.id;
+      console.log("action.payload", action.payload);
+      const newFavs = state.favourites.filter((story) => story.id !== FavId);
+      return {
+        ...state,
+        favourites: newFavs,
       };
     }
     default:
