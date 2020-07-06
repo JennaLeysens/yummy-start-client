@@ -8,7 +8,7 @@ import { selectTags } from "../store/Tags/selectors";
 import "./Recipes.css";
 import { selectToken } from "../store/User/selectors";
 import { selectUser } from "../store/User/selectors";
-import { addToFavourites } from "../store/User/actions";
+import { addToFavourites, deleteFavourite } from "../store/User/actions";
 
 export default function Recipes() {
   const dispatch = useDispatch();
@@ -20,7 +20,6 @@ export default function Recipes() {
   const token = useSelector(selectToken);
   const user = useSelector(selectUser);
   const [search, setSearch] = useState();
-  const [id, setId] = useState();
 
   const compareLikes = (recipeA, recipeB) => {
     return recipeB.likes - recipeA.likes;
@@ -34,10 +33,6 @@ export default function Recipes() {
         return rec.tags;
       })
     : null;
-
-  const theTags = allTags.flat().map((tag) => {
-    return tag.recipeTags;
-  });
 
   const filteredRecipes = selectedTag
     ? recipes.filter((recipe) =>
@@ -62,26 +57,35 @@ export default function Recipes() {
       )
     : filteredRecipes;
 
+  console.log("FAAAAVS", user.favourites);
   const userFavs = user.favourites
     ? user.favourites.map((recipe) => {
         return recipe.recipeId;
       })
-    : null;
-  console.log("FAAAAVS", user.favourites);
+    : [];
 
   const checkFav = (recipe) => {
-    if (userFavs ? userFavs.includes(recipe.id) : null) {
+    if (userFavs.includes(recipe.id)) {
       return "🍩";
     } else {
       return "🥦";
     }
   };
 
-  const userId = user.id;
+  const favsIds = user.favourites
+    ? user.favourites.map((favourite) => {
+        return favourite.id;
+      })
+    : [];
+  console.log("FAV ids", favsIds);
 
-  function favClicked(recipeId) {
+  function favClicked(recipeId, fav) {
     console.log(recipeId);
-    dispatch(addToFavourites(recipeId));
+    if (fav) {
+      dispatch(deleteFavourite(fav.id));
+    } else {
+      dispatch(addToFavourites(recipeId));
+    }
   }
 
   useEffect(() => {
@@ -125,7 +129,14 @@ export default function Recipes() {
                 {token ? (
                   <button
                     className="button"
-                    onClick={() => favClicked(recipe.id)}
+                    onClick={() =>
+                      favClicked(
+                        recipe.id,
+                        user.favourites.find(
+                          (favourite) => favourite.recipeId === recipe.id
+                        )
+                      )
+                    }
                   >
                     {checkFav(recipe)}
                   </button>
