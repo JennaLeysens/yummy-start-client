@@ -19,7 +19,7 @@ function App() {
   }, [dispatch]);
 
   return (
-    <div>
+    <div style={{ display: "block" }}>
       <NavBar></NavBar>
       <Switch>
         <Route path="/addrecipe" component={AddRecipe} />
