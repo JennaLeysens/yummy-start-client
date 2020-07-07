@@ -3,7 +3,7 @@ const initialState = {
   name: null,
   email: null,
   recipe: null,
-  favourites: null,
+  userFavourites: null,
 };
 
 export default function userSliceReducer(state = initialState, action) {
@@ -21,27 +21,29 @@ export default function userSliceReducer(state = initialState, action) {
         ...state,
         recipe: action.payload,
       };
-    case "TOGGLE_FAVOURITE_RECIPE": {
+    case "ADD_FAVOURITE_RECIPE": {
       console.log("reducer", action.payload);
       return {
         ...state,
-        favourites: state.favourites.some(
+        userFavourites: state.userFavourites.some(
           (favourite) => favourite.id === action.payload.recipeId
         )
-          ? state.favourites.filter((fav) => {
+          ? state.userFavourites.filter((fav) => {
               return fav !== action.payload;
             })
-          : state.favourites.concat(action.payload),
+          : state.userFavourites.concat(action.payload),
       };
     }
 
     case "DELETE_FAVOURITE_RECIPE": {
       const FavId = action.payload.id;
       console.log("action.payload", action.payload);
-      const newFavs = state.favourites.filter((story) => story.id !== FavId);
+      const newFavs = state.userFavourites.filter(
+        (story) => story.id !== FavId
+      );
       return {
         ...state,
-        favourites: newFavs,
+        userFavourites: newFavs,
       };
     }
     default:
