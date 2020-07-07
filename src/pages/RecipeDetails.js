@@ -34,13 +34,32 @@ export default function RecipeDetails() {
         </button>
       </p>
       <p>
+        <span role="img" aria-label="clock">
+          🕐
+        </span>
+        <span class="icon icon-clock"></span>
+        {recipe.cookingTime} minutes
+      </p>
+      <p>
+        <strong>Servings: </strong>
+        {recipe.servings}
+      </p>
+      <p>
         <strong>Ingredients</strong>
       </p>
-      <p>{recipe.ingredients}</p>
+      {recipe.ingredients
+        ? recipe.ingredients.map((ingredient) => {
+            return <li>{ingredient}</li>;
+          })
+        : null}
       <p>
         <strong>Method</strong>
       </p>
-      <p>{recipe.method}</p>
+      {recipe.method
+        ? recipe.method.split(".").map((method) => {
+            return <li>{method}</li>; ///,|\./
+          })
+        : null}
     </div>
   );
 }

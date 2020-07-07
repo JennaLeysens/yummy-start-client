@@ -174,7 +174,15 @@ export default function Recipes() {
                 </span>
                 {recipe.likes}
                 <p>
-                  <strong>Cooking time:</strong> {recipe.cookingTime}
+                  <strong>
+                    <span role="img" aria-label="clock">
+                      🕐
+                    </span>
+                  </strong>{" "}
+                  {recipe.cookingTime}{" "}
+                </p>
+                <p>
+                  <strong>Servings:</strong> {recipe.servings}
                 </p>
               </div>
             </div>
