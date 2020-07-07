@@ -18,6 +18,7 @@ export default function AddRecipe() {
   const [recipeTags, setRecipeTags] = useState([]);
   const [method, setMethod] = useState();
   const [cookingTime, setCookingTime] = useState();
+  const [servings, setServings] = useState();
   const [submitted, setSubmitted] = useState(false);
   const dispatch = useDispatch();
   const token = useSelector(selectToken);
@@ -66,7 +67,8 @@ export default function AddRecipe() {
         ingredients,
         method,
         cookingTime,
-        tagIds
+        tagIds,
+        servings
       )
     );
     console.log(
@@ -77,7 +79,9 @@ export default function AddRecipe() {
       ingredients,
       method,
       cookingTime,
-      tagIds
+      servings,
+      tagIds,
+      servings
     );
   }
 
@@ -141,6 +145,12 @@ export default function AddRecipe() {
           <option>90</option>
           <option>120</option>
         </select>
+        Servings
+        <input
+          type="number"
+          value={servings}
+          onChange={(e) => setServings(e.target.value)}
+        ></input>
         {tags
           ? tags.map((tag) => {
               return (

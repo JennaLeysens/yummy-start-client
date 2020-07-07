@@ -97,7 +97,8 @@ export function addRecipe(
   ingredients,
   method,
   cookingTime,
-  tagIds
+  tagIds,
+  servings
 ) {
   return async (dispatch, getState) => {
     const token = selectToken(getState());
@@ -112,6 +113,7 @@ export function addRecipe(
         method,
         cookingTime,
         tagIds,
+        servings,
       },
       { headers: { Authorization: `Bearer ${token}` } }
     );
