@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addRecipe } from "../store/User/actions";
 import { selectToken } from "../store/User/selectors";
+import { selectTags } from "../store/Tags/selectors";
+import { fetchTags } from "../store/Tags/actions";
 import { useHistory } from "react-router-dom";
 
 export default function AddRecipe() {
@@ -13,15 +15,34 @@ export default function AddRecipe() {
   const [ingredient3, setIngredient3] = useState();
   const [ingredient4, setIngredient4] = useState();
   const [ingredient5, setIngredient5] = useState();
+  const [recipeTags, setRecipeTags] = useState([]);
   const [method, setMethod] = useState();
   const [cookingTime, setCookingTime] = useState();
   const [submitted, setSubmitted] = useState(false);
   const dispatch = useDispatch();
   const token = useSelector(selectToken);
   const history = useHistory();
+  const tags = useSelector(selectTags);
 
   if (!token) {
     history.push("/login");
+  }
+
+  useEffect(() => {
+    dispatch(fetchTags());
+  }, [dispatch]);
+
+  function editTags(tagId) {
+    if (recipeTags.includes(tagId)) {
+      const newTags = recipeTags.filter((id) => {
+        console.log(id, tagId);
+        return !(id === tagId);
+      });
+      setRecipeTags(newTags);
+    } else {
+      const newTags = [...recipeTags, tagId];
+      setRecipeTags(newTags);
+    }
   }
 
   const ingredients = [
@@ -31,12 +52,22 @@ export default function AddRecipe() {
     ingredient4,
     ingredient5,
   ];
+  console.log(recipeTags);
 
   function submitForm(e) {
+    const tagIds = recipeTags;
     e.preventDefault();
     setSubmitted(true);
     dispatch(
-      addRecipe(title, imageURL, description, ingredients, method, cookingTime)
+      addRecipe(
+        title,
+        imageURL,
+        description,
+        ingredients,
+        method,
+        cookingTime,
+        tagIds
+      )
     );
     console.log(
       "new recipe",
@@ -45,7 +76,8 @@ export default function AddRecipe() {
       description,
       ingredients,
       method,
-      cookingTime
+      cookingTime,
+      tagIds
     );
   }
 
@@ -109,8 +141,22 @@ export default function AddRecipe() {
           <option>90</option>
           <option>120</option>
         </select>
+        {tags
+          ? tags.map((tag) => {
+              return (
+                <div>
+                  <input
+                    type="checkbox"
+                    value={recipeTags}
+                    onChange={() => editTags(tag.id)}
+                  ></input>
+                  <label>{tag.title}</label>
+                </div>
+              );
+            })
+          : null}
       </form>
-      <button onClick={submitForm}>Post recipe</button>{" "}
+      <button onClick={submitForm}>Post recipe</button>
     </div>
   );
 }

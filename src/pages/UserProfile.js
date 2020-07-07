@@ -8,8 +8,8 @@ import { Link } from "react-router-dom";
 export default function UserProfile() {
   const user = useSelector(selectUser);
   console.log(user);
-  const userFavs = user.favourites
-    ? user.favourites.map((recipe) => {
+  const userFavs = user.userFavourites
+    ? user.userFavourites.map((recipe) => {
         return recipe.recipeId;
       })
     : null;

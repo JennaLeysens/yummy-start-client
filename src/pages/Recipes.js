@@ -57,12 +57,13 @@ export default function Recipes() {
       )
     : filteredRecipes;
 
-  console.log("FAAAAVS", user.favourites);
-  const userFavs = user.favourites
-    ? user.favourites.map((recipe) => {
+  console.log("FAAAAVS", user.userFavourites);
+  const userFavs = user.userFavourites
+    ? user.userFavourites.map((recipe) => {
         return recipe.recipeId;
       })
     : [];
+  console.log("USER", userFavs);
 
   const checkFav = (recipe) => {
     if (userFavs.includes(recipe.id)) {
@@ -72,8 +73,8 @@ export default function Recipes() {
     }
   };
 
-  const favsIds = user.favourites
-    ? user.favourites.map((favourite) => {
+  const favsIds = user.userFavourites
+    ? user.userFavourites.map((favourite) => {
         return favourite.id;
       })
     : [];
@@ -132,7 +133,7 @@ export default function Recipes() {
                     onClick={() =>
                       favClicked(
                         recipe.id,
-                        user.favourites.find(
+                        user.userFavourites.find(
                           (favourite) => favourite.recipeId === recipe.id
                         )
                       )

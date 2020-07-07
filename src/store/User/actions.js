@@ -19,7 +19,7 @@ export function newRecipeAdded(data) {
 }
 
 export function newFavouriteAdded(data) {
-  return { type: "TOGGLE_FAVOURITE_RECIPE", payload: data };
+  return { type: "ADD_FAVOURITE_RECIPE", payload: data };
 }
 
 export function favouriteDeleted(id) {
@@ -96,7 +96,8 @@ export function addRecipe(
   description,
   ingredients,
   method,
-  cookingTime
+  cookingTime,
+  tagIds
 ) {
   return async (dispatch, getState) => {
     const token = selectToken(getState());
@@ -110,10 +111,11 @@ export function addRecipe(
         ingredients,
         method,
         cookingTime,
+        tagIds,
       },
       { headers: { Authorization: `Bearer ${token}` } }
     );
-    console.log("add recipe", response);
+    console.log("add recipe", response.data);
     dispatch(newRecipeAdded(response.data));
   };
 }
