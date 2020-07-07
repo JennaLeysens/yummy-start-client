@@ -16,6 +16,7 @@ export default function Recipes() {
   console.log("all recipes", recipes);
   const tags = useSelector(selectTags);
   const [sortLikes, setSortLikes] = useState();
+  const [sortCookingTime, setSortCookingTime] = useState();
   const [selectedTag, setSelectedTag] = useState();
   const token = useSelector(selectToken);
   const user = useSelector(selectUser);
@@ -23,6 +24,9 @@ export default function Recipes() {
 
   const compareLikes = (recipeA, recipeB) => {
     return recipeB.likes - recipeA.likes;
+  };
+  const compareCookingTime = (recipeA, recipeB) => {
+    return recipeA.cookingTime - recipeB.cookingTime;
   };
 
   // // const sortedProducts = recipes.sort(compareLikes);
@@ -110,11 +114,17 @@ export default function Recipes() {
         : null}
       <select
         onChange={(event) =>
-          setSortLikes(filteredRecipes.sort(compareLikes), console.log(event))
+          event.target.value === "Most popular"
+            ? setSortLikes(
+                filteredRecipes.sort(compareLikes),
+                console.log(event.target)
+              )
+            : setSortCookingTime(filteredRecipes.sort(compareCookingTime))
         }
       >
         <option>Sort by</option>
         <option value={sortLikes}>Most popular</option>
+        <option value={sortCookingTime}>Cooking Time (short - long</option>
       </select>
       <input
         type="text"
