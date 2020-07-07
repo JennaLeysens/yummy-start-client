@@ -4,10 +4,12 @@ import { selectUser } from "../store/User/selectors";
 import { selectRecipes } from "../store/Recipes/selectors";
 import { fetchRecipes } from "../store/Recipes/actions";
 import { Link } from "react-router-dom";
+import { Heading } from "@chakra-ui/core";
 
 export default function UserProfile() {
   const user = useSelector(selectUser);
   console.log(user);
+
   const userFavs = user.userFavourites
     ? user.userFavourites.map((recipe) => {
         return recipe.recipeId;
@@ -32,7 +34,7 @@ export default function UserProfile() {
   return (
     <div>
       <h1>{user.name}'s Kitchen</h1>
-      <h3>My favourite recipes</h3>
+      <Heading>My favourite recipes</Heading>
       <div className="container">
         {filteredRecipes
           ? filteredRecipes.map((recipe, i) => {

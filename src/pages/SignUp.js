@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { signUp } from "../store/User/actions";
+import { Input, Button, FormLabel, FormControl, Box } from "@chakra-ui/core";
+import { Heading } from "@chakra-ui/core";
+import "./forms.css";
 
 export default function SignUp() {
   const [name, setName] = useState();
@@ -16,20 +19,33 @@ export default function SignUp() {
   }
 
   return (
-    <div>
-      <h1>Create an account to start sharing your recipes!</h1>
-      <form>
-        Name
-        <input value={name} onChange={(e) => setName(e.target.value)}></input>
-        Email
-        <input value={email} onChange={(e) => setEmail(e.target.value)}></input>
-        Password
-        <input
+    <Box className="box">
+      <Heading>Create an account to start sharing your recipes!</Heading>
+      <FormControl>
+        <FormLabel>Name</FormLabel>
+        <Input
+          placeholder="Name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        ></Input>
+        <FormLabel>Email address</FormLabel>
+        <Input
+          placeholder="Email address"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        ></Input>
+        <FormLabel>Password</FormLabel>
+        <Input
+          placeholder="Password"
+          type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-        ></input>
-      </form>
-      <button onClick={submitForm}>Create account</button>
-    </div>
+        ></Input>
+      </FormControl>
+
+      <Button variantColor="gray" variant="outline" onClick={submitForm}>
+        Create account
+      </Button>
+    </Box>
   );
 }
