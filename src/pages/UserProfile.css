@@ -1,5 +1,12 @@
+.profile {
+  text-align: center;
+  display: block;
+  margin: 0 auto;
+  max-width: 500px;
+}
+
 .heading {
-  font-family: "Cormorant Garamond", serif;
+  text-align: center;
 }
 
 .container {

@@ -5,7 +5,7 @@ import { selectRecipes } from "../store/Recipes/selectors";
 import { fetchRecipes } from "../store/Recipes/actions";
 import { Link } from "react-router-dom";
 import { Heading } from "@chakra-ui/core";
-import { Stack, Tag, Image, Box } from "@chakra-ui/core";
+import { Stack, Tag, Image, Box, Text } from "@chakra-ui/core";
 import moment from "moment";
 import "./UserProfile.css";
 
@@ -36,21 +36,30 @@ export default function UserProfile() {
 
   return (
     <Box>
-      <Heading className="heading" as="h1" size="2xl">
-        {user.name}'s Kitchen
-      </Heading>
-      <Heading as="h2" size="xl">
-        About
-      </Heading>
-      <Image
-        src={user.imageurl}
-        rounded="full"
-        size="150px"
-        objectFit="cover"
-        fallbackSrc="https://cdn.pixabay.com/photo/2014/04/03/00/42/chef-hat-309146_1280.png"
-        border="1px"
-      ></Image>
-      <Heading>
+      <Box className="profile">
+        <Heading as="h1" size="2xl">
+          {user.name}'s Kitchen
+        </Heading>
+        <Box p={6}>
+          <Heading as="h2" size="xl">
+            About
+          </Heading>
+          <Image
+            src={user.imageurl}
+            rounded="full"
+            size="150px"
+            objectFit="cover"
+            fallbackSrc="https://cdn.pixabay.com/photo/2014/04/03/00/42/chef-hat-309146_1280.png"
+            border="1px"
+            display="inline-block"
+            p={2}
+          ></Image>
+          <Text p={5}>
+            <strong>Name:</strong> {user.name}
+          </Text>
+        </Box>
+      </Box>
+      <Heading className="heading">
         My favourite recipes ({filteredRecipes ? filteredRecipes.length : 0})
       </Heading>
       <Box className="container">
