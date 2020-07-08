@@ -24,7 +24,7 @@ function App() {
       <Switch>
         <Route path="/addrecipe" component={AddRecipe} />
         <Route path="/recipes/:id" component={RecipeDetails} />
-        <Route exact path="/" component={Recipes} />{" "}
+        <Route exact path="/" component={Recipes} />
         <Route path="/myprofile" component={UserProfile} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={SignUp} />
