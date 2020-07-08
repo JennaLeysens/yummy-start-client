@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { signUp } from "../store/User/actions";
 import {
   Input,
@@ -8,9 +8,11 @@ import {
   FormControl,
   Box,
   Image,
+  useToast,
 } from "@chakra-ui/core";
 import { Heading } from "@chakra-ui/core";
 import "./forms.css";
+import { selectErrorMessage } from "../store/User/selectors";
 
 export default function SignUp() {
   const [name, setName] = useState();
@@ -18,6 +20,8 @@ export default function SignUp() {
   const [password, setPassword] = useState();
   const [imageurl, setImageUrl] = useState();
   const dispatch = useDispatch();
+  const toast = useToast();
+  const error = useSelector(selectErrorMessage);
 
   function submitForm() {
     dispatch(signUp(name, email, password, imageurl));
@@ -27,10 +31,22 @@ export default function SignUp() {
     setImageUrl("");
   }
 
+  useEffect(() => {
+    if (error) {
+      toast({
+        title: "Sign up error!",
+        description: error.message,
+        status: "error",
+        duration: 90000,
+        isClosable: true,
+      });
+    }
+  }, [toast, error]);
+
   return (
     <Box className="box">
       <Heading>Create an account to start sharing your recipes!</Heading>
-      <FormControl>
+      <FormControl isRequired>
         <FormLabel>Name</FormLabel>
         <Input
           placeholder="Name"
@@ -50,6 +66,8 @@ export default function SignUp() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         ></Input>
+      </FormControl>
+      <FormControl>
         <FormLabel>Profile image url</FormLabel>
         <Input
           type="text"
@@ -58,7 +76,6 @@ export default function SignUp() {
         ></Input>
         <Image src={imageurl} thumbnail width="50%" />
       </FormControl>
-
       <Button variantColor="gray" variant="outline" onClick={submitForm}>
         Create account
       </Button>

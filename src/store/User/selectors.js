@@ -5,3 +5,7 @@ export const selectUser = (state) => {
 export const selectToken = (state) => {
   return state.user.token;
 };
+
+export const selectErrorMessage = (state) => {
+  return state.user.errorMessage;
+};

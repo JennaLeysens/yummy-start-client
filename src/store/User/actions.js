@@ -26,6 +26,10 @@ export function favouriteDeleted(id) {
   return { type: "DELETE_FAVOURITE_RECIPE", payload: id };
 }
 
+export function setErrorMessage(data) {
+  return { type: "SET_ERROR_MESSAGE", payload: data };
+}
+
 export function login(email, password) {
   return async (dispatch, getState) => {
     try {
@@ -37,7 +41,7 @@ export function login(email, password) {
       dispatch(userLoggedIn(response.data));
     } catch (error) {
       if (error.response) {
-        console.log(error.response.data.message);
+        dispatch(setErrorMessage({ message: error.response.data.message }));
       } else {
         console.log(error.message);
       }
@@ -58,7 +62,7 @@ export function signUp(name, email, password, imageurl) {
       dispatch(userLoggedIn(response.data));
     } catch (error) {
       if (error.response) {
-        console.log(error.response.data.message);
+        dispatch(setErrorMessage({ message: error.response.data.message }));
       } else {
         console.log(error.message);
       }
@@ -103,23 +107,31 @@ export function addRecipe(
 ) {
   return async (dispatch, getState) => {
     const token = selectToken(getState());
-    console.log("testing");
-    const response = await axios.post(
-      `${apiUrl}/`,
-      {
-        title,
-        imageURL,
-        description,
-        ingredients,
-        method,
-        cookingTime,
-        tagIds,
-        servings,
-      },
-      { headers: { Authorization: `Bearer ${token}` } }
-    );
-    console.log("add recipe", response.data);
-    dispatch(newRecipeAdded(response.data));
+    try {
+      const response = await axios.post(
+        `${apiUrl}/`,
+        {
+          title,
+          imageURL,
+          description,
+          ingredients,
+          method,
+          cookingTime,
+          tagIds,
+          servings,
+        },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+      console.log("add recipe", response.data);
+      dispatch(newRecipeAdded(response.data));
+    } catch (error) {
+      if (error.response) {
+        console.log(error.response);
+        dispatch(setErrorMessage({ message: error.response.data.message }));
+      } else {
+        console.log(error.message);
+      }
+    }
   };
 }
 
