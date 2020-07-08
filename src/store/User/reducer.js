@@ -2,6 +2,7 @@ const initialState = {
   token: localStorage.getItem("token"),
   name: null,
   email: null,
+  imageurl: null,
   recipe: null,
   userFavourites: null,
 };

@@ -45,13 +45,14 @@ export function login(email, password) {
   };
 }
 
-export function signUp(name, email, password) {
+export function signUp(name, email, password, imageurl) {
   return async (dispatch, getState) => {
     try {
       const response = await axios.post(`${apiUrl}/signup`, {
         name,
         email,
         password,
+        imageurl,
       });
 
       dispatch(userLoggedIn(response.data));

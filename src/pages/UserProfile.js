@@ -5,7 +5,9 @@ import { selectRecipes } from "../store/Recipes/selectors";
 import { fetchRecipes } from "../store/Recipes/actions";
 import { Link } from "react-router-dom";
 import { Heading } from "@chakra-ui/core";
-import { Stack, Tag } from "@chakra-ui/core";
+import { Stack, Tag, Image, Box } from "@chakra-ui/core";
+import moment from "moment";
+import "./UserProfile.css";
 
 export default function UserProfile() {
   const user = useSelector(selectUser);
@@ -33,25 +35,40 @@ export default function UserProfile() {
   }, [dispatch]);
 
   return (
-    <div>
-      <h1>{user.name}'s Kitchen</h1>
-      <Heading>My favourite recipes</Heading>
-      <div className="container">
+    <Box>
+      <Heading className="heading" as="h1" size="2xl">
+        {user.name}'s Kitchen
+      </Heading>
+      <Heading as="h2" size="xl">
+        About
+      </Heading>
+      <Image
+        src={user.imageurl}
+        rounded="full"
+        size="150px"
+        objectFit="cover"
+        fallbackSrc="https://cdn.pixabay.com/photo/2014/04/03/00/42/chef-hat-309146_1280.png"
+        border="1px"
+      ></Image>
+      <Heading>
+        My favourite recipes ({filteredRecipes ? filteredRecipes.length : 0})
+      </Heading>
+      <Box className="container">
         {filteredRecipes
           ? filteredRecipes.map((recipe, i) => {
               return (
-                <div className="recipe">
+                <Box className="recipe">
                   <Link to={`/recipes/${recipe.id}`}>
-                    <img
+                    <Image
                       key={i}
                       alt="recipe"
                       height="250px"
                       src={recipe.imageURL}
-                    />
+                    ></Image>
                   </Link>
-                  <div>
+                  <Box>
+                    <strong>{recipe.title}</strong>
                     <Stack spacing={1} isInline>
-                      <strong>{recipe.title}</strong>
                       {recipe.tags.map((tag) => {
                         return <Tag size="sm">{tag.title}</Tag>;
                       })}
@@ -66,12 +83,14 @@ export default function UserProfile() {
                     <p>
                       <strong>Cooking time:</strong> {recipe.cookingTime}
                     </p>
-                  </div>
-                </div>
+                    <strong>Added: </strong>
+                    {moment(recipe.createdAt).format("D MMMM YYYY")}
+                  </Box>
+                </Box>
               );
             })
           : null}
-      </div>
-    </div>
+      </Box>
+    </Box>
   );
 }
