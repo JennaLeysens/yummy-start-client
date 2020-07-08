@@ -23,7 +23,7 @@ export default function RecipeDetails() {
           ? recipe.tags.map((tag) => {
               return <Tag size="md">{tag.title}</Tag>;
             })
-          : null}{" "}
+          : null}
       </Stack>
       <p>{recipe.description}</p>
       <img alt="recipe" width="40%" src={recipe.imageURL} />

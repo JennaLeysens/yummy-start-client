@@ -164,15 +164,17 @@ export default function Recipes() {
                 <img
                   key={i}
                   alt="recipe"
-                  height="250px"
+                  height="200px"
                   src={recipe.imageURL}
                 />
               </Link>
               <div>
                 <strong>{recipe.title}</strong>
-                {recipe.tags.map((tag) => {
-                  return <button>{tag.title}</button>;
-                })}
+                <Stack spacing={1} isInline>
+                  {recipe.tags.map((tag) => {
+                    return <Tag size="sm">{tag.title}</Tag>;
+                  })}
+                </Stack>
                 <p>
                   <strong>Whipped up by:</strong> {recipe.user.name}
                 </p>
