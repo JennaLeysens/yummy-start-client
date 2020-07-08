@@ -5,6 +5,19 @@ import { selectToken } from "../store/User/selectors";
 import { selectTags } from "../store/Tags/selectors";
 import { fetchTags } from "../store/Tags/actions";
 import { useHistory } from "react-router-dom";
+import {
+  Input,
+  Button,
+  FormLabel,
+  FormControl,
+  Heading,
+  Box,
+  Textarea,
+  Select,
+  Checkbox,
+  Image,
+} from "@chakra-ui/core";
+import "./AddRecipe.css";
 
 export default function AddRecipe() {
   const [title, setTitle] = useState();
@@ -86,87 +99,90 @@ export default function AddRecipe() {
   }
 
   return (
-    <div>
-      <h1>Add your recipe</h1>
-      <form className="form">
-        Title
-        <input value={title} onChange={(e) => setTitle(e.target.value)}></input>
-        Image URL
-        <input
+    <Box className="box">
+      <Heading>Add your recipe</Heading>
+      <FormControl className="form">
+        <FormLabel> Title </FormLabel>
+        <Input value={title} onChange={(e) => setTitle(e.target.value)}></Input>
+        <FormLabel> Image URL </FormLabel>
+        <Input
           value={imageURL}
           onChange={(e) => setImageURL(e.target.value)}
-        ></input>
-        Description
-        <textarea
+        ></Input>
+        <Image src={imageURL} thumbnail width="50%" />
+        <FormLabel> Description </FormLabel>
+        <Input
           value={description}
           onChange={(e) => setDescription(e.target.value)}
-        ></textarea>
-        Ingredients
-        <input
+        ></Input>
+        <FormLabel>Ingredients</FormLabel>
+        <Input
           placeholder="Ingredient 1"
           value={ingredient1}
           onChange={(e) => setIngredient1(e.target.value)}
-        ></input>
-        <input
+        ></Input>
+        <Input
           placeholder="Ingredient 2"
           value={ingredient2}
           onChange={(e) => setIngredient2(e.target.value)}
-        ></input>
-        <input
+        ></Input>
+        <Input
           placeholder="Ingredient 3"
           value={ingredient3}
           onChange={(e) => setIngredient3(e.target.value)}
-        ></input>
-        <input
+        ></Input>
+        <Input
           placeholder="Ingredient 4"
           value={ingredient4}
           onChange={(e) => setIngredient4(e.target.value)}
-        ></input>
-        <input
+        ></Input>
+        <Input
           placeholder="Ingredient 5"
           value={ingredient5}
           onChange={(e) => setIngredient5(e.target.value)}
-        ></input>
-        Method
-        <textarea
+        ></Input>
+        <FormLabel>Method</FormLabel>
+        <Textarea
           value={method}
           onChange={(e) => setMethod(e.target.value)}
-        ></textarea>
-        Cooking time (minutes)
-        <select
+        ></Textarea>
+        <FormLabel>Cooking time (minutes)</FormLabel>
+        <Select
+          placeholder="Select"
           value={cookingTime}
           onChange={(e) => setCookingTime(e.target.value)}
         >
-          <option>Select</option>
-          <option>15</option>
-          <option>30</option>
-          <option>45</option>
-          <option>60</option>
-          <option>90</option>
-          <option>120</option>
-        </select>
-        Servings
-        <input
-          type="number"
+          <option>15 </option>
+          <option>30 </option>
+          <option>45 </option>
+          <option>60 </option>
+          <option>90 </option>
+          <option>120 </option>
+        </Select>
+        <FormLabel>Servings</FormLabel>
+        <Input
           value={servings}
           onChange={(e) => setServings(e.target.value)}
-        ></input>
+        ></Input>
+        <FormLabel>Recipe tags</FormLabel>
         {tags
           ? tags.map((tag) => {
               return (
                 <div>
-                  <input
+                  <Checkbox
+                    variantColor="gray"
                     type="checkbox"
                     value={recipeTags}
                     onChange={() => editTags(tag.id)}
-                  ></input>
-                  <label>{tag.title}</label>
+                  >
+                    {tag.title}
+                  </Checkbox>
                 </div>
               );
             })
           : null}
-      </form>
-      <button onClick={submitForm}>Post recipe</button>
-    </div>
+      </FormControl>
+      <Button onClick={submitForm}>Post recipe</Button>
+    </Box>
   );
 }

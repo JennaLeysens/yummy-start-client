@@ -105,7 +105,7 @@ export default function Recipes() {
   return (
     <div>
       <h1>Recipes</h1>
-      <Stack spacing={3} isInline>
+      <Stack spacing={2} isInline>
         <Tag size="md" onClick={() => setSelectedTag(null)}>
           All recipes
         </Tag>
@@ -169,10 +169,12 @@ export default function Recipes() {
                 />
               </Link>
               <div>
-                <strong>{recipe.title}</strong>
-                {recipe.tags.map((tag) => {
-                  return <button>{tag.title}</button>;
-                })}
+                <strong>{recipe.title}</strong>{" "}
+                <Stack spacing={1} isInline>
+                  {recipe.tags.map((tag) => {
+                    return <Tag size="sm">{tag.title}</Tag>;
+                  })}{" "}
+                </Stack>
                 <p>
                   <strong>Whipped up by:</strong> {recipe.user.name}
                 </p>
