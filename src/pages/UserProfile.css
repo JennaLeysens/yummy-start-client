@@ -1,0 +1,23 @@
+.profile {
+  text-align: center;
+  display: block;
+  margin: 0 auto;
+  max-width: 500px;
+}
+
+.heading {
+  text-align: center;
+}
+
+.container {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+}
+.recipe {
+  margin: 1em;
+  width: 340px;
+  height: 250px;
+  padding: 3px;
+  background-size: cover;
+}

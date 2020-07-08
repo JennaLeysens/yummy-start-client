@@ -7,9 +7,10 @@ import store from "./store";
 import { Provider } from "react-redux";
 import { BrowserRouter as Router } from "react-router-dom";
 import { ThemeProvider, CSSReset } from "@chakra-ui/core";
+import customTheme from "./theme";
 
 ReactDOM.render(
-  <ThemeProvider>
+  <ThemeProvider theme={customTheme}>
     <CSSReset />
     <Router>
       <Provider store={store}>

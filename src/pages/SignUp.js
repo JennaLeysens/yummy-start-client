@@ -1,7 +1,14 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { signUp } from "../store/User/actions";
-import { Input, Button, FormLabel, FormControl, Box } from "@chakra-ui/core";
+import {
+  Input,
+  Button,
+  FormLabel,
+  FormControl,
+  Box,
+  Image,
+} from "@chakra-ui/core";
 import { Heading } from "@chakra-ui/core";
 import "./forms.css";
 
@@ -9,13 +16,15 @@ export default function SignUp() {
   const [name, setName] = useState();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
+  const [imageurl, setImageUrl] = useState();
   const dispatch = useDispatch();
 
   function submitForm() {
-    dispatch(signUp(name, email, password));
+    dispatch(signUp(name, email, password, imageurl));
     setName("");
     setEmail("");
     setPassword("");
+    setImageUrl("");
   }
 
   return (
@@ -41,6 +50,13 @@ export default function SignUp() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         ></Input>
+        <FormLabel>Profile image url</FormLabel>
+        <Input
+          type="text"
+          value={imageurl}
+          onChange={(e) => setImageUrl(e.target.value)}
+        ></Input>
+        <Image src={imageurl} thumbnail width="50%" />
       </FormControl>
 
       <Button variantColor="gray" variant="outline" onClick={submitForm}>
