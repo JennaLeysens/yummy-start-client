@@ -5,13 +5,14 @@ const initialState = {
   imageurl: null,
   recipe: null,
   userFavourites: null,
+  errorMessage: null,
 };
 
 export default function userSliceReducer(state = initialState, action) {
   switch (action.type) {
     case "LOGIN-SUCCESS":
       localStorage.setItem("token", action.payload.token);
-      return { ...state, ...action.payload };
+      return { ...state, ...action.payload, errorMessage: null };
     case "TOKEN_STILL_VALID":
       return { ...state, ...action.payload };
     case "LOG_OUT":
@@ -38,7 +39,6 @@ export default function userSliceReducer(state = initialState, action) {
 
     case "DELETE_FAVOURITE_RECIPE": {
       const FavId = action.payload.id;
-      console.log("action.payload", action.payload);
       const newFavs = state.userFavourites.filter(
         (story) => story.id !== FavId
       );
@@ -46,6 +46,9 @@ export default function userSliceReducer(state = initialState, action) {
         ...state,
         userFavourites: newFavs,
       };
+    }
+    case "SET_ERROR_MESSAGE": {
+      return { ...state, errorMessage: action.payload };
     }
     default:
       return state;

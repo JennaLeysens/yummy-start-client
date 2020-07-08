@@ -107,8 +107,8 @@ export default function AddRecipe() {
 
   function showToast() {
     return toast({
-      title: "Oops!",
-      description: "Please complete all fields to post a recipe",
+      title: "Oops! Something is burning!",
+      description: "Please complete all the fields to post a recipe",
       status: "error",
       duration: 9000,
       isClosable: true,

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../store/User/actions";
 import { Link } from "react-router-dom";
-import { selectToken } from "../store/User/selectors";
+import { selectToken, selectErrorMessage } from "../store/User/selectors";
 import { useHistory } from "react-router-dom";
 import {
   Input,
@@ -11,6 +11,7 @@ import {
   FormControl,
   Heading,
   Box,
+  useToast,
 } from "@chakra-ui/core";
 import "./forms.css";
 
@@ -20,12 +21,26 @@ export default function Login() {
   const dispatch = useDispatch();
   const token = useSelector(selectToken);
   const history = useHistory();
+  const toast = useToast();
+  const error = useSelector(selectErrorMessage);
 
   useEffect(() => {
     if (token !== null) {
       history.push("/");
     }
   });
+
+  useEffect(() => {
+    if (error) {
+      toast({
+        title: "Login error!",
+        description: error.message,
+        status: "error",
+        duration: 90000,
+        isClosable: true,
+      });
+    }
+  }, [toast, error]);
 
   function submitForm(e) {
     e.preventDefault();
@@ -37,7 +52,7 @@ export default function Login() {
   return (
     <Box className="box">
       <Heading>Login</Heading>
-      <FormControl>
+      <FormControl isRequired>
         <FormLabel>Email address</FormLabel>
         <Input
           variant="outline"
