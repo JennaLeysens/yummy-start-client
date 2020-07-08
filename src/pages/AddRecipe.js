@@ -22,6 +22,7 @@ import {
   AlertDescription,
   Link,
   Text,
+  useToast,
 } from "@chakra-ui/core";
 import "./AddRecipe.css";
 
@@ -43,6 +44,7 @@ export default function AddRecipe() {
   const token = useSelector(selectToken);
   const history = useHistory();
   const tags = useSelector(selectTags);
+  const toast = useToast();
 
   if (!token) {
     history.push("/login");
@@ -73,9 +75,8 @@ export default function AddRecipe() {
     ingredient5,
   ];
   console.log(recipeTags);
-
+  const tagIds = recipeTags;
   function submitForm(e) {
-    const tagIds = recipeTags;
     e.preventDefault();
     setSubmitted(true);
     dispatch(
@@ -102,6 +103,16 @@ export default function AddRecipe() {
       tagIds,
       servings
     );
+  }
+
+  function showToast() {
+    return toast({
+      title: "Oops!",
+      description: "Please complete all fields to post a recipe",
+      status: "error",
+      duration: 9000,
+      isClosable: true,
+    });
   }
 
   return (
@@ -138,7 +149,7 @@ export default function AddRecipe() {
       ) : (
         <Box className="box">
           <Heading>Add your recipe</Heading>
-          <FormControl className="form">
+          <FormControl className="form" isRequired>
             <FormLabel> Title </FormLabel>
             <Input
               value={title}
@@ -222,7 +233,23 @@ export default function AddRecipe() {
                 })
               : null}
           </FormControl>
-          <Button onClick={submitForm}>Post recipe</Button>{" "}
+          <Button
+            onClick={
+              title &&
+              imageURL &&
+              description &&
+              ingredients &&
+              method &&
+              cookingTime &&
+              servings &&
+              tagIds &&
+              servings
+                ? submitForm
+                : showToast
+            }
+          >
+            Post recipe
+          </Button>
         </Box>
       )}
     </Box>
