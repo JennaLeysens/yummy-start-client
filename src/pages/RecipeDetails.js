@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { fetchOneRecipe, addLike } from "../store/RecipeDetails/actions";
 import { selectRecipe } from "../store/RecipeDetails/selectors";
+import { Stack, Tag } from "@chakra-ui/core";
 
 export default function RecipeDetails() {
   const { id } = useParams();
@@ -17,13 +18,15 @@ export default function RecipeDetails() {
   return (
     <div>
       <h2>{recipe.title}</h2>
-      {recipe.tags
-        ? recipe.tags.map((tag) => {
-            return <button>{tag.title}</button>;
-          })
-        : null}
+      <Stack spacing={3} isInline>
+        {recipe.tags
+          ? recipe.tags.map((tag) => {
+              return <Tag size="md">{tag.title}</Tag>;
+            })
+          : null}{" "}
+      </Stack>
       <p>{recipe.description}</p>
-      <img alt="recipe" height="500px" src={recipe.imageURL} />
+      <img alt="recipe" width="40%" src={recipe.imageURL} />
       <p>
         <strong>Whipped up by:</strong> {recipe.user ? recipe.user.name : null}{" "}
         <button onClick={() => dispatch(addLike())}>

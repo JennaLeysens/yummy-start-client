@@ -9,6 +9,7 @@ import "./Recipes.css";
 import { selectToken } from "../store/User/selectors";
 import { selectUser } from "../store/User/selectors";
 import { addToFavourites, deleteFavourite } from "../store/User/actions";
+import { Stack, Tag } from "@chakra-ui/core";
 
 export default function Recipes() {
   const dispatch = useDispatch();
@@ -104,14 +105,20 @@ export default function Recipes() {
   return (
     <div>
       <h1>Recipes</h1>
-      <button onClick={() => setSelectedTag(null)}>All recipes</button>
-      {tags
-        ? tags.map((tag) => {
-            return (
-              <button onClick={() => setSelectedTag(tag)}>{tag.title}</button>
-            );
-          })
-        : null}
+      <Stack spacing={3} isInline>
+        <Tag size="md" onClick={() => setSelectedTag(null)}>
+          All recipes
+        </Tag>
+        {tags
+          ? tags.map((tag) => {
+              return (
+                <Tag size="md" onClick={() => setSelectedTag(tag)}>
+                  {tag.title}
+                </Tag>
+              );
+            })
+          : null}
+      </Stack>
       <select
         onChange={(event) =>
           event.target.value === "Most popular"
