@@ -5,6 +5,7 @@ import { selectRecipes } from "../store/Recipes/selectors";
 import { fetchRecipes } from "../store/Recipes/actions";
 import { Link } from "react-router-dom";
 import { Heading } from "@chakra-ui/core";
+import { Stack, Tag } from "@chakra-ui/core";
 
 export default function UserProfile() {
   const user = useSelector(selectUser);
@@ -49,10 +50,12 @@ export default function UserProfile() {
                     />
                   </Link>
                   <div>
-                    <strong>{recipe.title}</strong>
-                    {recipe.tags.map((tag) => {
-                      return <button>{tag.title}</button>;
-                    })}
+                    <Stack spacing={1} isInline>
+                      <strong>{recipe.title}</strong>
+                      {recipe.tags.map((tag) => {
+                        return <Tag size="sm">{tag.title}</Tag>;
+                      })}
+                    </Stack>
                     <p>
                       <strong>Whipped up by:</strong> {recipe.user.name}
                     </p>
