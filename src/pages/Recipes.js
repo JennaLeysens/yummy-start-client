@@ -9,7 +9,16 @@ import "./Recipes.css";
 import { selectToken } from "../store/User/selectors";
 import { selectUser } from "../store/User/selectors";
 import { addToFavourites, deleteFavourite } from "../store/User/actions";
-import { Stack, Tag, Heading, Select, Input } from "@chakra-ui/core";
+import {
+  Stack,
+  Tag,
+  Heading,
+  Select,
+  Input,
+  InputGroup,
+  InputRightAddon,
+  Icon,
+} from "@chakra-ui/core";
 
 export default function Recipes() {
   const dispatch = useDispatch();
@@ -107,7 +116,7 @@ export default function Recipes() {
       <Heading fontWeight="thin" className="recipesheading" as="h1" size="2xl">
         Recipes
       </Heading>
-      <Stack fontFamily="playright script" fontSize="md" spacing={2} isInline>
+      <Stack fontFamily="playright script" fontSize="md" spacing={3} isInline>
         <Tag className="tags" size="md" onClick={() => setSelectedTag(null)}>
           All recipes
         </Tag>
@@ -127,7 +136,7 @@ export default function Recipes() {
         <Stack className="select">
           <Select
             placeholder="Sort by"
-            width="90%"
+            width="100%"
             fontFamily="playright script"
             onChange={(event) =>
               event.target.value === "Most popular"
@@ -143,14 +152,17 @@ export default function Recipes() {
           </Select>
         </Stack>
         <Stack>
-          <Input
-            variant="outline"
-            width="50%"
-            type="text"
-            placeholder="Search by ingredient"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-          ></Input>
+          <InputGroup>
+            <InputRightAddon children={<Icon name="search"></Icon>} />
+            <Input
+              type="text"
+              variant="outline"
+              width="160%"
+              placeholder="Search by ingredient"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+            ></Input>
+          </InputGroup>
         </Stack>
       </Stack>
 
