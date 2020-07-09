@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { fetchOneRecipe, addLike } from "../store/RecipeDetails/actions";
 import { selectRecipe } from "../store/RecipeDetails/selectors";
+import { selectToken, selectUser } from "../store/User/selectors";
+import { addToFavourites, deleteFavourite } from "../store/User/actions";
 import {
   Stack,
   Tag,
@@ -19,11 +21,34 @@ export default function RecipeDetails() {
   const { id } = useParams();
   const dispatch = useDispatch();
   const recipe = useSelector(selectRecipe);
-  console.log("one recipe", recipe);
+  const token = useSelector(selectToken);
+  const user = useSelector(selectUser);
 
   useEffect(() => {
     dispatch(fetchOneRecipe(id));
   }, [dispatch, id]);
+
+  const userFavs = user.userFavourites
+    ? user.userFavourites.map((recipe) => {
+        return recipe.recipeId;
+      })
+    : [];
+
+  const checkFav = (recipe) => {
+    if (userFavs.includes(recipe.id)) {
+      return "🍩";
+    } else {
+      return "🥦";
+    }
+  };
+  function favClicked(recipeId, fav) {
+    console.log(recipeId);
+    if (fav) {
+      dispatch(deleteFavourite(fav.id));
+    } else {
+      dispatch(addToFavourites(recipeId));
+    }
+  }
 
   return (
     <Flex className="recipeDetailsCard">
@@ -51,13 +76,40 @@ export default function RecipeDetails() {
             {recipe.likes}
           </Button>
         </Stack>
-        <Image alt="recipe" width="90%" src={recipe.imageURL} align="center" />
+
+        <Box className="imageContainer">
+          <Image
+            alt="recipe"
+            width="90%"
+            src={recipe.imageURL}
+            align="center"
+          />
+        </Box>
+
         <Text className="text"></Text>
       </Box>
       <Box className="recipeText" mt="45px">
         <Heading fontWeight="thin" as="h2" size="xl">
-          {recipe.title}
-        </Heading>
+          {recipe.title}{" "}
+          {token ? (
+            <Button
+              className="favButton"
+              variantColor="gray"
+              rounded="120%"
+              variant="outline"
+              onClick={() =>
+                favClicked(
+                  recipe.id,
+                  user.userFavourites.find(
+                    (favourite) => favourite.recipeId === recipe.id
+                  )
+                )
+              }
+            >
+              {checkFav(recipe)}
+            </Button>
+          ) : null}
+        </Heading>{" "}
         <Text className="text">
           <Heading as="h4" size="md">
             Whipped up by: {recipe.user ? recipe.user.name : null}

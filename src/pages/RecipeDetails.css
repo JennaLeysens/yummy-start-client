@@ -5,8 +5,21 @@
   border: 1px solid lightgray;
   padding: 15px;
 }
-.imageBox {
+
+.imageContainer {
+  width: 100%;
+  height: auto;
+  position: relative;
 }
+
+.imageBox {
+  padding: 3px;
+}
+
+.favButton {
+  text-align: center;
+}
+
 .text {
   margin-top: 10px;
 }
