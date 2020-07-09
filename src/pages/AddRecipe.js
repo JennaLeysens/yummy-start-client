@@ -25,6 +25,7 @@ import {
   useToast,
 } from "@chakra-ui/core";
 import "./AddRecipe.css";
+import addRecipeBackground from "../addRecipeBackground.png";
 
 export default function AddRecipe() {
   const [title, setTitle] = useState();
@@ -147,109 +148,124 @@ export default function AddRecipe() {
           </Box>
         </Box>
       ) : (
-        <Box className="box">
-          <Heading>Add your recipe</Heading>
-          <FormControl className="form" isRequired>
-            <FormLabel> Title </FormLabel>
-            <Input
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-            ></Input>
-            <FormLabel> Image URL </FormLabel>
-            <Input
-              value={imageURL}
-              onChange={(e) => setImageURL(e.target.value)}
-            ></Input>
-            <Image src={imageURL} thumbnail width="50%" />
-            <FormLabel> Description </FormLabel>
-            <Input
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-            ></Input>
-            <FormLabel>Ingredients</FormLabel>
-            <Input
-              placeholder="Ingredient 1"
-              value={ingredient1}
-              onChange={(e) => setIngredient1(e.target.value)}
-            ></Input>
-            <Input
-              placeholder="Ingredient 2"
-              value={ingredient2}
-              onChange={(e) => setIngredient2(e.target.value)}
-            ></Input>
-            <Input
-              placeholder="Ingredient 3"
-              value={ingredient3}
-              onChange={(e) => setIngredient3(e.target.value)}
-            ></Input>
-            <Input
-              placeholder="Ingredient 4"
-              value={ingredient4}
-              onChange={(e) => setIngredient4(e.target.value)}
-            ></Input>
-            <Input
-              placeholder="Ingredient 5"
-              value={ingredient5}
-              onChange={(e) => setIngredient5(e.target.value)}
-            ></Input>
-            <FormLabel>Method</FormLabel>
-            <Textarea
-              value={method}
-              onChange={(e) => setMethod(e.target.value)}
-            ></Textarea>
-            <FormLabel>Cooking time (minutes)</FormLabel>
-            <Select
-              placeholder="Select"
-              value={cookingTime}
-              onChange={(e) => setCookingTime(e.target.value)}
-            >
-              <option>15 </option>
-              <option>30 </option>
-              <option>45 </option>
-              <option>60 </option>
-              <option>90 </option>
-              <option>120 </option>
-            </Select>
-            <FormLabel>Servings</FormLabel>
-            <Input
-              value={servings}
-              onChange={(e) => setServings(e.target.value)}
-            ></Input>
-            <FormLabel>Recipe tags</FormLabel>
-            {tags
-              ? tags.map((tag) => {
-                  return (
-                    <div>
-                      <Checkbox
-                        variantColor="gray"
-                        type="checkbox"
-                        value={recipeTags}
-                        onChange={() => editTags(tag.id)}
-                      >
-                        {tag.title}
-                      </Checkbox>
-                    </div>
-                  );
-                })
-              : null}
-          </FormControl>
-          <Button
-            onClick={
-              title &&
-              imageURL &&
-              description &&
-              ingredients &&
-              method &&
-              cookingTime &&
-              servings &&
-              tagIds &&
-              servings
-                ? submitForm
-                : showToast
-            }
+        <Box>
+          <Heading
+            position="relative"
+            fontWeight="thin"
+            as="h2"
+            size="xl"
+            padding="10px"
           >
-            Post recipe
-          </Button>
+            Add your recipe
+          </Heading>
+          <Image
+            position="absolute"
+            className="bg"
+            src={addRecipeBackground}
+          ></Image>
+          <Box className="box" position="relative">
+            <FormControl className="form" isRequired>
+              <FormLabel> Title </FormLabel>
+              <Input
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+              ></Input>
+              <FormLabel> Image URL </FormLabel>
+              <Input
+                value={imageURL}
+                onChange={(e) => setImageURL(e.target.value)}
+              ></Input>
+              <Image src={imageURL} thumbnail width="50%" />
+              <FormLabel> Description </FormLabel>
+              <Input
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+              ></Input>
+              <FormLabel>Ingredients</FormLabel>
+              <Input
+                placeholder="Ingredient 1"
+                value={ingredient1}
+                onChange={(e) => setIngredient1(e.target.value)}
+              ></Input>
+              <Input
+                placeholder="Ingredient 2"
+                value={ingredient2}
+                onChange={(e) => setIngredient2(e.target.value)}
+              ></Input>
+              <Input
+                placeholder="Ingredient 3"
+                value={ingredient3}
+                onChange={(e) => setIngredient3(e.target.value)}
+              ></Input>
+              <Input
+                placeholder="Ingredient 4"
+                value={ingredient4}
+                onChange={(e) => setIngredient4(e.target.value)}
+              ></Input>
+              <Input
+                placeholder="Ingredient 5"
+                value={ingredient5}
+                onChange={(e) => setIngredient5(e.target.value)}
+              ></Input>
+              <FormLabel>Method</FormLabel>
+              <Textarea
+                value={method}
+                onChange={(e) => setMethod(e.target.value)}
+              ></Textarea>
+              <FormLabel>Cooking time (minutes)</FormLabel>
+              <Select
+                placeholder="Select"
+                value={cookingTime}
+                onChange={(e) => setCookingTime(e.target.value)}
+              >
+                <option>15 </option>
+                <option>30 </option>
+                <option>45 </option>
+                <option>60 </option>
+                <option>90 </option>
+                <option>120 </option>
+              </Select>
+              <FormLabel>Servings</FormLabel>
+              <Input
+                value={servings}
+                onChange={(e) => setServings(e.target.value)}
+              ></Input>
+              <FormLabel>Recipe tags</FormLabel>
+              {tags
+                ? tags.map((tag) => {
+                    return (
+                      <div>
+                        <Checkbox
+                          variantColor="gray"
+                          type="checkbox"
+                          value={recipeTags}
+                          onChange={() => editTags(tag.id)}
+                        >
+                          {tag.title}
+                        </Checkbox>
+                      </div>
+                    );
+                  })
+                : null}
+            </FormControl>
+            <Button
+              onClick={
+                title &&
+                imageURL &&
+                description &&
+                ingredients &&
+                method &&
+                cookingTime &&
+                servings &&
+                tagIds &&
+                servings
+                  ? submitForm
+                  : showToast
+              }
+            >
+              Post recipe
+            </Button>
+          </Box>
         </Box>
       )}
     </Box>
