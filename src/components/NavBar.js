@@ -44,7 +44,7 @@ export default function NavBar() {
       <div className="grow">
         <NavLink
           exact
-          to="/myfavourites"
+          to="/ourfoodosophy"
           activeStyle={{
             fontWeight: "bold",
           }}

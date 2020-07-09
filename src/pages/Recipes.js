@@ -163,73 +163,76 @@ export default function Recipes() {
       <Box className="container">
         {searched.map((recipe, i) => {
           return (
-            <div className="recipe">
-              <div>
-                {" "}
-                <Heading padding="8px" fontWeight="thin" as="h2" size="md">
-                  {recipe.title}{" "}
-                </Heading>{" "}
-              </div>
-              <Link to={`/recipes/${recipe.id}`}>
-                <Image
-                  key={i}
-                  alt="recipe"
-                  height="auto"
-                  src={recipe.imageURL}
-                />
-              </Link>
-              {token ? (
-                <Box padding="5px">
-                  <Button
-                    className="favButton"
-                    variantColor="gray"
-                    rounded="140%"
-                    variant="outline"
-                    onClick={() =>
-                      favClicked(
-                        recipe.id,
-                        user.userFavourites.find(
-                          (favourite) => favourite.recipeId === recipe.id
-                        )
-                      )
-                    }
-                  >
-                    {checkFav(recipe)}
-                  </Button>{" "}
-                  <span role="img" aria-label="heart">
-                    🤍
-                  </span>
-                  {recipe.likes}
+            <Link to={`/recipes/${recipe.id}`}>
+              <Box className="recipeCard">
+                <Box>
+                  {" "}
+                  <Heading padding="8px" fontWeight="thin" as="h2" size="md">
+                    {recipe.title}{" "}
+                  </Heading>{" "}
                 </Box>
-              ) : null}
-              <Box>
-                <Stack
-                  padding="4px"
-                  fontFamily="playright script"
-                  spacing={1}
-                  isInline
-                >
-                  {recipe.tags.map((tag) => {
-                    return <Tag fontSize="12px">{tag.title}</Tag>;
-                  })}{" "}
-                </Stack>
+                <center>
+                  <Image
+                    key={i}
+                    alt="recipe"
+                    height="350px"
+                    objectFit="cover"
+                    src={recipe.imageURL}
+                  />
+                </center>
+                {token ? (
+                  <Box padding="5px">
+                    <Button
+                      className="favButton"
+                      variantColor="gray"
+                      rounded="140%"
+                      variant="outline"
+                      onClick={() =>
+                        favClicked(
+                          recipe.id,
+                          user.userFavourites.find(
+                            (favourite) => favourite.recipeId === recipe.id
+                          )
+                        )
+                      }
+                    >
+                      {checkFav(recipe)}
+                    </Button>{" "}
+                    <span role="img" aria-label="heart">
+                      🤍
+                    </span>
+                    {recipe.likes}
+                  </Box>
+                ) : null}{" "}
+                <Box>
+                  <Stack
+                    padding="4px"
+                    fontFamily="playright script"
+                    spacing={1}
+                    isInline
+                  >
+                    {recipe.tags.map((tag) => {
+                      return <Tag fontSize="12px">{tag.title}</Tag>;
+                    })}{" "}
+                  </Stack>
+                </Box>{" "}
+                <Box>
+                  <Heading fontWeight="thin" as="h5" size="s" paddingTop="5px">
+                    Whipped up by: {recipe.user.name}
+                  </Heading>
+                  <Heading fontWeight="thin" as="h5" size="s" paddingTop="5px">
+                    <span role="img" aria-label="clock">
+                      🕐
+                    </span>{" "}
+                    {recipe.cookingTime} minutes{" "}
+                  </Heading>
+                  <Heading fontWeight="thin" as="h5" size="s" paddingTop="5px">
+                    Servings:
+                    {recipe.servings}
+                  </Heading>
+                </Box>
               </Box>
-              <Box>
-                <Heading fontWeight="thin" as="h5" size="s" paddingTop="5px">
-                  Whipped up by: {recipe.user.name}
-                </Heading>
-                <Heading fontWeight="thin" as="h5" size="s" paddingTop="5px">
-                  <span role="img" aria-label="clock">
-                    🕐
-                  </span>{" "}
-                  {recipe.cookingTime} minutes{" "}
-                </Heading>
-                <Heading fontWeight="thin" as="h5" size="s" paddingTop="5px">
-                  Servings:
-                  {recipe.servings}
-                </Heading>
-              </Box>
-            </div>
+            </Link>
           );
         })}
       </Box>

@@ -12,8 +12,10 @@ import {
   Heading,
   Box,
   useToast,
+  Image,
 } from "@chakra-ui/core";
 import "./forms.css";
+import loginBackground from "../loginBackground.png";
 
 export default function Login() {
   const [email, setEmail] = useState();
@@ -50,38 +52,54 @@ export default function Login() {
   }
 
   return (
-    <Box className="box">
-      <Heading>Login</Heading>
-      <FormControl isRequired>
-        <FormLabel>Email address</FormLabel>
-        <Input
-          variant="outline"
-          placeholder="Email address"
-          size="lg"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <FormLabel>Password</FormLabel>
-        <Input
-          variant="outline"
-          placeholder="Password"
-          type="password"
-          size="lg"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-      </FormControl>
-      <Button variantColor="gray" variant="outline" onClick={submitForm}>
+    <Box className="page">
+      <Image position="absolute" className="bg" src={loginBackground}></Image>
+      <Heading
+        position="relative"
+        fontWeight="thin"
+        as="h2"
+        size="xl"
+        padding="10px"
+      >
         Login
-      </Button>
-      <p>
-        No account yet?
-        <Link to="/signup">
-          <Button variantColor="gray" variant="outline">
-            Sign up!
-          </Button>
-        </Link>
-      </p>
+      </Heading>
+      <Box className="box" position="relative">
+        <FormControl isRequired>
+          <FormLabel>Email address</FormLabel>
+          <Input
+            variant="outline"
+            placeholder="Email address"
+            size="lg"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <FormLabel>Password</FormLabel>
+          <Input
+            variant="outline"
+            placeholder="Password"
+            type="password"
+            size="lg"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </FormControl>
+        <Button
+          variantColor="gray"
+          variant="outline"
+          margin="15px"
+          onClick={submitForm}
+        >
+          Login
+        </Button>
+        <Box>
+          No account yet?
+          <Link to="/signup">
+            <Button variantColor="gray" variant="outline" marginLeft="10px">
+              Sign up!
+            </Button>
+          </Link>
+        </Box>
+      </Box>
     </Box>
   );
 }
