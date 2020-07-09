@@ -104,17 +104,21 @@ export default function Recipes() {
 
   return (
     <div>
-      <Heading className="recipesheading" as="h1" size="2xl">
+      <Heading fontWeight="thin" className="recipesheading" as="h1" size="2xl">
         Recipes
       </Heading>
-      <Stack spacing={2} isInline>
-        <Tag size="md" onClick={() => setSelectedTag(null)}>
+      <Stack fontFamily="playright script" fontSize="md" spacing={2} isInline>
+        <Tag className="tags" size="md" onClick={() => setSelectedTag(null)}>
           All recipes
         </Tag>
         {tags
           ? tags.map((tag) => {
               return (
-                <Tag size="md" onClick={() => setSelectedTag(tag)}>
+                <Tag
+                  className="tags"
+                  size="md"
+                  onClick={() => setSelectedTag(tag)}
+                >
                   {tag.title}
                 </Tag>
               );

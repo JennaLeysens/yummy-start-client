@@ -21,3 +21,9 @@
   text-align: left;
   padding-bottom: 12px;
 }
+
+.tags:hover {
+  background-color: white;
+  border: 1px solid lightgray;
+  cursor: pointer;
+}
