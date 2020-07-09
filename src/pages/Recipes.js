@@ -16,7 +16,7 @@ import {
   Select,
   Input,
   InputGroup,
-  InputRightAddon,
+  InputLeftAddon,
   Icon,
 } from "@chakra-ui/core";
 
@@ -116,7 +116,7 @@ export default function Recipes() {
       <Heading fontWeight="thin" className="recipesheading" as="h1" size="2xl">
         Recipes
       </Heading>
-      <Stack fontFamily="playright script" fontSize="md" spacing={3} isInline>
+      <Stack fontFamily="playright script" fontSize="md" spacing={2} isInline>
         <Tag className="tags" size="md" onClick={() => setSelectedTag(null)}>
           All recipes
         </Tag>
@@ -135,8 +135,9 @@ export default function Recipes() {
           : null}
         <Stack className="select">
           <Select
+            focusBorderColor="darkgray"
             placeholder="Sort by"
-            width="100%"
+            width="80%"
             fontFamily="playright script"
             onChange={(event) =>
               event.target.value === "Most popular"
@@ -153,8 +154,9 @@ export default function Recipes() {
         </Stack>
         <Stack>
           <InputGroup>
-            <InputRightAddon children={<Icon name="search"></Icon>} />
+            <InputLeftAddon bg="white" children={<Icon name="search"></Icon>} />
             <Input
+              focusBorderColor="darkgray"
               type="text"
               variant="outline"
               width="160%"
