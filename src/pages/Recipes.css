@@ -3,6 +3,7 @@
   flex-flow: row wrap;
   justify-content: space-around;
 }
+
 .recipe {
   margin: 1em;
   width: 340px;
@@ -10,12 +11,6 @@
   padding: 3px;
   background-size: cover;
   font-family: '"Cormorant Garamond", serif';
-}
-.button {
-  font-size: x-large;
-  background-color: white;
-  border-radius: 80%;
-  border-color: gray;
 }
 
 .recipesheading {
