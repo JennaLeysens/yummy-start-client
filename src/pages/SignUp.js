@@ -13,6 +13,7 @@ import {
 import { Heading } from "@chakra-ui/core";
 import "./forms.css";
 import { selectErrorMessage } from "../store/User/selectors";
+import signupBackground from "../signupBackground.png";
 
 export default function SignUp() {
   const [name, setName] = useState();
@@ -45,11 +46,17 @@ export default function SignUp() {
 
   return (
     <Box>
-      <Heading fontWeight="thin" as="h2" size="xl" padding="10px">
-        {" "}
+      <Image position="absolute" className="bg" src={signupBackground}></Image>
+      <Heading
+        position="relative"
+        fontWeight="thin"
+        as="h2"
+        size="xl"
+        padding="10px"
+      >
         Create an account to start sharing your recipes!
       </Heading>{" "}
-      <Box className="box">
+      <Box className="box" position="relative">
         <FormControl isRequired>
           <FormLabel>Name</FormLabel>
           <Input
