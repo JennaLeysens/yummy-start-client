@@ -16,3 +16,8 @@
   border-radius: 80%;
   border-color: gray;
 }
+
+.recipesheading {
+  text-align: left;
+  padding-bottom: 12px;
+}

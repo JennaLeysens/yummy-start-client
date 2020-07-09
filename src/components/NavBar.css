@@ -1,13 +1,39 @@
-.NavBar {
-  display: inline;
-  font-family: "Verdana";
+.navbar {
+  text-align: center;
+  padding-bottom: 10px;
+}
+
+.logo {
+  max-width: 50%;
+  text-align: center;
+  align-content: center;
+  margin: 0 auto;
+  padding-top: 8px;
+}
+
+.grow {
+  display: inline-block;
+  align-content: center;
+  font-family: "playright script";
+  font-size: 18px;
   color: "grey";
   padding-left: 6px;
   padding-right: 6px;
   background-color: white;
-  border-right: 1px solid #bbb;
+  padding: 18px;
 }
 
 .NavBar:last-child {
   border-right: none;
+}
+
+.grow:hover {
+  -webkit-transform: scale(1.2);
+  -ms-transform: scale(1.2);
+  transform: scale(1.2);
+}
+
+.button {
+  margin: 10px;
+  font-family: "playright script";
 }

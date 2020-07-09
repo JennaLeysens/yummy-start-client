@@ -50,7 +50,6 @@ export default function UserProfile() {
             size="150px"
             objectFit="cover"
             fallbackSrc="https://cdn.pixabay.com/photo/2014/04/03/00/42/chef-hat-309146_1280.png"
-            border="1px"
             display="inline-block"
             p={2}
           ></Image>

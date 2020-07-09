@@ -5,6 +5,8 @@ import { logOut } from "../store/User/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { selectToken } from "../store/User/selectors";
 import { selectUser } from "../store/User/selectors";
+import logo from "../logo-ys.png";
+import { Image, Button } from "@chakra-ui/core";
 
 export default function NavBar() {
   const dispatch = useDispatch();
@@ -12,20 +14,23 @@ export default function NavBar() {
   const user = useSelector(selectUser);
 
   return (
-    <div>
-      <div className="NavBar">
+    <div className="navbar">
+      <div className="logo">
+        <Image display="inline-block" src={logo}></Image>
+      </div>
+      <div className="grow">
         <NavLink
           exact
           to="/"
           activeStyle={{
-            fontWeight: "bold",
+            fontWeight: "grow",
           }}
         >
           Recipes
         </NavLink>
       </div>
 
-      <div className="NavBar">
+      <div className="grow">
         <NavLink
           to="/addrecipe"
           activeStyle={{
@@ -36,7 +41,7 @@ export default function NavBar() {
         </NavLink>
       </div>
 
-      <div className="NavBar">
+      <div className="grow">
         <NavLink
           exact
           to="/myfavourites"
@@ -48,7 +53,7 @@ export default function NavBar() {
         </NavLink>{" "}
       </div>
       {token ? (
-        <div className="NavBar">
+        <div className="grow">
           <NavLink
             exact
             to="/myprofile"
@@ -58,20 +63,40 @@ export default function NavBar() {
           >
             {user.name}'s Kitchen
           </NavLink>
-          <button onClick={() => dispatch(logOut())}>Logout</button>{" "}
+          <Button
+            className="button"
+            variantColor="gray"
+            variant="outline"
+            size="xs"
+            onClick={() => dispatch(logOut())}
+          >
+            Logout
+          </Button>{" "}
         </div>
       ) : (
         <>
           <Link to="/signup">
-            <button>Create an account</button>
+            <Button
+              className="button"
+              variantColor="gray"
+              variant="outline"
+              size="xs"
+            >
+              Create an account
+            </Button>
           </Link>
           <Link to="/login">
-            <button>Login</button>
+            <Button
+              className="button"
+              variantColor="gray"
+              variant="outline"
+              size="xs"
+            >
+              Login
+            </Button>
           </Link>
         </>
       )}
-
-      <div className="NavBar"></div>
     </div>
   );
 }
