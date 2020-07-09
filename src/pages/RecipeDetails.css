@@ -1,0 +1,21 @@
+.recipeDetailsCard {
+  font-family: '"Cormorant Garamond", serif';
+  text-align: left;
+  margin-bottom: 40px;
+  border: 1px solid lightgray;
+  padding: 15px;
+}
+.imageBox {
+}
+.text {
+  margin-top: 10px;
+}
+.likeButton {
+  align-items: left;
+}
+
+.likeButton:hover {
+  -webkit-transform: scale(1.2);
+  -ms-transform: scale(1.2);
+  transform: scale(1.2);
+}

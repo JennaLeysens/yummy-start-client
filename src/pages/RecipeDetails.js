@@ -3,7 +3,17 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { fetchOneRecipe, addLike } from "../store/RecipeDetails/actions";
 import { selectRecipe } from "../store/RecipeDetails/selectors";
-import { Stack, Tag } from "@chakra-ui/core";
+import {
+  Stack,
+  Tag,
+  Heading,
+  Box,
+  Image,
+  Text,
+  Button,
+  Flex,
+} from "@chakra-ui/core";
+import "./RecipeDetails.css";
 
 export default function RecipeDetails() {
   const { id } = useParams();
@@ -16,53 +26,78 @@ export default function RecipeDetails() {
   }, [dispatch, id]);
 
   return (
-    <div>
-      <h2>{recipe.title}</h2>
-      <Stack spacing={3} isInline>
-        {recipe.tags
-          ? recipe.tags.map((tag) => {
-              return <Tag size="md">{tag.title}</Tag>;
-            })
-          : null}{" "}
-      </Stack>
-      <p>{recipe.description}</p>
-      <img alt="recipe" width="40%" src={recipe.imageURL} />
-      <p>
-        <strong>Whipped up by:</strong> {recipe.user ? recipe.user.name : null}{" "}
-        <button onClick={() => dispatch(addLike())}>
-          <span role="img" aria-label="heart">
-            🤍
-          </span>
-          {recipe.likes}
-        </button>
-      </p>
-      <p>
-        <span role="img" aria-label="clock">
-          🕐
-        </span>
-        <span class="icon icon-clock"></span>
-        {recipe.cookingTime} minutes
-      </p>
-      <p>
-        <strong>Servings: </strong>
-        {recipe.servings}
-      </p>
-      <p>
-        <strong>Ingredients</strong>
-      </p>
-      {recipe.ingredients
-        ? recipe.ingredients.map((ingredient) => {
-            return <li>{ingredient}</li>;
-          })
-        : null}
-      <p>
-        <strong>Method</strong>
-      </p>
-      {recipe.method
-        ? recipe.method.split(".").map((method) => {
-            return <li>{method}</li>; ///,|\./
-          })
-        : null}
-    </div>
+    <Flex className="recipeDetailsCard">
+      <Box w="40%" className="imageBox">
+        <Stack
+          padding="8px"
+          fontFamily="playright script"
+          fontSize="md"
+          spacing={2}
+          isInline
+        >
+          {recipe.tags
+            ? recipe.tags.map((tag) => {
+                return <Tag size="md">{tag.title}</Tag>;
+              })
+            : null}{" "}
+          <Button
+            className="likeButton"
+            bg="white"
+            onClick={() => dispatch(addLike())}
+          >
+            <span role="img" aria-label="heart">
+              🤍
+            </span>
+            {recipe.likes}
+          </Button>
+        </Stack>
+        <Image alt="recipe" width="90%" src={recipe.imageURL} align="center" />
+        <Text className="text"></Text>
+      </Box>
+      <Box className="recipeText" mt="45px">
+        <Heading fontWeight="thin" as="h2" size="xl">
+          {recipe.title}
+        </Heading>
+        <Text className="text">
+          <Heading as="h4" size="md">
+            Whipped up by: {recipe.user ? recipe.user.name : null}
+          </Heading>
+        </Text>
+        <Text className="text">{recipe.description}</Text>{" "}
+        <Text className="text">
+          <Heading as="h4" size="md">
+            <span role="img" aria-label="clock">
+              🕐
+            </span>{" "}
+            {recipe.cookingTime} minutes
+          </Heading>
+          <Heading className="text" as="h4" size="md">
+            Servings: {recipe.servings}
+          </Heading>
+        </Text>
+        <Text className="text">
+          <Heading as="h4" size="md">
+            Ingredients
+          </Heading>
+          {recipe.ingredients
+            ? recipe.ingredients.map((ingredient) => {
+                return <li>{ingredient}</li>;
+              })
+            : null}
+        </Text>
+        <Box>
+          <Text className="text">
+            <Heading as="h4" size="md">
+              Method
+            </Heading>
+            {recipe.method
+              ? recipe.method.split(".").map((method) => {
+                  return <li>{method}</li>; ///,|\./
+                })
+              : null}{" "}
+          </Text>
+        </Box>
+      </Box>
+    </Flex>
   );
 }
