@@ -9,6 +9,7 @@
   height: 250px;
   padding: 3px;
   background-size: cover;
+  font-family: '"Cormorant Garamond", serif';
 }
 .button {
   font-size: x-large;
@@ -24,6 +25,11 @@
 
 .tags:hover {
   background-color: white;
-  border: 1px solid lightgray;
+  border: 1px solid rgb(211, 211, 211);
   cursor: pointer;
+}
+
+.select {
+  padding-left: 18px;
+  padding-right: 18px;
 }

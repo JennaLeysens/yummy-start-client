@@ -9,7 +9,7 @@ import "./Recipes.css";
 import { selectToken } from "../store/User/selectors";
 import { selectUser } from "../store/User/selectors";
 import { addToFavourites, deleteFavourite } from "../store/User/actions";
-import { Stack, Tag, Heading } from "@chakra-ui/core";
+import { Stack, Tag, Heading, Select, Input } from "@chakra-ui/core";
 
 export default function Recipes() {
   const dispatch = useDispatch();
@@ -124,27 +124,36 @@ export default function Recipes() {
               );
             })
           : null}
+        <Stack className="select">
+          <Select
+            placeholder="Sort by"
+            width="90%"
+            fontFamily="playright script"
+            onChange={(event) =>
+              event.target.value === "Most popular"
+                ? setSortLikes(
+                    filteredRecipes.sort(compareLikes),
+                    console.log(event.target)
+                  )
+                : setSortCookingTime(filteredRecipes.sort(compareCookingTime))
+            }
+          >
+            <option value={sortLikes}>Most popular</option>
+            <option value={sortCookingTime}>Cooking Time (short - long</option>
+          </Select>
+        </Stack>
+        <Stack>
+          <Input
+            variant="outline"
+            width="50%"
+            type="text"
+            placeholder="Search by ingredient"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          ></Input>
+        </Stack>
       </Stack>
-      <select
-        onChange={(event) =>
-          event.target.value === "Most popular"
-            ? setSortLikes(
-                filteredRecipes.sort(compareLikes),
-                console.log(event.target)
-              )
-            : setSortCookingTime(filteredRecipes.sort(compareCookingTime))
-        }
-      >
-        <option>Sort by</option>
-        <option value={sortLikes}>Most popular</option>
-        <option value={sortCookingTime}>Cooking Time (short - long</option>
-      </select>
-      <input
-        type="text"
-        placeholder="Search by ingredient"
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-      ></input>
+
       <div className="container">
         {searched.map((recipe, i) => {
           return (
@@ -176,7 +185,7 @@ export default function Recipes() {
               </Link>
               <div>
                 <strong>{recipe.title}</strong>{" "}
-                <Stack spacing={1} isInline>
+                <Stack fontFamily="playright script" spacing={1} isInline>
                   {recipe.tags.map((tag) => {
                     return <Tag size="sm">{tag.title}</Tag>;
                   })}{" "}
