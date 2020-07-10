@@ -23,6 +23,7 @@ import {
   Link,
   Text,
   useToast,
+  FormHelperText,
 } from "@chakra-ui/core";
 import "./AddRecipe.css";
 import addRecipeBackground from "../addRecipeBackground.png";
@@ -138,7 +139,7 @@ export default function AddRecipe() {
             </AlertDescription>
           </Alert>
           <Box className="linkbox">
-            <Text>
+            <Text p={4}>
               <Link href="/">
                 <Heading as="h3" size="lg">
                   Go to recipes
@@ -167,21 +168,28 @@ export default function AddRecipe() {
             <FormControl className="form" isRequired>
               <FormLabel> Title </FormLabel>
               <Input
+                placeholder="e.g Seasoned roast vegetables"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
               ></Input>
               <FormLabel> Image URL </FormLabel>
               <Input
+                placeholder="https"
                 value={imageURL}
                 onChange={(e) => setImageURL(e.target.value)}
               ></Input>
               <Image src={imageURL} thumbnail width="50%" />
               <FormLabel> Description </FormLabel>
               <Input
+                placeholder="e.g. A healthy side dish"
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
               ></Input>
               <FormLabel>Ingredients</FormLabel>
+              <FormHelperText>
+                Please include the measurement along with the ingredient (e.g 2
+                x sweet potatoes/½ cup of flour)
+              </FormHelperText>
               <Input
                 placeholder="Ingredient 1"
                 value={ingredient1}
@@ -209,6 +217,7 @@ export default function AddRecipe() {
               ></Input>
               <FormLabel>Method</FormLabel>
               <Textarea
+                placeholder="e.g. Blend the ingredients together. Pour into a 15x15 dish and bake for 20 minutes"
                 value={method}
                 onChange={(e) => setMethod(e.target.value)}
               ></Textarea>
@@ -227,6 +236,7 @@ export default function AddRecipe() {
               </Select>
               <FormLabel>Servings</FormLabel>
               <Input
+                placeholder="e.g. 4"
                 value={servings}
                 onChange={(e) => setServings(e.target.value)}
               ></Input>
