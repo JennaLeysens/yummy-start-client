@@ -8,7 +8,6 @@ import { addToFavourites, deleteFavourite } from "../store/User/actions";
 import { Link } from "react-router-dom";
 import { Heading } from "@chakra-ui/core";
 import { Stack, Tag, Image, Box, Button } from "@chakra-ui/core";
-import moment from "moment";
 import "./UserProfile.css";
 
 export default function UserProfile() {

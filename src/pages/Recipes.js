@@ -21,13 +21,11 @@ import {
   Button,
   Box,
   Image,
-  Text,
 } from "@chakra-ui/core";
 
 export default function Recipes() {
   const dispatch = useDispatch();
   const recipes = useSelector(selectRecipes);
-  console.log("all recipes", recipes);
   const tags = useSelector(selectTags);
   const [sortLikes, setSortLikes] = useState();
   const [sortCookingTime, setSortCookingTime] = useState();
@@ -66,7 +64,6 @@ export default function Recipes() {
       )
     : filteredRecipes;
 
-  console.log("FAAAAVS", user.userFavourites);
   const userFavs = user.userFavourites
     ? user.userFavourites.map((recipe) => {
         return recipe.recipeId;
@@ -80,12 +77,6 @@ export default function Recipes() {
       return "🥦";
     }
   };
-
-  const favsIds = user.userFavourites
-    ? user.userFavourites.map((favourite) => {
-        return favourite.id;
-      })
-    : [];
 
   function favClicked(recipeId, fav) {
     console.log(recipeId);
