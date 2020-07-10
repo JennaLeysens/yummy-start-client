@@ -25,6 +25,9 @@
   text-align: left;
   padding-bottom: 12px;
 }
+.tags:active {
+  background-color: white;
+}
 
 .tags:hover {
   background-color: white;

@@ -14,10 +14,16 @@
   flex-flow: row wrap;
   justify-content: space-around;
 }
-.recipe {
+.smallRecipeCard {
+  text-align: center;
+  display: inline-block;
   margin: 1em;
   width: 340px;
-  height: 250px;
-  padding: 3px;
+  height: 350px;
+  padding: 2px;
   background-size: cover;
+}
+
+.smallRecipeCard:hover {
+  box-shadow: 0 12px 20px 0 rgba(0, 0, 0, 0.2);
 }

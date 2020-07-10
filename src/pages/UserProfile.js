@@ -12,6 +12,7 @@ import "./UserProfile.css";
 
 export default function UserProfile() {
   const user = useSelector(selectUser);
+  const userRecipes = user.recipes;
   const token = useSelector(selectToken);
 
   const userFavs = user.userFavourites
@@ -90,96 +91,107 @@ export default function UserProfile() {
         {filteredRecipes
           ? filteredRecipes.map((recipe, i) => {
               return (
-                <Link to={`/recipes/${recipe.id}`}>
-                  <Box className="recipeCard">
-                    <Box>
-                      {" "}
-                      <Heading
-                        padding="8px"
-                        fontWeight="thin"
-                        as="h2"
-                        size="md"
-                      >
-                        {recipe.title}{" "}
-                      </Heading>{" "}
-                    </Box>
-                    <center>
-                      <Image
-                        key={i}
-                        alt="recipe"
-                        height="350px"
-                        objectFit="cover"
-                        src={recipe.imageURL}
-                      />
-                    </center>
-                    {token ? (
-                      <Box padding="5px">
-                        <Button
-                          className="favButton"
-                          variantColor="gray"
-                          rounded="140%"
-                          variant="outline"
-                          onClick={() =>
-                            favClicked(
-                              recipe.id,
-                              user.userFavourites.find(
-                                (favourite) => favourite.recipeId === recipe.id
-                              )
+                <Box>
+                  {token ? (
+                    <Box padding="5px">
+                      <Button
+                        className="favButton"
+                        variantColor="gray"
+                        rounded="140%"
+                        variant="outline"
+                        onClick={() =>
+                          favClicked(
+                            recipe.id,
+                            user.userFavourites.find(
+                              (favourite) => favourite.recipeId === recipe.id
                             )
-                          }
-                        >
-                          {checkFav(recipe)}
-                        </Button>{" "}
-                        <span role="img" aria-label="heart">
-                          🤍
-                        </span>
-                        {recipe.likes}
-                      </Box>
-                    ) : null}{" "}
-                    <Box>
-                      <Stack
-                        padding="4px"
-                        fontFamily="playright script"
-                        spacing={1}
-                        isInline
+                          )
+                        }
                       >
-                        {recipe.tags.map((tag) => {
-                          return <Tag fontSize="12px">{tag.title}</Tag>;
-                        })}{" "}
-                      </Stack>
-                    </Box>{" "}
-                    <Box>
-                      <Heading
-                        fontWeight="thin"
-                        as="h5"
-                        size="s"
-                        paddingTop="5px"
-                      >
-                        Whipped up by: {recipe.user.name}
-                      </Heading>
-                      <Heading
-                        fontWeight="thin"
-                        as="h5"
-                        size="s"
-                        paddingTop="5px"
-                      >
-                        <span role="img" aria-label="clock">
-                          🕐
-                        </span>{" "}
-                        {recipe.cookingTime} minutes{" "}
-                      </Heading>
-                      <Heading
-                        fontWeight="thin"
-                        as="h5"
-                        size="s"
-                        paddingTop="5px"
-                      >
-                        Servings:
-                        {recipe.servings}
-                      </Heading>
+                        {checkFav(recipe)}
+                      </Button>{" "}
                     </Box>
-                  </Box>
-                </Link>
+                  ) : null}{" "}
+                  <Link to={`/recipes/${recipe.id}`}>
+                    <Box className="smallRecipeCard">
+                      <Box>
+                        {" "}
+                        <Heading
+                          padding="8px"
+                          fontWeight="thin"
+                          as="h2"
+                          size="md"
+                        >
+                          {recipe.title}{" "}
+                        </Heading>{" "}
+                      </Box>
+                      <center>
+                        <Image
+                          key={i}
+                          alt="recipe"
+                          w={210}
+                          h={250}
+                          objectFit="cover"
+                          src={recipe.imageURL}
+                        />
+                      </center>
+
+                      <span role="img" aria-label="heart">
+                        🤍
+                      </span>
+                      {recipe.likes}
+                    </Box>
+                  </Link>
+                </Box>
+              );
+            })
+          : null}
+      </Box>{" "}
+      <Heading
+        className="heading"
+        fontWeight="thin"
+        as="h2"
+        size="xl"
+        padding={2}
+      >
+        My posted recipes ({userRecipes ? userRecipes.length : 0})
+      </Heading>
+      <Box className="container">
+        {userRecipes
+          ? userRecipes.map((recipe, i) => {
+              return (
+                <Box>
+                  <Link to={`/recipes/${recipe.id}`}>
+                    <Box className="smallRecipeCard">
+                      <Box>
+                        {" "}
+                        <Heading
+                          padding="8px"
+                          fontWeight="thin"
+                          as="h2"
+                          size="md"
+                        >
+                          {recipe.title}{" "}
+                        </Heading>{" "}
+                      </Box>
+                      <center>
+                        <Image
+                          key={i}
+                          alt="recipe"
+                          w={210}
+                          h={250}
+                          objectFit="cover"
+                          src={recipe.imageURL}
+                        />
+                      </center>
+
+                      <span role="img" aria-label="heart">
+                        🤍
+                      </span>
+                      {recipe.likes}
+                    </Box>
+                  </Link>
+                </Box>
               );
             })
           : null}
