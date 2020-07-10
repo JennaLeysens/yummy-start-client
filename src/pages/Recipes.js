@@ -60,9 +60,15 @@ export default function Recipes() {
 
   const searched = filterIngredient
     ? filteredRecipes.filter((recipe) =>
-        recipe.ingredients.some((ingredient) => ingredient.includes(search))
+        recipe.ingredients.some((ingredient) =>
+          ingredient ? ingredient.includes(search) : null
+        )
       )
     : filteredRecipes;
+
+  console.log("filteredRecipes", filteredRecipes);
+  console.log("searched", searched);
+  console.log("search", search);
 
   const userFavs = user.userFavourites
     ? user.userFavourites.map((recipe) => {
