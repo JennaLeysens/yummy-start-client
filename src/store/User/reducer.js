@@ -5,6 +5,7 @@ const initialState = {
   imageurl: null,
   recipe: null,
   userFavourites: null,
+  recipes: null,
   errorMessage: null,
 };
 
