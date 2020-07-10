@@ -10,6 +10,7 @@ import { getUserWithStoredToken } from "./store/User/actions";
 import { useDispatch } from "react-redux";
 import NavBar from "./components/NavBar";
 import UserProfile from "./pages/UserProfile";
+import OurFoodosophy from "./pages/OurFoodosophy";
 
 function App() {
   const dispatch = useDispatch();
@@ -22,6 +23,7 @@ function App() {
     <div className="App" style={{ display: "block" }}>
       <NavBar></NavBar>
       <Switch>
+        <Route path="/ourfoodosophy" component={OurFoodosophy} />
         <Route path="/addrecipe" component={AddRecipe} />
         <Route path="/recipes/:id" component={RecipeDetails} />
         <Route exact path="/" component={Recipes} />
@@ -29,6 +31,7 @@ function App() {
         <Route path="/login" component={Login} />
         <Route path="/signup" component={SignUp} />
       </Switch>
+      <div className="footer"></div>
     </div>
   );
 }

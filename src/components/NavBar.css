@@ -1,6 +1,5 @@
 .navbar {
   text-align: center;
-  padding-bottom: 10px;
 }
 
 .logo {
@@ -17,8 +16,8 @@
   font-family: "playright script";
   font-size: 18px;
   color: "grey";
-  padding-left: 6px;
-  padding-right: 6px;
+  padding-left: 8px;
+  padding-right: 8px;
   background-color: white;
   padding: 18px;
 }

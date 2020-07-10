@@ -13,6 +13,7 @@ import {
 import { Heading } from "@chakra-ui/core";
 import "./forms.css";
 import { selectErrorMessage } from "../store/User/selectors";
+import signupBackground from "../signupBackground.png";
 
 export default function SignUp() {
   const [name, setName] = useState();
@@ -44,41 +45,57 @@ export default function SignUp() {
   }, [toast, error]);
 
   return (
-    <Box className="box">
-      <Heading>Create an account to start sharing your recipes!</Heading>
-      <FormControl isRequired>
-        <FormLabel>Name</FormLabel>
-        <Input
-          placeholder="Name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        ></Input>
-        <FormLabel>Email address</FormLabel>
-        <Input
-          placeholder="Email address"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        ></Input>
-        <FormLabel>Password</FormLabel>
-        <Input
-          placeholder="Password"
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        ></Input>
-      </FormControl>
-      <FormControl>
-        <FormLabel>Profile image url</FormLabel>
-        <Input
-          type="text"
-          value={imageurl}
-          onChange={(e) => setImageUrl(e.target.value)}
-        ></Input>
-        <Image src={imageurl} thumbnail width="50%" />
-      </FormControl>
-      <Button variantColor="gray" variant="outline" onClick={submitForm}>
-        Create account
-      </Button>
+    <Box>
+      <Image position="absolute" className="bg" src={signupBackground}></Image>
+      <Heading
+        position="relative"
+        fontWeight="thin"
+        as="h2"
+        size="xl"
+        padding="10px"
+      >
+        Create an account to start sharing your recipes!
+      </Heading>{" "}
+      <Box className="box" position="relative">
+        <FormControl isRequired>
+          <FormLabel>Name</FormLabel>
+          <Input
+            placeholder="Name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          ></Input>
+          <FormLabel>Email address</FormLabel>
+          <Input
+            placeholder="Email address"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          ></Input>
+          <FormLabel>Password</FormLabel>
+          <Input
+            placeholder="Password"
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          ></Input>
+        </FormControl>
+        <FormControl>
+          <FormLabel>Profile image url</FormLabel>
+          <Input
+            type="text"
+            value={imageurl}
+            onChange={(e) => setImageUrl(e.target.value)}
+          ></Input>
+          <Image src={imageurl} thumbnail width="50%" />
+        </FormControl>
+        <Button
+          variantColor="gray"
+          variant="outline"
+          margin="15px"
+          onClick={submitForm}
+        >
+          Create account
+        </Button>
+      </Box>
     </Box>
   );
 }

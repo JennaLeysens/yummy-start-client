@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink, Link } from "react-router-dom";
+import { NavLink, Link, useHistory } from "react-router-dom";
 import "./NavBar.css";
 import { logOut } from "../store/User/actions";
 import { useDispatch, useSelector } from "react-redux";
@@ -12,6 +12,7 @@ export default function NavBar() {
   const dispatch = useDispatch();
   const token = useSelector(selectToken);
   const user = useSelector(selectUser);
+  const history = useHistory();
 
   return (
     <div className="navbar">
@@ -44,7 +45,7 @@ export default function NavBar() {
       <div className="grow">
         <NavLink
           exact
-          to="/myfavourites"
+          to="/ourfoodosophy"
           activeStyle={{
             fontWeight: "bold",
           }}
@@ -68,7 +69,10 @@ export default function NavBar() {
             variantColor="gray"
             variant="outline"
             size="xs"
-            onClick={() => dispatch(logOut())}
+            onClick={() => {
+              dispatch(logOut());
+              history.push("/");
+            }}
           >
             Logout
           </Button>{" "}
