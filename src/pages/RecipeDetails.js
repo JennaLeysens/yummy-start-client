@@ -133,7 +133,9 @@ export default function RecipeDetails() {
           </Heading>
           {recipe.ingredients
             ? recipe.ingredients.map((ingredient) => {
-                return <li>{ingredient}</li>;
+                if (ingredient) {
+                  return <li>{ingredient}</li>;
+                }
               })
             : null}
         </Text>
@@ -144,9 +146,11 @@ export default function RecipeDetails() {
             </Heading>
             {recipe.method
               ? recipe.method.split(".").map((method) => {
-                  return <li>{method}</li>; ///,|\./
+                  if (method) {
+                    return <li>{method}</li>;
+                  }
                 })
-              : null}{" "}
+              : null}
           </Text>
         </Box>
       </Box>

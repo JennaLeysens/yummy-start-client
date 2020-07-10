@@ -60,9 +60,15 @@ export default function Recipes() {
 
   const searched = filterIngredient
     ? filteredRecipes.filter((recipe) =>
-        recipe.ingredients.some((ingredient) => ingredient.includes(search))
+        recipe.ingredients.some((ingredient) =>
+          ingredient ? ingredient.includes(search) : null
+        )
       )
     : filteredRecipes;
+
+  console.log("filteredRecipes", filteredRecipes);
+  console.log("searched", searched);
+  console.log("search", search);
 
   const userFavs = user.userFavourites
     ? user.userFavourites.map((recipe) => {
@@ -166,7 +172,8 @@ export default function Recipes() {
                   <Image
                     key={i}
                     alt="recipe"
-                    height="350px"
+                    h={360}
+                    w={300}
                     objectFit="cover"
                     src={recipe.imageURL}
                   />
@@ -199,8 +206,9 @@ export default function Recipes() {
                   <Stack
                     padding="4px"
                     fontFamily="playright script"
-                    spacing={1}
+                    s={1}
                     isInline
+                    display="inline-flex"
                   >
                     {recipe.tags.map((tag) => {
                       return <Tag fontSize="12px">{tag.title}</Tag>;
@@ -218,8 +226,7 @@ export default function Recipes() {
                     {recipe.cookingTime} minutes{" "}
                   </Heading>
                   <Heading fontWeight="thin" as="h5" size="s" paddingTop="5px">
-                    Servings:
-                    {recipe.servings}
+                    Servings: {recipe.servings}
                   </Heading>
                 </Box>
               </Box>
