@@ -72,7 +72,7 @@ export default function RecipeDetails() {
           >
             <span role="img" aria-label="heart">
               🤍
-            </span>
+            </span>{" "}
             {recipe.likes}
           </Button>
         </Stack>

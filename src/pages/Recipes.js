@@ -66,10 +66,6 @@ export default function Recipes() {
       )
     : filteredRecipes;
 
-  console.log("filteredRecipes", filteredRecipes);
-  console.log("searched", searched);
-  console.log("search", search);
-
   const userFavs = user.userFavourites
     ? user.userFavourites.map((recipe) => {
         return recipe.recipeId;
@@ -160,8 +156,8 @@ export default function Recipes() {
       <Box className="container">
         {searched.map((recipe, i) => {
           return (
-            <Link to={`/recipes/${recipe.id}`}>
-              <Box className="recipeCard">
+            <Box className="recipeCard">
+              <Link to={`/recipes/${recipe.id}`}>
                 <Box>
                   {" "}
                   <Heading padding="8px" fontWeight="thin" as="h2" size="md">
@@ -178,30 +174,32 @@ export default function Recipes() {
                     src={recipe.imageURL}
                   />
                 </center>
-                {token ? (
-                  <Box padding="5px">
-                    <Button
-                      className="favButton"
-                      variantColor="gray"
-                      rounded="140%"
-                      variant="outline"
-                      onClick={() =>
-                        favClicked(
-                          recipe.id,
-                          user.userFavourites.find(
-                            (favourite) => favourite.recipeId === recipe.id
-                          )
+              </Link>
+              {token ? (
+                <Box padding="5px">
+                  <Button
+                    className="favButton"
+                    variantColor="gray"
+                    rounded="140%"
+                    variant="outline"
+                    onClick={() =>
+                      favClicked(
+                        recipe.id,
+                        user.userFavourites.find(
+                          (favourite) => favourite.recipeId === recipe.id
                         )
-                      }
-                    >
-                      {checkFav(recipe)}
-                    </Button>{" "}
-                    <span role="img" aria-label="heart">
-                      🤍
-                    </span>
-                    {recipe.likes}
-                  </Box>
-                ) : null}{" "}
+                      )
+                    }
+                  >
+                    {checkFav(recipe)}
+                  </Button>{" "}
+                  <span role="img" aria-label="heart">
+                    🤍
+                  </span>{" "}
+                  {recipe.likes}
+                </Box>
+              ) : null}{" "}
+              <Link to={`/recipes/${recipe.id}`}>
                 <Box>
                   <Stack
                     padding="4px"
@@ -229,8 +227,8 @@ export default function Recipes() {
                     Servings: {recipe.servings}
                   </Heading>
                 </Box>
-              </Box>
-            </Link>
+              </Link>
+            </Box>
           );
         })}
       </Box>

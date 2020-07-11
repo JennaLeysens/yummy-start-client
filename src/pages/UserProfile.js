@@ -60,7 +60,7 @@ export default function UserProfile() {
           {user.name}'s Kitchen
         </Heading>
         <Box>
-          <Heading fontWeight="thin" as="h3" size="lg" p={4}>
+          <Heading fontWeight="thin" fontSize="30px" p={4}>
             About
           </Heading>
           <Image
@@ -92,28 +92,8 @@ export default function UserProfile() {
           filteredRecipes.map((recipe, i) => {
             return (
               <Box>
-                {token ? (
-                  <Box padding="5px">
-                    <Button
-                      className="favButton"
-                      variantColor="gray"
-                      rounded="140%"
-                      variant="outline"
-                      onClick={() =>
-                        favClicked(
-                          recipe.id,
-                          user.userFavourites.find(
-                            (favourite) => favourite.recipeId === recipe.id
-                          )
-                        )
-                      }
-                    >
-                      {checkFav(recipe)}
-                    </Button>{" "}
-                  </Box>
-                ) : null}{" "}
-                <Link to={`/recipes/${recipe.id}`}>
-                  <Box className="smallRecipeCard">
+                <Box className="smallRecipeCard">
+                  <Link to={`/recipes/${recipe.id}`}>
                     <Box>
                       {" "}
                       <Heading
@@ -134,16 +114,29 @@ export default function UserProfile() {
                         objectFit="cover"
                         src={recipe.imageURL}
                       />
-                    </center>
-                    <Box p={4}>
-                      {" "}
-                      <span role="img" aria-label="heart">
-                        🤍
-                      </span>
-                      {recipe.likes}
+                    </center>{" "}
+                  </Link>
+                  {token ? (
+                    <Box padding="5px">
+                      <Button
+                        className="favButton"
+                        variantColor="gray"
+                        rounded="140%"
+                        variant="outline"
+                        onClick={() =>
+                          favClicked(
+                            recipe.id,
+                            user.userFavourites.find(
+                              (favourite) => favourite.recipeId === recipe.id
+                            )
+                          )
+                        }
+                      >
+                        {checkFav(recipe)}
+                      </Button>{" "}
                     </Box>
-                  </Box>
-                </Link>
+                  ) : null}{" "}
+                </Box>
               </Box>
             );
           })
@@ -200,7 +193,7 @@ export default function UserProfile() {
                       {" "}
                       <span role="img" aria-label="heart">
                         🤍
-                      </span>
+                      </span>{" "}
                       {recipe.likes}
                     </Box>
                   </Box>
