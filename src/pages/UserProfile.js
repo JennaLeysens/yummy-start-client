@@ -88,64 +88,76 @@ export default function UserProfile() {
         My favourite recipes ({filteredRecipes ? filteredRecipes.length : 0})
       </Heading>
       <Box className="container">
-        {filteredRecipes
-          ? filteredRecipes.map((recipe, i) => {
-              return (
-                <Box>
-                  {token ? (
-                    <Box padding="5px">
-                      <Button
-                        className="favButton"
-                        variantColor="gray"
-                        rounded="140%"
-                        variant="outline"
-                        onClick={() =>
-                          favClicked(
-                            recipe.id,
-                            user.userFavourites.find(
-                              (favourite) => favourite.recipeId === recipe.id
-                            )
+        {filteredRecipes && filteredRecipes.length !== 0 ? (
+          filteredRecipes.map((recipe, i) => {
+            return (
+              <Box>
+                {token ? (
+                  <Box padding="5px">
+                    <Button
+                      className="favButton"
+                      variantColor="gray"
+                      rounded="140%"
+                      variant="outline"
+                      onClick={() =>
+                        favClicked(
+                          recipe.id,
+                          user.userFavourites.find(
+                            (favourite) => favourite.recipeId === recipe.id
                           )
-                        }
+                        )
+                      }
+                    >
+                      {checkFav(recipe)}
+                    </Button>{" "}
+                  </Box>
+                ) : null}{" "}
+                <Link to={`/recipes/${recipe.id}`}>
+                  <Box className="smallRecipeCard">
+                    <Box>
+                      {" "}
+                      <Heading
+                        padding="8px"
+                        fontWeight="thin"
+                        as="h2"
+                        size="md"
                       >
-                        {checkFav(recipe)}
-                      </Button>{" "}
+                        {recipe.title}{" "}
+                      </Heading>{" "}
                     </Box>
-                  ) : null}{" "}
-                  <Link to={`/recipes/${recipe.id}`}>
-                    <Box className="smallRecipeCard">
-                      <Box>
-                        {" "}
-                        <Heading
-                          padding="8px"
-                          fontWeight="thin"
-                          as="h2"
-                          size="md"
-                        >
-                          {recipe.title}{" "}
-                        </Heading>{" "}
-                      </Box>
-                      <center>
-                        <Image
-                          key={i}
-                          alt="recipe"
-                          w={210}
-                          h={250}
-                          objectFit="cover"
-                          src={recipe.imageURL}
-                        />
-                      </center>
-
+                    <center>
+                      <Image
+                        key={i}
+                        alt="recipe"
+                        w={210}
+                        h={250}
+                        objectFit="cover"
+                        src={recipe.imageURL}
+                      />
+                    </center>
+                    <Box p={4}>
+                      {" "}
                       <span role="img" aria-label="heart">
                         🤍
                       </span>
                       {recipe.likes}
                     </Box>
-                  </Link>
-                </Box>
-              );
-            })
-          : null}
+                  </Box>
+                </Link>
+              </Box>
+            );
+          })
+        ) : (
+          <Heading
+            className="heading"
+            fontWeight="thin"
+            as="h4"
+            size="md"
+            padding={2}
+          >
+            No favourite recipes yet
+          </Heading>
+        )}
       </Box>{" "}
       <Heading
         className="heading"
@@ -157,44 +169,56 @@ export default function UserProfile() {
         My posted recipes ({userRecipes ? userRecipes.length : 0})
       </Heading>
       <Box className="container">
-        {userRecipes
-          ? userRecipes.map((recipe, i) => {
-              return (
-                <Box>
-                  <Link to={`/recipes/${recipe.id}`}>
-                    <Box className="smallRecipeCard">
-                      <Box>
-                        {" "}
-                        <Heading
-                          padding="8px"
-                          fontWeight="thin"
-                          as="h2"
-                          size="md"
-                        >
-                          {recipe.title}{" "}
-                        </Heading>{" "}
-                      </Box>
-                      <center>
-                        <Image
-                          key={i}
-                          alt="recipe"
-                          w={210}
-                          h={250}
-                          objectFit="cover"
-                          src={recipe.imageURL}
-                        />
-                      </center>
-
+        {userRecipes && userRecipes.length !== 0 ? (
+          userRecipes.map((recipe, i) => {
+            return (
+              <Box>
+                <Link to={`/recipes/${recipe.id}`}>
+                  <Box className="smallRecipeCard">
+                    <Box>
+                      {" "}
+                      <Heading
+                        padding="8px"
+                        fontWeight="thin"
+                        as="h2"
+                        size="md"
+                      >
+                        {recipe.title}{" "}
+                      </Heading>{" "}
+                    </Box>
+                    <center>
+                      <Image
+                        key={i}
+                        alt="recipe"
+                        w={210}
+                        h={250}
+                        objectFit="cover"
+                        src={recipe.imageURL}
+                      />
+                    </center>
+                    <Box p={4}>
+                      {" "}
                       <span role="img" aria-label="heart">
                         🤍
                       </span>
                       {recipe.likes}
                     </Box>
-                  </Link>
-                </Box>
-              );
-            })
-          : null}
+                  </Box>
+                </Link>
+              </Box>
+            );
+          })
+        ) : (
+          <Heading
+            className="heading"
+            fontWeight="thin"
+            as="h4"
+            size="md"
+            padding={2}
+          >
+            No posted recipes yet
+          </Heading>
+        )}
       </Box>
     </Box>
   );

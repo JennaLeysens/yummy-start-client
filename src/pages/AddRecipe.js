@@ -122,6 +122,10 @@ export default function AddRecipe() {
       {submitted ? (
         <Box>
           <Alert
+            paddingTop={45}
+            paddingBottom={5}
+            fontFamily="Cormorant Garamond"
+            backgroundColor="white"
             status="success"
             variant="subtle"
             flexDirection="column"
@@ -157,7 +161,7 @@ export default function AddRecipe() {
             size="xl"
             padding="10px"
           >
-            Add your recipe
+            Add a recipe
           </Heading>
           <Image
             position="absolute"
@@ -166,26 +170,26 @@ export default function AddRecipe() {
           ></Image>
           <Box className="box" position="relative">
             <FormControl className="form" isRequired>
-              <FormLabel> Title </FormLabel>
+              <FormLabel p={3}> Title </FormLabel>
               <Input
                 placeholder="e.g Seasoned roast vegetables"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
               ></Input>
-              <FormLabel> Image URL </FormLabel>
+              <FormLabel p={3}> Image URL </FormLabel>
               <Input
                 placeholder="https"
                 value={imageURL}
                 onChange={(e) => setImageURL(e.target.value)}
               ></Input>
               <Image src={imageURL} thumbnail width="50%" />
-              <FormLabel> Description </FormLabel>
+              <FormLabel p={3}> Description </FormLabel>
               <Input
                 placeholder="e.g. A healthy side dish"
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
               ></Input>
-              <FormLabel>Ingredients</FormLabel>
+              <FormLabel paddingTop={3}>Ingredients</FormLabel>
               <FormHelperText>
                 Please include the measurement along with the ingredient (e.g 2
                 x sweet potatoes/½ cup of flour)
@@ -215,13 +219,13 @@ export default function AddRecipe() {
                 value={ingredient5}
                 onChange={(e) => setIngredient5(e.target.value)}
               ></Input>
-              <FormLabel>Method</FormLabel>
+              <FormLabel p={3}>Method</FormLabel>
               <Textarea
                 placeholder="e.g. Blend the ingredients together. Pour into a 15x15 dish and bake for 20 minutes"
                 value={method}
                 onChange={(e) => setMethod(e.target.value)}
               ></Textarea>
-              <FormLabel>Cooking time (minutes)</FormLabel>
+              <FormLabel p={3}>Cooking time (minutes)</FormLabel>
               <Select
                 placeholder="Select"
                 value={cookingTime}
@@ -234,18 +238,19 @@ export default function AddRecipe() {
                 <option>90 </option>
                 <option>120 </option>
               </Select>
-              <FormLabel>Servings</FormLabel>
+              <FormLabel p={3}>Servings</FormLabel>
               <Input
                 placeholder="e.g. 4"
                 value={servings}
                 onChange={(e) => setServings(e.target.value)}
               ></Input>
-              <FormLabel>Recipe tags</FormLabel>
+              <FormLabel p={3}>Recipe tags</FormLabel>
               {tags
                 ? tags.map((tag) => {
                     return (
-                      <div>
+                      <Box textAlign="left">
                         <Checkbox
+                          textAlign="left"
                           variantColor="gray"
                           type="checkbox"
                           value={recipeTags}
@@ -253,12 +258,14 @@ export default function AddRecipe() {
                         >
                           {tag.title}
                         </Checkbox>
-                      </div>
+                      </Box>
                     );
                   })
                 : null}
             </FormControl>
             <Button
+              marginTop={4}
+              p={2}
               onClick={
                 title &&
                 imageURL &&
