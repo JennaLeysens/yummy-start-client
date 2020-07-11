@@ -1,6 +1,7 @@
 import axios from "axios";
 import { apiUrl } from "../../config/constants";
 import { selectToken, selectUser } from "../User/selectors";
+import { appLoading, appDoneLoading } from "../Appstate/actions";
 
 export function userLoggedIn(data) {
   return { type: "LOGIN-SUCCESS", payload: data };
@@ -32,6 +33,7 @@ export function setErrorMessage(data) {
 
 export function login(email, password) {
   return async (dispatch, getState) => {
+    dispatch(appLoading());
     try {
       const response = await axios.post(`${apiUrl}/login`, {
         email,
@@ -39,6 +41,7 @@ export function login(email, password) {
       });
 
       dispatch(userLoggedIn(response.data));
+      dispatch(appDoneLoading());
     } catch (error) {
       if (error.response) {
         dispatch(setErrorMessage({ message: error.response.data.message }));
@@ -51,6 +54,7 @@ export function login(email, password) {
 
 export function signUp(name, email, password, imageurl) {
   return async (dispatch, getState) => {
+    dispatch(appLoading());
     try {
       const response = await axios.post(`${apiUrl}/signup`, {
         name,
@@ -58,7 +62,7 @@ export function signUp(name, email, password, imageurl) {
         password,
         imageurl,
       });
-
+      dispatch(appDoneLoading());
       dispatch(userLoggedIn(response.data));
     } catch (error) {
       if (error.response) {
@@ -106,6 +110,7 @@ export function addRecipe(
   servings
 ) {
   return async (dispatch, getState) => {
+    dispatch(appLoading());
     const token = selectToken(getState());
     try {
       const response = await axios.post(
@@ -124,6 +129,7 @@ export function addRecipe(
       );
       console.log("add recipe", response.data);
       dispatch(newRecipeAdded(response.data));
+      dispatch(appDoneLoading());
     } catch (error) {
       if (error.response) {
         console.log(error.response);

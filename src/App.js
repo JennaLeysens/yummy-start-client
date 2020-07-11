@@ -7,13 +7,16 @@ import AddRecipe from "./pages/AddRecipe";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import { getUserWithStoredToken } from "./store/User/actions";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import NavBar from "./components/NavBar";
 import UserProfile from "./pages/UserProfile";
 import OurFoodosophy from "./pages/OurFoodosophy";
+import Loading from "./components/Loading";
+import { selectAppLoading } from "./store/Appstate/selectors";
 
 function App() {
   const dispatch = useDispatch();
+  const isLoading = useSelector(selectAppLoading);
 
   useEffect(() => {
     dispatch(getUserWithStoredToken());
@@ -22,6 +25,7 @@ function App() {
   return (
     <div className="App" style={{ display: "block" }}>
       <NavBar></NavBar>
+      {isLoading ? <Loading /> : null}
       <Switch>
         <Route path="/ourfoodosophy" component={OurFoodosophy} />
         <Route path="/addrecipe" component={AddRecipe} />
