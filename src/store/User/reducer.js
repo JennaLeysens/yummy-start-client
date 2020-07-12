@@ -4,7 +4,7 @@ const initialState = {
   email: null,
   imageurl: null,
   recipe: null,
-  userFavourites: null,
+  userFavourites: [],
   recipes: null,
   errorMessage: null,
 };
