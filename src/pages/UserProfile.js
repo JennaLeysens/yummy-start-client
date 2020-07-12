@@ -7,7 +7,7 @@ import { fetchRecipes } from "../store/Recipes/actions";
 import { addToFavourites, deleteFavourite } from "../store/User/actions";
 import { Link } from "react-router-dom";
 import { Heading } from "@chakra-ui/core";
-import { Stack, Tag, Image, Box, Button } from "@chakra-ui/core";
+import { Image, Box, Button } from "@chakra-ui/core";
 import "./UserProfile.css";
 
 export default function UserProfile() {
@@ -20,7 +20,6 @@ export default function UserProfile() {
         return recipe.recipeId;
       })
     : null;
-  console.log("favs", userFavs);
 
   const checkFav = (recipe) => {
     if (userFavs.includes(recipe.id)) {
@@ -46,8 +45,6 @@ export default function UserProfile() {
   const filteredRecipes = userFavs
     ? recipes.filter((recipe) => userFavs.includes(recipe.id))
     : null;
-
-  console.log("recipes?????", filteredRecipes);
 
   useEffect(() => {
     dispatch(fetchRecipes());

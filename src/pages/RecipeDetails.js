@@ -3,11 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { fetchOneRecipe, addLike } from "../store/RecipeDetails/actions";
 import { selectRecipe } from "../store/RecipeDetails/selectors";
-import {
-  selectToken,
-  selectUser,
-  selectErrorMessage,
-} from "../store/User/selectors";
+import { selectToken, selectUser } from "../store/User/selectors";
 import {
   addToFavourites,
   deleteFavourite,
@@ -37,7 +33,6 @@ export default function RecipeDetails() {
   const token = useSelector(selectToken);
   const user = useSelector(selectUser);
   const [recipeDeleted, setRecipeDeleted] = useState();
-  const error = useSelector(selectErrorMessage);
 
   useEffect(() => {
     dispatch(fetchOneRecipe(id));

@@ -1,6 +1,6 @@
 # YUMMY START CLIENT 🌿 🍩
 
-❕Click [here](https://yummy-start-app.netlify.app/) to view the deployed version.
+❕Click [here](https://yummy-start-app.netlify.app/) to view the deployed version ❕
 
 Hello, I'm Jenna! This my portfolio project web application.
 
@@ -8,14 +8,16 @@ Hello, I'm Jenna! This my portfolio project web application.
 
 Yummy Start is an app that helps people to have a 'yummy start' when it comes to healthy eating by providing recipes that show that healthy eating doesn't have to be boring and complicated! You can filter recipes by detary preferences, meal type and search for recipes by ingredient. You can also add your own recipes to inspire others in their Yummy Start journey!
 
-[Wireframe](https://wireframepro.mockflow.com/view/yummystartapp)
-[Kaban task board](https://github.com/users/JennaLeysens/projects/1)
+- [Wireframe](https://wireframepro.mockflow.com/view/yummystartapp)
+- [Kanban task board](https://github.com/users/JennaLeysens/projects/1)
 
 ## App Demo
 
 ![](https://media.giphy.com/media/S5bbx3773NMXAXTHJ6/giphy.gif)
 
 ![](https://media.giphy.com/media/fT1bsFJ5r09NqtRvRT/giphy.gif)
+
+![](https://media.giphy.com/media/J4JZjAzyDBYzXc73tQ/giphy.gif)
 
 ## User stories
 

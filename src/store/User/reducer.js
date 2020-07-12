@@ -25,7 +25,6 @@ export default function userSliceReducer(state = initialState, action) {
         recipe: action.payload,
       };
     case "ADD_FAVOURITE_RECIPE": {
-      console.log("reducer", action.payload);
       return {
         ...state,
         userFavourites: state.userFavourites.some(
@@ -51,7 +50,6 @@ export default function userSliceReducer(state = initialState, action) {
       return { ...state, errorMessage: action.payload };
     }
     case "DELETE_RECIPE": {
-      console.log("reducer", action.payload);
       const recipeId = action.payload.id;
       const newRecipes = state.recipes.filter(
         (recipe) => recipe.id !== recipeId
