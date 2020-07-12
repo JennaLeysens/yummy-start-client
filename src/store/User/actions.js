@@ -31,6 +31,10 @@ export function setErrorMessage(data) {
   return { type: "SET_ERROR_MESSAGE", payload: data };
 }
 
+export function recipeDeleted(data) {
+  return { type: "DELETE_RECIPE", payload: data };
+}
+
 export function login(email, password) {
   return async (dispatch, getState) => {
     dispatch(appLoading());
@@ -168,5 +172,17 @@ export function deleteFavourite(favId) {
     });
     console.log("delete fav", response.data.favourite);
     dispatch(favouriteDeleted(response.data.favourite));
+  };
+}
+
+export function deleteRecipe(recipeId) {
+  console.log("action", recipeId);
+  return async (dispatch, getState) => {
+    const token = selectToken(getState());
+    const response = await axios.delete(`${apiUrl}/deleterecipe/${recipeId}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    console.log("delete recipe", response.data.recipe);
+    dispatch(recipeDeleted(response.data.recipe));
   };
 }
