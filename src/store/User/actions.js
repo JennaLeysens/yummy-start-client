@@ -1,6 +1,7 @@
 import axios from "axios";
 import { apiUrl } from "../../config/constants";
 import { selectToken, selectUser } from "../User/selectors";
+import { appLoading, appDoneLoading } from "../Appstate/actions";
 
 export function userLoggedIn(data) {
   return { type: "LOGIN-SUCCESS", payload: data };
@@ -30,8 +31,13 @@ export function setErrorMessage(data) {
   return { type: "SET_ERROR_MESSAGE", payload: data };
 }
 
+export function recipeDeleted(data) {
+  return { type: "DELETE_RECIPE", payload: data };
+}
+
 export function login(email, password) {
   return async (dispatch, getState) => {
+    dispatch(appLoading());
     try {
       const response = await axios.post(`${apiUrl}/login`, {
         email,
@@ -39,6 +45,7 @@ export function login(email, password) {
       });
 
       dispatch(userLoggedIn(response.data));
+      dispatch(appDoneLoading());
     } catch (error) {
       if (error.response) {
         dispatch(setErrorMessage({ message: error.response.data.message }));
@@ -51,6 +58,7 @@ export function login(email, password) {
 
 export function signUp(name, email, password, imageurl) {
   return async (dispatch, getState) => {
+    dispatch(appLoading());
     try {
       const response = await axios.post(`${apiUrl}/signup`, {
         name,
@@ -58,7 +66,7 @@ export function signUp(name, email, password, imageurl) {
         password,
         imageurl,
       });
-
+      dispatch(appDoneLoading());
       dispatch(userLoggedIn(response.data));
     } catch (error) {
       if (error.response) {
@@ -106,6 +114,7 @@ export function addRecipe(
   servings
 ) {
   return async (dispatch, getState) => {
+    dispatch(appLoading());
     const token = selectToken(getState());
     try {
       const response = await axios.post(
@@ -124,6 +133,7 @@ export function addRecipe(
       );
       console.log("add recipe", response.data);
       dispatch(newRecipeAdded(response.data));
+      dispatch(appDoneLoading());
     } catch (error) {
       if (error.response) {
         console.log(error.response);
@@ -162,5 +172,17 @@ export function deleteFavourite(favId) {
     });
     console.log("delete fav", response.data.favourite);
     dispatch(favouriteDeleted(response.data.favourite));
+  };
+}
+
+export function deleteRecipe(recipeId) {
+  console.log("action", recipeId);
+  return async (dispatch, getState) => {
+    const token = selectToken(getState());
+    const response = await axios.delete(`${apiUrl}/deleterecipe/${recipeId}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    console.log("delete recipe", response.data.recipe);
+    dispatch(recipeDeleted(response.data.recipe));
   };
 }

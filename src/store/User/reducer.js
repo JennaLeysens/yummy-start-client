@@ -37,11 +37,10 @@ export default function userSliceReducer(state = initialState, action) {
           : state.userFavourites.concat(action.payload),
       };
     }
-
     case "DELETE_FAVOURITE_RECIPE": {
       const FavId = action.payload.id;
       const newFavs = state.userFavourites.filter(
-        (story) => story.id !== FavId
+        (favourite) => favourite.id !== FavId
       );
       return {
         ...state,
@@ -50,6 +49,17 @@ export default function userSliceReducer(state = initialState, action) {
     }
     case "SET_ERROR_MESSAGE": {
       return { ...state, errorMessage: action.payload };
+    }
+    case "DELETE_RECIPE": {
+      console.log("reducer", action.payload);
+      const recipeId = action.payload.id;
+      const newRecipes = state.recipes.filter(
+        (recipe) => recipe.id !== recipeId
+      );
+      return {
+        ...state,
+        recipes: newRecipes,
+      };
     }
     default:
       return state;

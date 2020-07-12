@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectToken } from "../store/User/selectors";
 import { selectUser } from "../store/User/selectors";
 import logo from "../logo-ys.png";
-import { Image, Button } from "@chakra-ui/core";
+import { Image, Button, Box } from "@chakra-ui/core";
 
 export default function NavBar() {
   const dispatch = useDispatch();
@@ -15,11 +15,11 @@ export default function NavBar() {
   const history = useHistory();
 
   return (
-    <div className="navbar">
-      <div className="logo">
+    <Box className="navbar">
+      <Box className="logo">
         <Image display="inline-block" src={logo}></Image>
-      </div>
-      <div className="grow">
+      </Box>
+      <Box className="grow">
         <NavLink
           exact
           to="/"
@@ -29,9 +29,9 @@ export default function NavBar() {
         >
           Recipes
         </NavLink>
-      </div>
+      </Box>
 
-      <div className="grow">
+      <Box className="grow">
         <NavLink
           to="/addrecipe"
           activeStyle={{
@@ -40,9 +40,9 @@ export default function NavBar() {
         >
           Add recipe
         </NavLink>
-      </div>
+      </Box>
 
-      <div className="grow">
+      <Box className="grow">
         <NavLink
           exact
           to="/ourfoodosophy"
@@ -52,20 +52,21 @@ export default function NavBar() {
         >
           Our foodosophy
         </NavLink>{" "}
-      </div>
+      </Box>
       {token ? (
-        <div className="grow">
-          <NavLink
-            exact
-            to="/myprofile"
-            activeStyle={{
-              fontWeight: "bold",
-            }}
-          >
-            {user.name}'s Kitchen
-          </NavLink>
+        <>
+          <Box className="grow">
+            <NavLink
+              exact
+              to="/myprofile"
+              activeStyle={{
+                fontWeight: "bold",
+              }}
+            >
+              {user.name}'s Kitchen
+            </NavLink>
+          </Box>
           <Button
-            className="button"
             variantColor="gray"
             variant="outline"
             size="xs"
@@ -75,8 +76,8 @@ export default function NavBar() {
             }}
           >
             Logout
-          </Button>{" "}
-        </div>
+          </Button>
+        </>
       ) : (
         <>
           <Link to="/signup">
@@ -101,6 +102,6 @@ export default function NavBar() {
           </Link>
         </>
       )}
-    </div>
+    </Box>
   );
 }

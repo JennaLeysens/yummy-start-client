@@ -60,7 +60,7 @@ export default function UserProfile() {
           {user.name}'s Kitchen
         </Heading>
         <Box>
-          <Heading fontWeight="thin" as="h3" size="lg" p={4}>
+          <Heading fontWeight="thin" fontSize="30px" p={4}>
             About
           </Heading>
           <Image
@@ -88,10 +88,34 @@ export default function UserProfile() {
         My favourite recipes ({filteredRecipes ? filteredRecipes.length : 0})
       </Heading>
       <Box className="container">
-        {filteredRecipes
-          ? filteredRecipes.map((recipe, i) => {
-              return (
-                <Box>
+        {filteredRecipes && filteredRecipes.length !== 0 ? (
+          filteredRecipes.map((recipe, i) => {
+            return (
+              <Box>
+                <Box className="smallRecipeCard">
+                  <Link to={`/recipes/${recipe.id}`}>
+                    <Box>
+                      {" "}
+                      <Heading
+                        padding="8px"
+                        fontWeight="thin"
+                        as="h2"
+                        size="md"
+                      >
+                        {recipe.title}{" "}
+                      </Heading>{" "}
+                    </Box>
+                    <center>
+                      <Image
+                        key={i}
+                        alt="recipe"
+                        w={210}
+                        h={250}
+                        objectFit="cover"
+                        src={recipe.imageURL}
+                      />
+                    </center>{" "}
+                  </Link>
                   {token ? (
                     <Box padding="5px">
                       <Button
@@ -112,40 +136,21 @@ export default function UserProfile() {
                       </Button>{" "}
                     </Box>
                   ) : null}{" "}
-                  <Link to={`/recipes/${recipe.id}`}>
-                    <Box className="smallRecipeCard">
-                      <Box>
-                        {" "}
-                        <Heading
-                          padding="8px"
-                          fontWeight="thin"
-                          as="h2"
-                          size="md"
-                        >
-                          {recipe.title}{" "}
-                        </Heading>{" "}
-                      </Box>
-                      <center>
-                        <Image
-                          key={i}
-                          alt="recipe"
-                          w={210}
-                          h={250}
-                          objectFit="cover"
-                          src={recipe.imageURL}
-                        />
-                      </center>
-
-                      <span role="img" aria-label="heart">
-                        🤍
-                      </span>
-                      {recipe.likes}
-                    </Box>
-                  </Link>
                 </Box>
-              );
-            })
-          : null}
+              </Box>
+            );
+          })
+        ) : (
+          <Heading
+            className="heading"
+            fontWeight="thin"
+            as="h4"
+            size="md"
+            padding={2}
+          >
+            No favourite recipes yet
+          </Heading>
+        )}
       </Box>{" "}
       <Heading
         className="heading"
@@ -157,44 +162,56 @@ export default function UserProfile() {
         My posted recipes ({userRecipes ? userRecipes.length : 0})
       </Heading>
       <Box className="container">
-        {userRecipes
-          ? userRecipes.map((recipe, i) => {
-              return (
-                <Box>
-                  <Link to={`/recipes/${recipe.id}`}>
-                    <Box className="smallRecipeCard">
-                      <Box>
-                        {" "}
-                        <Heading
-                          padding="8px"
-                          fontWeight="thin"
-                          as="h2"
-                          size="md"
-                        >
-                          {recipe.title}{" "}
-                        </Heading>{" "}
-                      </Box>
-                      <center>
-                        <Image
-                          key={i}
-                          alt="recipe"
-                          w={210}
-                          h={250}
-                          objectFit="cover"
-                          src={recipe.imageURL}
-                        />
-                      </center>
-
+        {userRecipes && userRecipes.length !== 0 ? (
+          userRecipes.map((recipe, i) => {
+            return (
+              <Box>
+                <Link to={`/recipes/${recipe.id}`}>
+                  <Box className="smallRecipeCard">
+                    <Box>
+                      {" "}
+                      <Heading
+                        padding="8px"
+                        fontWeight="thin"
+                        as="h2"
+                        size="md"
+                      >
+                        {recipe.title}{" "}
+                      </Heading>{" "}
+                    </Box>
+                    <center>
+                      <Image
+                        key={i}
+                        alt="recipe"
+                        w={210}
+                        h={250}
+                        objectFit="cover"
+                        src={recipe.imageURL}
+                      />
+                    </center>
+                    <Box p={4}>
+                      {" "}
                       <span role="img" aria-label="heart">
                         🤍
-                      </span>
+                      </span>{" "}
                       {recipe.likes}
                     </Box>
-                  </Link>
-                </Box>
-              );
-            })
-          : null}
+                  </Box>
+                </Link>
+              </Box>
+            );
+          })
+        ) : (
+          <Heading
+            className="heading"
+            fontWeight="thin"
+            as="h4"
+            size="md"
+            padding={2}
+          >
+            No posted recipes yet
+          </Heading>
+        )}
       </Box>
     </Box>
   );

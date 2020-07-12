@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { signUp } from "../store/User/actions";
 import {
   Input,
@@ -23,6 +24,7 @@ export default function SignUp() {
   const dispatch = useDispatch();
   const toast = useToast();
   const error = useSelector(selectErrorMessage);
+  const history = useHistory();
 
   function submitForm() {
     dispatch(signUp(name, email, password, imageurl));
@@ -30,6 +32,7 @@ export default function SignUp() {
     setEmail("");
     setPassword("");
     setImageUrl("");
+    history.push("/");
   }
 
   useEffect(() => {
