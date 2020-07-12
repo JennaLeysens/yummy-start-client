@@ -1,6 +1,7 @@
 import axios from "axios";
 import { apiUrl } from "../../config/constants";
 import { appLoading, appDoneLoading } from "../Appstate/actions";
+import { setErrorMessage } from "../User/actions";
 
 export function storeOneRecipe(data) {
   return { type: "FETCH_ONE_RECIPE", payload: data };
@@ -13,10 +14,18 @@ export function updateRecipe(data) {
 export function fetchOneRecipe(id) {
   return async (dispatch, getState) => {
     dispatch(appLoading());
-    const oneResponse = await axios.get(`${apiUrl}/recipes/${id}`);
-    console.log("one response", oneResponse.data);
-    dispatch(storeOneRecipe(oneResponse.data));
-    dispatch(appDoneLoading());
+    try {
+      const oneResponse = await axios.get(`${apiUrl}/recipes/${id}`);
+      console.log("one response", oneResponse.data);
+      dispatch(storeOneRecipe(oneResponse.data));
+      dispatch(appDoneLoading());
+    } catch (error) {
+      if (error.response) {
+        dispatch(setErrorMessage({ message: error.response.data.message }));
+      } else {
+        console.log(error.message);
+      }
+    }
   };
 }
 

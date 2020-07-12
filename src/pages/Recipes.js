@@ -175,8 +175,8 @@ export default function Recipes() {
                   />
                 </center>
               </Link>
-              {token ? (
-                <Box padding="5px">
+              <Box>
+                {token ? (
                   <Button
                     className="favButton"
                     variantColor="gray"
@@ -192,13 +192,13 @@ export default function Recipes() {
                     }
                   >
                     {checkFav(recipe)}
-                  </Button>{" "}
-                  <span role="img" aria-label="heart">
-                    🤍
-                  </span>{" "}
-                  {recipe.likes}
-                </Box>
-              ) : null}{" "}
+                  </Button>
+                ) : null}{" "}
+                <span role="img" aria-label="heart">
+                  🤍
+                </span>{" "}
+                {recipe.likes}
+              </Box>
               <Link to={`/recipes/${recipe.id}`}>
                 <Box>
                   <Stack
