@@ -194,22 +194,24 @@ export default function Recipes() {
                     {checkFav(recipe)}
                   </Button>
                 ) : null}{" "}
-                <span role="img" aria-label="heart">
-                  🤍
-                </span>{" "}
-                {recipe.likes}
+                <Box p={2}>
+                  <span role="img" aria-label="heart">
+                    🤍
+                  </span>{" "}
+                  {recipe.likes}
+                </Box>
               </Box>
               <Link to={`/recipes/${recipe.id}`}>
                 <Box>
                   <Stack
-                    padding="4px"
+                    padding="3px"
                     fontFamily="playright script"
                     s={1}
                     isInline
                     display="inline-flex"
                   >
                     {recipe.tags.map((tag) => {
-                      return <Tag fontSize="12px">{tag.title}</Tag>;
+                      return <Tag fontSize="10px">{tag.title}</Tag>;
                     })}{" "}
                   </Stack>
                 </Box>{" "}

@@ -139,7 +139,7 @@ export default function AddRecipe() {
             </AlertTitle>
             <AlertDescription maxWidth="sm">
               Thank you for submitting your yummy recipe! See your recipe ready
-              to be made on the recipes page
+              to be made on the recipes page.
             </AlertDescription>
           </Alert>
           <Box className="linkbox">
