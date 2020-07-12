@@ -81,7 +81,7 @@ export default function RecipeDetails() {
               paddingBottom={5}
               fontFamily="Cormorant Garamond"
               backgroundColor="white"
-              status="error"
+              status="success"
               variant="subtle"
               flexDirection="column"
               justifyContent="center"
@@ -90,9 +90,11 @@ export default function RecipeDetails() {
             >
               <AlertIcon size="40px" mr={0} />
               <AlertTitle mt={4} mb={1} fontSize="lg">
-                No recipe
+                Recipe deleted
               </AlertTitle>
-              <AlertDescription maxWidth="sm">{error.message}</AlertDescription>
+              <AlertDescription maxWidth="sm">
+                We're sorry to see your recipe leave the kitchen.
+              </AlertDescription>
             </Alert>
             <Box className="linkbox">
               <Text p={4}>
@@ -207,7 +209,11 @@ export default function RecipeDetails() {
                     : null}
                 </Text>
                 {user.id === recipe.userId ? (
-                  <Button marginTop={5} onClick={deleteARecipe}>
+                  <Button
+                    variantColor="red"
+                    marginTop={5}
+                    onClick={deleteARecipe}
+                  >
                     Delete recipe
                   </Button>
                 ) : null}
