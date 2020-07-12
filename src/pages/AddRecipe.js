@@ -59,7 +59,6 @@ export default function AddRecipe() {
   function editTags(tagId) {
     if (recipeTags.includes(tagId)) {
       const newTags = recipeTags.filter((id) => {
-        console.log(id, tagId);
         return !(id === tagId);
       });
       setRecipeTags(newTags);
@@ -76,7 +75,7 @@ export default function AddRecipe() {
     ingredient4,
     ingredient5,
   ];
-  console.log(recipeTags);
+
   const tagIds = recipeTags;
   function submitForm(e) {
     e.preventDefault();
@@ -92,18 +91,6 @@ export default function AddRecipe() {
         tagIds,
         servings
       )
-    );
-    console.log(
-      "new recipe",
-      title,
-      imageURL,
-      description,
-      ingredients,
-      method,
-      cookingTime,
-      servings,
-      tagIds,
-      servings
     );
   }
 
