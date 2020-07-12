@@ -187,6 +187,7 @@ export default function RecipeDetails() {
                       if (ingredient) {
                         return <li>{ingredient}</li>;
                       }
+                      return undefined;
                     })
                   : null}
               </Text>
@@ -200,6 +201,7 @@ export default function RecipeDetails() {
                         if (method) {
                           return <li>{method}</li>;
                         }
+                        return undefined;
                       })
                     : null}
                 </Text>
