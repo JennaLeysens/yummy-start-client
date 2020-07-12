@@ -34,10 +34,6 @@ Yummy Start is an app that helps people to have a 'yummy start' when it comes to
 - Redux
 - Chakra UI
 - CSS
-- React Bootstrap
-- Express
-  - Rest API
-- Sequelize
 
 ## Goals for this project
 
