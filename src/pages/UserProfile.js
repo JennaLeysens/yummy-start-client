@@ -96,7 +96,7 @@ export default function UserProfile() {
                       <Heading
                         padding="8px"
                         fontWeight="thin"
-                        as="h2"
+                        as="h4"
                         size="md"
                       >
                         {recipe.title}{" "}
@@ -141,8 +141,8 @@ export default function UserProfile() {
           <Heading
             className="heading"
             fontWeight="thin"
-            as="h4"
-            size="md"
+            as="h5"
+            size="sm"
             padding={2}
           >
             No favourite recipes yet

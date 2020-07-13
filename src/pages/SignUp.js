@@ -10,6 +10,7 @@ import {
   Box,
   Image,
   useToast,
+  Link,
 } from "@chakra-ui/core";
 import { Heading } from "@chakra-ui/core";
 import "./forms.css";
@@ -98,6 +99,14 @@ export default function SignUp() {
         >
           Create account
         </Button>
+        <Box>
+          Already have an account?
+          <Link to="/login">
+            <Button variantColor="gray" variant="outline" marginLeft="10px">
+              Login
+            </Button>
+          </Link>
+        </Box>
       </Box>
     </Box>
   );
