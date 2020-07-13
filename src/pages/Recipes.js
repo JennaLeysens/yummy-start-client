@@ -21,6 +21,7 @@ import {
   Button,
   Box,
   Image,
+  Avatar,
 } from "@chakra-ui/core";
 
 export default function Recipes() {
@@ -175,7 +176,7 @@ export default function Recipes() {
                   />
                 </center>
               </Link>
-              <Box>
+              <Box p={2}>
                 {token ? (
                   <Button
                     className="favButton"
@@ -194,12 +195,10 @@ export default function Recipes() {
                     {checkFav(recipe)}
                   </Button>
                 ) : null}{" "}
-                <Box p={2}>
-                  <span role="img" aria-label="heart">
-                    🤍
-                  </span>{" "}
-                  {recipe.likes}
-                </Box>
+                <span role="img" aria-label="heart">
+                  🤍
+                </span>{" "}
+                {recipe.likes}
               </Box>
               <Link to={`/recipes/${recipe.id}`}>
                 <Box>
@@ -216,9 +215,17 @@ export default function Recipes() {
                   </Stack>
                 </Box>{" "}
                 <Box>
-                  <Heading fontWeight="thin" as="h5" size="s" paddingTop="5px">
-                    Whipped up by: {recipe.user.name}
+                  <Heading
+                    fontWeight="thin"
+                    as="h5"
+                    size="s"
+                    paddingTop="5px"
+                    paddingBottom="5px"
+                  >
+                    Whipped up by: {recipe.user.name}{" "}
+                    <Avatar src={recipe.user.imageurl} size="2xs"></Avatar>
                   </Heading>
+
                   <Heading fontWeight="thin" as="h5" size="s" paddingTop="5px">
                     <span role="img" aria-label="clock">
                       🕐
