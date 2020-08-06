@@ -4,7 +4,9 @@ import { selectToken } from "../store/User/selectors";
 import { selectUser } from "../store/User/selectors";
 import { selectRecipes } from "../store/Recipes/selectors";
 import { fetchRecipes } from "../store/Recipes/actions";
+import { selectFavourites } from "../store/Favourites/selectors";
 import { addToFavourites, deleteFavourite } from "../store/User/actions";
+import { fetchFavourites } from "../store/Favourites/actions";
 import { Link } from "react-router-dom";
 import { Heading } from "@chakra-ui/core";
 import { Image, Box, Button } from "@chakra-ui/core";
@@ -14,6 +16,9 @@ export default function UserProfile() {
   const user = useSelector(selectUser);
   const userRecipes = user.recipes;
   const token = useSelector(selectToken);
+  const dispatch = useDispatch();
+  const favourites = useSelector(selectFavourites);
+  console.log(favourites);
 
   const userFavs = user.userFavourites
     ? user.userFavourites.map((recipe) => {
@@ -38,7 +43,6 @@ export default function UserProfile() {
     }
   }
 
-  const dispatch = useDispatch();
   const recipes = useSelector(selectRecipes);
   console.log("recipes", recipes);
 
@@ -48,6 +52,10 @@ export default function UserProfile() {
 
   useEffect(() => {
     dispatch(fetchRecipes());
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(fetchFavourites());
   }, [dispatch]);
 
   return (
