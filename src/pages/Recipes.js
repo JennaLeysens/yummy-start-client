@@ -20,9 +20,10 @@ import {
   Icon,
   Button,
   Box,
-  Image,
   Avatar,
 } from "@chakra-ui/core";
+import { fetchPhotos } from "../config/CloudinaryService";
+import { CloudinaryContext, Image } from "cloudinary-react";
 
 export default function Recipes() {
   const dispatch = useDispatch();
@@ -34,6 +35,12 @@ export default function Recipes() {
   const token = useSelector(selectToken);
   const user = useSelector(selectUser);
   const [search, setSearch] = useState();
+  const [images, setImages] = useState([]);
+
+  useEffect(() => {
+    fetchPhotos("image", setImages);
+  }, []);
+  console.log(images);
 
   const compareLikes = (recipeA, recipeB) => {
     return recipeB.likes - recipeA.likes;
@@ -103,6 +110,22 @@ export default function Recipes() {
       <Heading fontWeight="thin" className="recipesheading" as="h1" size="2xl">
         Recipes
       </Heading>
+      <CloudinaryContext cloudName="yummystart">
+        <div className="App">
+          <section>
+            {images.map((i) => (
+              <Image
+                key={i}
+                publicId={i}
+                fetch-format="auto"
+                quality="auto"
+                height="360"
+                width="300"
+              />
+            ))}
+          </section>
+        </div>
+      </CloudinaryContext>
       <Stack fontFamily="playright script" fontSize="md" spacing={2} isInline>
         <Tag className="tags" size="md" onClick={() => setSelectedTag(null)}>
           All recipes

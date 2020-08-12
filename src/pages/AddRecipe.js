@@ -15,7 +15,6 @@ import {
   Textarea,
   Select,
   Checkbox,
-  Image,
   Alert,
   AlertIcon,
   AlertTitle,
@@ -24,13 +23,14 @@ import {
   Text,
   useToast,
   FormHelperText,
+  Image,
 } from "@chakra-ui/core";
 import "./AddRecipe.css";
 import addRecipeBackground from "../addRecipeBackground.png";
+import { openUploadWidget } from "../config/CloudinaryService";
 
 export default function AddRecipe() {
   const [title, setTitle] = useState();
-  const [imageURL, setImageURL] = useState();
   const [description, setDescription] = useState();
   const [ingredient1, setIngredient1] = useState();
   const [ingredient2, setIngredient2] = useState();
@@ -47,6 +47,26 @@ export default function AddRecipe() {
   const history = useHistory();
   const tags = useSelector(selectTags);
   const toast = useToast();
+  const [images, setImages] = useState([]);
+
+  const beginUpload = (tag) => {
+    const uploadOptions = {
+      cloudName: "yummystart",
+      tags: [tag],
+      uploadPreset: "upload",
+    };
+
+    openUploadWidget(uploadOptions, (error, photos) => {
+      if (!error) {
+        console.log(photos);
+        if (photos.event === "success") {
+          setImages([...images, photos.info.public_id]);
+        }
+      } else {
+        console.log(error);
+      }
+    });
+  };
 
   if (!token) {
     history.push("/login");
@@ -83,7 +103,6 @@ export default function AddRecipe() {
     dispatch(
       addRecipe(
         title,
-        imageURL,
         description,
         ingredients,
         method,
@@ -163,13 +182,13 @@ export default function AddRecipe() {
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
               ></Input>
-              <FormLabel p={3}> Image URL </FormLabel>
-              <Input
-                placeholder="https"
-                value={imageURL}
-                onChange={(e) => setImageURL(e.target.value)}
-              ></Input>
-              <Image src={imageURL} thumbnail width="50%" />
+              <FormLabel p={3}> Recipe image </FormLabel>
+              <div>
+                <Button onClick={() => beginUpload("image")}>
+                  Upload Image
+                </Button>
+              </div>
+
               <FormLabel p={3}> Description </FormLabel>
               <Input
                 placeholder="e.g. A healthy side dish"
@@ -255,7 +274,6 @@ export default function AddRecipe() {
               p={2}
               onClick={
                 title &&
-                imageURL &&
                 description &&
                 ingredients &&
                 method &&

@@ -105,7 +105,6 @@ export function getUserWithStoredToken() {
 
 export function addRecipe(
   title,
-  imageURL,
   description,
   ingredients,
   method,
@@ -121,7 +120,6 @@ export function addRecipe(
         `${apiUrl}/`,
         {
           title,
-          imageURL,
           description,
           ingredients,
           method,
