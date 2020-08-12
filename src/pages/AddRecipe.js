@@ -27,7 +27,7 @@ import {
 } from "@chakra-ui/core";
 import "./AddRecipe.css";
 import addRecipeBackground from "../addRecipeBackground.png";
-import { openUploadWidget } from "../CloudinaryService";
+import { openUploadWidget } from "../config/CloudinaryService";
 
 export default function AddRecipe() {
   const [title, setTitle] = useState();

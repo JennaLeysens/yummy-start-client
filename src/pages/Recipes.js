@@ -22,7 +22,7 @@ import {
   Box,
   Avatar,
 } from "@chakra-ui/core";
-import { fetchPhotos } from "../CloudinaryService";
+import { fetchPhotos } from "../config/CloudinaryService";
 import { CloudinaryContext, Image } from "cloudinary-react";
 
 export default function Recipes() {
@@ -40,6 +40,7 @@ export default function Recipes() {
   useEffect(() => {
     fetchPhotos("image", setImages);
   }, []);
+  console.log(images);
 
   const compareLikes = (recipeA, recipeB) => {
     return recipeB.likes - recipeA.likes;
