@@ -31,7 +31,7 @@ import { openUploadWidget } from "../config/CloudinaryService";
 
 export default function AddRecipe() {
   const [title, setTitle] = useState();
-  const [imageUrl, setImageUrl] = useState();
+  const [imageURL, setImageURL] = useState();
   const [description, setDescription] = useState();
   const [ingredient1, setIngredient1] = useState();
   const [ingredient2, setIngredient2] = useState();
@@ -61,14 +61,15 @@ export default function AddRecipe() {
       if (!error) {
         if (photos.event === "success") {
           setImages([...images, photos.info.public_id]);
+          setImageURL(photos.info.url);
+          console.log(photos.info.url);
         }
       } else {
         console.log(error);
       }
     });
   };
-
-  console.log("images", images);
+  console.log("image", imageURL);
 
   if (!token) {
     history.push("/login");
@@ -105,7 +106,7 @@ export default function AddRecipe() {
     dispatch(
       addRecipe(
         title,
-
+        imageURL,
         description,
         ingredients,
         method,
@@ -187,11 +188,8 @@ export default function AddRecipe() {
               ></Input>
               <FormLabel p={3}> Recipe image </FormLabel>
 
-              <div
-                value={imageUrl}
-                onChange={(e) => setImageUrl(e.target.value)}
-              >
-                <Button onClick={() => beginUpload("image")}>
+              <div>
+                <Button value={imageURL} onClick={() => beginUpload("image")}>
                   Upload Image
                 </Button>
               </div>
@@ -281,6 +279,7 @@ export default function AddRecipe() {
               p={2}
               onClick={
                 title &&
+                imageURL &&
                 description &&
                 ingredients &&
                 method &&
