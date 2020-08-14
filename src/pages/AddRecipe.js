@@ -186,7 +186,7 @@ export default function AddRecipe() {
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
               ></Input>
-              <FormLabel p={3}> Recipe image </FormLabel>
+              <FormLabel p={3}> Recipe photograph </FormLabel>
 
               <div>
                 <Button value={imageURL} onClick={() => beginUpload("image")}>

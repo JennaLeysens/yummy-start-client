@@ -21,9 +21,10 @@ import {
   Button,
   Box,
   Avatar,
+  Image,
 } from "@chakra-ui/core";
 import { fetchPhotos } from "../config/CloudinaryService";
-import { CloudinaryContext, Image } from "cloudinary-react";
+import { CloudinaryContext } from "cloudinary-react";
 
 export default function Recipes() {
   const dispatch = useDispatch();
