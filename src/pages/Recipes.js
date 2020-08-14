@@ -21,9 +21,10 @@ import {
   Button,
   Box,
   Avatar,
+  Image,
 } from "@chakra-ui/core";
 import { fetchPhotos } from "../config/CloudinaryService";
-import { CloudinaryContext, Image } from "cloudinary-react";
+import { CloudinaryContext } from "cloudinary-react";
 
 export default function Recipes() {
   const dispatch = useDispatch();
@@ -111,20 +112,7 @@ export default function Recipes() {
         Recipes
       </Heading>
       <CloudinaryContext cloudName="yummystart">
-        <div className="App">
-          <section>
-            {images.map((i) => (
-              <Image
-                key={i}
-                publicId={i}
-                fetch-format="auto"
-                quality="auto"
-                height="360"
-                width="300"
-              />
-            ))}
-          </section>
-        </div>
+        <div className="App"></div>
       </CloudinaryContext>
       <Stack fontFamily="playright script" fontSize="md" spacing={2} isInline>
         <Tag className="tags" size="md" onClick={() => setSelectedTag(null)}>
