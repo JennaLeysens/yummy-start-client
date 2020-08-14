@@ -34,12 +34,13 @@ Yummy Start is an app that helps people to have a 'yummy start' when it comes to
 - Redux
 - Chakra UI
 - CSS
+- Cloudinary API
 
 ## Goals for this project
 
 - Practice full-stack development
 - Practice working with external api
-- Apply what I learned so far
+- Apply what I have learned so far
 - Showcase a planned development approach of using a wireframe, uml and user stories
 - Practice disciplined [git usage](https://github.com/JennaLeysens/yummy-start-client/branches) (good commit message, branching and pull requests with summaries)
 - I plan on continuing to work on this app, expanding on different technologies and functionality
