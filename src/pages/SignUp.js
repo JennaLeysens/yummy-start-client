@@ -16,16 +16,38 @@ import { Heading } from "@chakra-ui/core";
 import "./forms.css";
 import { selectErrorMessage } from "../store/User/selectors";
 import signupBackground from "../signupBackground.png";
+import { openUploadWidget } from "../config/CloudinaryService";
 
 export default function SignUp() {
   const [name, setName] = useState();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [imageurl, setImageUrl] = useState();
+  const [images, setImages] = useState([]);
+  const [imageURL, setImageURL] = useState();
   const dispatch = useDispatch();
   const toast = useToast();
   const error = useSelector(selectErrorMessage);
   const history = useHistory();
+
+  const beginUpload = (tag) => {
+    const uploadOptions = {
+      cloudName: "yummystart",
+      tags: [tag],
+      uploadPreset: "upload",
+    };
+
+    openUploadWidget(uploadOptions, (error, photos) => {
+      if (!error) {
+        if (photos.event === "success") {
+          setImages([...images, photos.info.public_id]);
+          setImageURL(photos.info.url);
+        }
+      } else {
+        console.log(error);
+      }
+    });
+  };
 
   function submitForm() {
     dispatch(signUp(name, email, password, imageurl));
@@ -83,13 +105,12 @@ export default function SignUp() {
           ></Input>
         </FormControl>
         <FormControl>
-          <FormLabel>Profile image url</FormLabel>
-          <Input
-            type="text"
-            value={imageurl}
-            onChange={(e) => setImageUrl(e.target.value)}
-          ></Input>
-          <Image src={imageurl} thumbnail width="50%" />
+          <FormLabel>Profile photo</FormLabel>
+          <div>
+            <Button value={imageURL} onClick={() => beginUpload("image")}>
+              Upload image
+            </Button>
+          </div>
         </FormControl>
         <Button
           variantColor="gray"

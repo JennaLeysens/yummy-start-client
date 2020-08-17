@@ -16,7 +16,7 @@ export function fetchOneRecipe(id) {
     dispatch(appLoading());
     try {
       const oneResponse = await axios.get(`${apiUrl}/recipes/${id}`);
-      console.log("one response", oneResponse.data);
+
       dispatch(storeOneRecipe(oneResponse.data));
       dispatch(appDoneLoading());
     } catch (error) {
@@ -32,9 +32,9 @@ export function fetchOneRecipe(id) {
 export function addLike() {
   return async (dispatch, getState) => {
     const recipe = getState().recipe.recipe;
-    console.log("add like action", recipe);
+
     const response = await axios.patch(`${apiUrl}/recipes/like/${recipe.id}`);
-    console.log("like", response.data);
+
     dispatch(updateRecipe(response.data));
   };
 }

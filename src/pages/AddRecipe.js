@@ -62,14 +62,12 @@ export default function AddRecipe() {
         if (photos.event === "success") {
           setImages([...images, photos.info.public_id]);
           setImageURL(photos.info.url);
-          console.log(photos.info.url);
         }
       } else {
         console.log(error);
       }
     });
   };
-  console.log("image", imageURL);
 
   if (!token) {
     history.push("/login");
