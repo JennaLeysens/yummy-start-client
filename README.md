@@ -2,11 +2,11 @@
 
 ❕Click [here](https://yummy-start-app.netlify.app/) to view the deployed version ❕
 
-Hello, I'm Jenna! This my portfolio project web application.
+Hello, I'm Jenna! This my portfolio project web application for my full stack bootcamp at Codaisseur.
 
 ## About Yummy Start
 
-Yummy Start is an app that helps people to have a 'yummy start' when it comes to healthy eating by providing recipes that show that healthy eating doesn't have to be boring and complicated! You can filter recipes by dietary preferences, meal type and search for recipes by ingredient. You can also add your own recipes to inspire others in their Yummy Start journey!
+Yummy Start is an app that helps people to have a 'yummy start' when it comes to healthy eating by providing recipes that show that healthy eating doesn't have to be boring and complicated! You can filter recipes by dietary preferences, meal type and search for recipes by ingredient. You can also add your own recipes to inspire others in their Yummy Start journey.
 
 - [Wireframe](https://wireframepro.mockflow.com/view/yummystartapp)
 - [Kanban task board](https://github.com/users/JennaLeysens/projects/1)
@@ -42,7 +42,7 @@ Yummy Start is an app that helps people to have a 'yummy start' when it comes to
 - Practice working with external api
 - Apply what I have learned so far
 - Showcase a planned development approach of using a wireframe, uml and user stories
-- Practice disciplined [git usage](https://github.com/JennaLeysens/yummy-start-client/branches) (good commit message, branching and pull requests with summaries)
+- Practice disciplined [git usage](https://github.com/JennaLeysens/yummy-start-client/branches) (good commit messages, branching and pull requests with summaries)
 - I plan on continuing to work on this app, expanding on different technologies and functionality
 
 ## Server
