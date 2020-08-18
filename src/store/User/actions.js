@@ -68,6 +68,7 @@ export function signUp(name, email, password, imageurl) {
       });
       dispatch(appDoneLoading());
       dispatch(userLoggedIn(response.data));
+      console.log("new user", response);
     } catch (error) {
       if (error.response) {
         dispatch(setErrorMessage({ message: error.response.data.message }));
