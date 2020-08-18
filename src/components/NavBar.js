@@ -17,7 +17,9 @@ export default function NavBar() {
   return (
     <Box className="navbar">
       <Box className="logo">
-        <Image display="inline-block" src={logo}></Image>
+        <NavLink exact to="/">
+          <Image display="inline-block" src={logo}></Image>
+        </NavLink>
       </Box>
       <Box className="grow">
         <NavLink
@@ -30,7 +32,6 @@ export default function NavBar() {
           Recipes
         </NavLink>
       </Box>
-
       <Box className="grow">
         <NavLink
           to="/addrecipe"
@@ -41,7 +42,6 @@ export default function NavBar() {
           Add recipe
         </NavLink>
       </Box>
-
       <Box className="grow">
         <NavLink
           exact

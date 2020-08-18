@@ -128,6 +128,7 @@ export default function SignUp() {
           variant="outline"
           margin="15px"
           onClick={submitForm}
+          marginBottom="15px"
         >
           Create account
         </Button>

@@ -107,6 +107,7 @@ export default function UserProfile() {
                         w={210}
                         h={250}
                         objectFit="cover"
+                        marginBottom="10px"
                         src={recipe.imageURL}
                       />
                     </center>{" "}
@@ -181,6 +182,7 @@ export default function UserProfile() {
                         w={210}
                         h={250}
                         objectFit="cover"
+                        marginBottom="8px"
                         src={recipe.imageURL}
                       />
                     </center>
