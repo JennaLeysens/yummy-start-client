@@ -185,13 +185,20 @@ export default function AddRecipe() {
                 onChange={(e) => setTitle(e.target.value)}
               ></Input>
               <FormLabel p={3}> Recipe photograph </FormLabel>
-
+              <center>
+                <Image
+                  marginTop="5px"
+                  src={imageURL}
+                  fallbackSrc="https://icon-library.com/images/photo-placeholder-icon/photo-placeholder-icon-7.jpg"
+                  width="180px"
+                  marginBottom="15px"
+                />
+              </center>
               <div>
                 <Button value={imageURL} onClick={() => beginUpload("image")}>
                   Upload Image
                 </Button>
               </div>
-
               <FormLabel p={3}> Description </FormLabel>
               <Input
                 placeholder="e.g. A healthy side dish"

@@ -24,7 +24,6 @@ export default function SignUp() {
   const [password, setPassword] = useState();
   const [imageurl, setImageUrl] = useState();
   const [images, setImages] = useState([]);
-  const [imageURL, setImageURL] = useState();
   const dispatch = useDispatch();
   const toast = useToast();
   const error = useSelector(selectErrorMessage);
@@ -41,7 +40,7 @@ export default function SignUp() {
       if (!error) {
         if (photos.event === "success") {
           setImages([...images, photos.info.public_id]);
-          setImageURL(photos.info.url);
+          setImageUrl(photos.info.url);
         }
       } else {
         console.log(error);
@@ -107,7 +106,7 @@ export default function SignUp() {
         <FormControl>
           <FormLabel>Profile photo</FormLabel>
           <div>
-            <Button value={imageURL} onClick={() => beginUpload("image")}>
+            <Button value={imageurl} onClick={() => beginUpload("image")}>
               Upload image
             </Button>
           </div>
