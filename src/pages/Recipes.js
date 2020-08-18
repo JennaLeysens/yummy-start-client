@@ -40,7 +40,8 @@ export default function Recipes() {
 
   useEffect(() => {
     fetchPhotos("image", setImages);
-  }, []);
+    console.log(images);
+  }, [images]);
 
   const compareLikes = (recipeA, recipeB) => {
     return recipeB.likes - recipeA.likes;
