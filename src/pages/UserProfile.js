@@ -30,7 +30,6 @@ export default function UserProfile() {
   };
 
   function favClicked(recipeId, fav) {
-    console.log(recipeId);
     if (fav) {
       dispatch(deleteFavourite(fav.id));
     } else {
@@ -40,7 +39,6 @@ export default function UserProfile() {
 
   const dispatch = useDispatch();
   const recipes = useSelector(selectRecipes);
-  console.log("recipes", recipes);
 
   const filteredRecipes = userFavs
     ? recipes.filter((recipe) => userFavs.includes(recipe.id))

@@ -41,7 +41,6 @@ export default function Recipes() {
   useEffect(() => {
     fetchPhotos("image", setImages);
   }, []);
-  console.log(images);
 
   const compareLikes = (recipeA, recipeB) => {
     return recipeB.likes - recipeA.likes;
@@ -90,7 +89,6 @@ export default function Recipes() {
   };
 
   function favClicked(recipeId, fav) {
-    console.log(recipeId);
     if (fav) {
       dispatch(deleteFavourite(fav.id));
     } else {
@@ -139,10 +137,7 @@ export default function Recipes() {
             fontFamily="playright script"
             onChange={(event) =>
               event.target.value === "Most popular"
-                ? setSortLikes(
-                    filteredRecipes.sort(compareLikes),
-                    console.log(event.target)
-                  )
+                ? setSortLikes(filteredRecipes.sort(compareLikes))
                 : setSortCookingTime(filteredRecipes.sort(compareCookingTime))
             }
           >

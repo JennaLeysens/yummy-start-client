@@ -109,11 +109,11 @@ export default function SignUp() {
             <Image
               marginTop="5px"
               src={imageurl}
-              fallbackSrc="https://sdchefs.org/wp-content/uploads/2016/07/chef-placeholder.png"
+              fallbackSrc="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/Placeholder_no_text.svg/1024px-Placeholder_no_text.svg.png"
               width="150px"
               border="solid"
               borderWidth="0.5px"
-              borderColor="grey"
+              borderColor="lightgrey"
               marginBottom="15px"
             />
           </center>
@@ -131,14 +131,12 @@ export default function SignUp() {
         >
           Create account
         </Button>
-        <Box>
-          Already have an account?
-          <Link to="/login">
-            <Button variantColor="gray" variant="outline" marginLeft="10px">
-              Login
-            </Button>
-          </Link>
-        </Box>
+        <Box>Already have an account?</Box>{" "}
+        <Link to="/login">
+          <Button variantColor="gray" variant="outline" marginLeft="10px">
+            Login
+          </Button>
+        </Link>
       </Box>
     </Box>
   );

@@ -52,7 +52,6 @@ export default function RecipeDetails() {
     }
   };
   function favClicked(recipeId, fav) {
-    console.log(recipeId);
     if (fav) {
       dispatch(deleteFavourite(fav.id));
     } else {
