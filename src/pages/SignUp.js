@@ -132,8 +132,13 @@ export default function SignUp() {
           Create account
         </Button>
         <Box>Already have an account?</Box>{" "}
-        <Link to="/login">
-          <Button variantColor="gray" variant="outline" marginLeft="10px">
+        <Link href="/login">
+          <Button
+            marginTop="10px"
+            variantColor="gray"
+            variant="outline"
+            marginLeft="10px"
+          >
             Login
           </Button>
         </Link>
