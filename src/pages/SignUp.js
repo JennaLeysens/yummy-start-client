@@ -105,6 +105,18 @@ export default function SignUp() {
         </FormControl>
         <FormControl>
           <FormLabel>Profile photo</FormLabel>
+          <center>
+            <Image
+              marginTop="5px"
+              src={imageurl}
+              fallbackSrc="https://sdchefs.org/wp-content/uploads/2016/07/chef-placeholder.png"
+              width="150px"
+              border="solid"
+              borderWidth="0.5px"
+              borderColor="grey"
+              marginBottom="15px"
+            />
+          </center>
           <div>
             <Button value={imageurl} onClick={() => beginUpload("image")}>
               Upload image

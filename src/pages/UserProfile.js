@@ -65,7 +65,7 @@ export default function UserProfile() {
             rounded="full"
             size="150px"
             objectFit="cover"
-            fallbackSrc="https://cdn.pixabay.com/photo/2014/04/03/00/42/chef-hat-309146_1280.png"
+            fallbackSrc="https://sdchefs.org/wp-content/uploads/2016/07/chef-placeholder.png"
             display="inline-block"
             border="1px"
             borderColor="lightgray"
