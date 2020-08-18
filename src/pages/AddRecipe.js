@@ -280,6 +280,8 @@ export default function AddRecipe() {
                 : null}
             </FormControl>
             <Button
+              variantColor="gray"
+              variant="outline"
               marginTop={4}
               p={2}
               onClick={
