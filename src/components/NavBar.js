@@ -82,20 +82,24 @@ export default function NavBar() {
         <>
           <Link to="/signup">
             <Button
+              p={1}
               className="button"
               variantColor="gray"
               variant="outline"
-              size="xs"
+              size="s"
+              fontSize="13px"
             >
               Create an account
             </Button>
           </Link>
           <Link to="/login">
             <Button
+              p={1}
               className="button"
               variantColor="gray"
               variant="outline"
-              size="xs"
+              size="s"
+              fontSize="13px"
             >
               Login
             </Button>
