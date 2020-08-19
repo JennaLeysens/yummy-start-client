@@ -87,7 +87,7 @@ export default function NavBar() {
               variantColor="gray"
               variant="outline"
               size="s"
-              fontSize="13px"
+              fontSize="16px"
             >
               Create an account
             </Button>
@@ -99,7 +99,7 @@ export default function NavBar() {
               variantColor="gray"
               variant="outline"
               size="s"
-              fontSize="13px"
+              fontSize="16px"
             >
               Login
             </Button>

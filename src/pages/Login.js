@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../store/User/actions";
-import { Link } from "react-router-dom";
 import { selectToken, selectErrorMessage } from "../store/User/selectors";
 import { useHistory } from "react-router-dom";
 import {
@@ -51,6 +50,10 @@ export default function Login() {
     setPassword("");
   }
 
+  function navigateSignUp() {
+    history.push("/signup");
+  }
+
   return (
     <Box className="page">
       <Image position="absolute" className="bg" src={loginBackground}></Image>
@@ -93,11 +96,14 @@ export default function Login() {
         </Button>
         <Box>
           No account yet?
-          <Link to="/signup">
-            <Button variantColor="gray" variant="outline" marginLeft="10px">
-              Sign up!
-            </Button>
-          </Link>
+          <Button
+            onClick={navigateSignUp}
+            variantColor="gray"
+            variant="outline"
+            marginLeft="10px"
+          >
+            Sign up!
+          </Button>
         </Box>
       </Box>
     </Box>

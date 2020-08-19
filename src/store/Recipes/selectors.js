@@ -3,6 +3,5 @@ export const selectRecipes = (state) => {
 };
 
 export const selectTags = (state) => {
-  console.log("Selector", state.recipes.recipes.tags);
   return state.recipes.recipes.tags;
 };

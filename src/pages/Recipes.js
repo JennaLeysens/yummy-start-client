@@ -36,12 +36,11 @@ export default function Recipes() {
   const token = useSelector(selectToken);
   const user = useSelector(selectUser);
   const [search, setSearch] = useState();
-  const [images, setImages] = useState([]);
+  const [, setImages] = useState([]);
 
   useEffect(() => {
     fetchPhotos("image", setImages);
-    console.log(images);
-  }, [images]);
+  }, []);
 
   const compareLikes = (recipeA, recipeB) => {
     return recipeB.likes - recipeA.likes;
@@ -107,7 +106,7 @@ export default function Recipes() {
 
   return (
     <Box>
-      <Heading fontWeight="thin" className="recipesheading" as="h1" size="2xl">
+      <Heading fontWeight="thin" className="recipesheading" as="h2" size="xl">
         Recipes
       </Heading>
       <CloudinaryContext cloudName="yummystart">
