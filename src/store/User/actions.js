@@ -131,7 +131,6 @@ export function addRecipe(
         },
         { headers: { Authorization: `Bearer ${token}` } }
       );
-      console.log("add recipe", response.data);
       dispatch(newRecipeAdded(response.data));
       dispatch(appDoneLoading());
     } catch (error) {
@@ -146,7 +145,6 @@ export function addRecipe(
 }
 
 export function addToFavourites(recipeId) {
-  console.log("action", recipeId);
   return async (dispatch, getState) => {
     const token = selectToken(getState());
     const user = selectUser(getState());
@@ -158,31 +156,26 @@ export function addToFavourites(recipeId) {
       },
       { headers: { Authorization: `Bearer ${token}` } }
     );
-    console.log("add fav", response.data.newFavourite);
     dispatch(newFavouriteAdded(response.data.newFavourite));
   };
 }
 
 export function deleteFavourite(favId) {
-  console.log("action", favId);
   return async (dispatch, getState) => {
     const token = selectToken(getState());
     const response = await axios.delete(`${apiUrl}/favourite/${favId}`, {
       headers: { Authorization: `Bearer ${token}` },
     });
-    console.log("delete fav", response.data.favourite);
     dispatch(favouriteDeleted(response.data.favourite));
   };
 }
 
 export function deleteRecipe(recipeId) {
-  console.log("action", recipeId);
   return async (dispatch, getState) => {
     const token = selectToken(getState());
     const response = await axios.delete(`${apiUrl}/deleterecipe/${recipeId}`, {
       headers: { Authorization: `Bearer ${token}` },
     });
-    console.log("delete recipe", response.data.recipe);
     dispatch(recipeDeleted(response.data.recipe));
   };
 }

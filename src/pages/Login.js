@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../store/User/actions";
-import { Link } from "react-router-dom";
 import { selectToken, selectErrorMessage } from "../store/User/selectors";
 import { useHistory } from "react-router-dom";
 import {
@@ -51,7 +50,7 @@ export default function Login() {
     setPassword("");
   }
 
-  function navigteSignUp() {
+  function navigateSignUp() {
     history.push("/signup");
   }
 
@@ -98,7 +97,7 @@ export default function Login() {
         <Box>
           No account yet?
           <Button
-            onClick={navigteSignUp}
+            onClick={navigateSignUp}
             variantColor="gray"
             variant="outline"
             marginLeft="10px"

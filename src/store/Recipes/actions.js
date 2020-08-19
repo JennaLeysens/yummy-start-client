@@ -10,7 +10,6 @@ export function fetchRecipes() {
   return async (dispatch, getState) => {
     dispatch(appLoading());
     const response = await axios.get(`${apiUrl}/recipes`);
-    console.log("response", response.data);
     dispatch(storeRecipes(response.data));
     dispatch(appDoneLoading());
   };

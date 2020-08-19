@@ -10,7 +10,6 @@ import {
   Box,
   Image,
   useToast,
-  Link,
 } from "@chakra-ui/core";
 import { Heading } from "@chakra-ui/core";
 import "./forms.css";
@@ -68,6 +67,10 @@ export default function SignUp() {
       });
     }
   }, [toast, error]);
+
+  function navigateLogin() {
+    history.push("/login");
+  }
 
   return (
     <Box>
@@ -133,16 +136,15 @@ export default function SignUp() {
           Create account
         </Button>
         <Box>Already have an account?</Box>
-        <Link to="/login">
-          <Button
-            marginTop="10px"
-            variantColor="gray"
-            variant="outline"
-            marginLeft="10px"
-          >
-            Login
-          </Button>
-        </Link>
+        <Button
+          onClick={navigateLogin}
+          marginTop="10px"
+          variantColor="gray"
+          variant="outline"
+          marginLeft="10px"
+        >
+          Login
+        </Button>
       </Box>
     </Box>
   );
