@@ -36,12 +36,11 @@ export default function Recipes() {
   const token = useSelector(selectToken);
   const user = useSelector(selectUser);
   const [search, setSearch] = useState();
-  const [images, setImages] = useState([]);
+  const [, setImages] = useState([]);
 
   useEffect(() => {
     fetchPhotos("image", setImages);
-    console.log(images);
-  }, [images]);
+  }, []);
 
   const compareLikes = (recipeA, recipeB) => {
     return recipeB.likes - recipeA.likes;

@@ -133,7 +133,7 @@ export default function SignUp() {
           Create account
         </Button>
         <Box>Already have an account?</Box>
-        <Link href="/login">
+        <Link to="/login">
           <Button
             marginTop="10px"
             variantColor="gray"
