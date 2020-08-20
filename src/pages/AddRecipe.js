@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addRecipe } from "../store/User/actions";
-import { selectToken } from "../store/User/selectors";
 import { selectTags } from "../store/Tags/selectors";
 import { fetchTags } from "../store/Tags/actions";
-import { useHistory } from "react-router-dom";
 import {
   Input,
   Button,
@@ -44,8 +42,6 @@ export default function AddRecipe() {
   const [servings, setServings] = useState();
   const [submitted, setSubmitted] = useState(false);
   const dispatch = useDispatch();
-  const token = useSelector(selectToken);
-  const history = useHistory();
   const tags = useSelector(selectTags);
   const toast = useToast();
   const [images, setImages] = useState([]);
