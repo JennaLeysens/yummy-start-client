@@ -26,7 +26,7 @@ export default function NavBar() {
           exact
           to="/"
           activeStyle={{
-            fontWeight: "grow",
+            fontWeight: "bold",
           }}
         >
           Recipes

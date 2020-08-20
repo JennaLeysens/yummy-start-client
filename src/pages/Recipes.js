@@ -106,9 +106,6 @@ export default function Recipes() {
 
   return (
     <Box>
-      <Heading fontWeight="thin" className="recipesheading" as="h2" size="xl">
-        Recipes
-      </Heading>
       <CloudinaryContext cloudName="yummystart">
         <div className="App"></div>
       </CloudinaryContext>
