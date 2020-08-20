@@ -26,22 +26,35 @@ export default function NavBar() {
           exact
           to="/"
           activeStyle={{
-            fontWeight: "grow",
+            fontWeight: "bold",
           }}
         >
           Recipes
         </NavLink>
       </Box>
-      <Box className="grow">
-        <NavLink
-          to="/addrecipe"
-          activeStyle={{
-            fontWeight: "bold",
-          }}
-        >
-          Add recipe
-        </NavLink>
-      </Box>
+      {token ? (
+        <Box className="grow">
+          <NavLink
+            to="/addrecipe"
+            activeStyle={{
+              fontWeight: "bold",
+            }}
+          >
+            Add recipe
+          </NavLink>
+        </Box>
+      ) : (
+        <Box className="grow">
+          <NavLink
+            to="/login"
+            activeStyle={{
+              fontWeight: "bold",
+            }}
+          >
+            Add recipe
+          </NavLink>
+        </Box>
+      )}
       <Box className="grow">
         <NavLink
           exact
@@ -51,7 +64,7 @@ export default function NavBar() {
           }}
         >
           Our foodosophy
-        </NavLink>{" "}
+        </NavLink>
       </Box>
       {token ? (
         <>
@@ -80,30 +93,38 @@ export default function NavBar() {
         </>
       ) : (
         <>
-          <Link to="/signup">
-            <Button
+          <Box className="grow">
+            <NavLink
+              exact
+              to="/signup"
+              activeStyle={{
+                fontWeight: "bold",
+              }}
               p={1}
-              className="button"
               variantColor="gray"
               variant="outline"
               size="s"
               fontSize="16px"
             >
               Create an account
-            </Button>
-          </Link>
-          <Link to="/login">
-            <Button
+            </NavLink>
+          </Box>
+          <Box className="grow">
+            <NavLink
+              exact
+              to="/login"
+              activeStyle={{
+                fontWeight: "bold",
+              }}
               p={1}
-              className="button"
               variantColor="gray"
               variant="outline"
               size="s"
               fontSize="16px"
             >
               Login
-            </Button>
-          </Link>
+            </NavLink>
+          </Box>
         </>
       )}
     </Box>
