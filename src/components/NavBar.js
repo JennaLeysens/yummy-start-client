@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink, Link, useHistory } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import "./NavBar.css";
 import { logOut } from "../store/User/actions";
 import { useDispatch, useSelector } from "react-redux";
