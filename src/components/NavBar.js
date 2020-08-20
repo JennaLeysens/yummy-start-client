@@ -101,7 +101,6 @@ export default function NavBar() {
                 fontWeight: "bold",
               }}
               p={1}
-              className="button"
               variantColor="gray"
               variant="outline"
               size="s"
@@ -118,7 +117,6 @@ export default function NavBar() {
                 fontWeight: "bold",
               }}
               p={1}
-              className="button"
               variantColor="gray"
               variant="outline"
               size="s"
