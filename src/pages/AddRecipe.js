@@ -69,10 +69,6 @@ export default function AddRecipe() {
     });
   };
 
-  if (!token) {
-    history.push("/login");
-  }
-
   useEffect(() => {
     dispatch(fetchTags());
   }, [dispatch]);
