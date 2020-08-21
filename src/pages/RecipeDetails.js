@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import moment from "moment";
 import { fetchOneRecipe, addLike } from "../store/RecipeDetails/actions";
 import { selectRecipe } from "../store/RecipeDetails/selectors";
 import { selectToken, selectUser } from "../store/User/selectors";
@@ -158,16 +159,16 @@ export default function RecipeDetails() {
                     {checkFav(recipe)}
                   </Button>
                 ) : null}
-              </Heading>{" "}
+              </Heading>
               <Text className="text">
                 <Heading as="h4" size="md">
                   Whipped up by: {recipe.user ? recipe.user.name : null}
                 </Heading>
                 <Heading as="h4" size="md">
-                  Posted: {recipe.createdAt}
+                  Posted on: {moment(recipe.createdAt).format("D MMMM YYYY")}
                 </Heading>
               </Text>
-              <Text className="text">{recipe.description}</Text>{" "}
+              <Text className="text">{recipe.description}</Text>
               <Text className="text">
                 <Heading as="h4" size="md">
                   <span role="img" aria-label="clock">
