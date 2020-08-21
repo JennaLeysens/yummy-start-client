@@ -228,7 +228,6 @@ export default function Recipes() {
                     Whipped up by: {recipe.user.name}{" "}
                     <Avatar src={recipe.user.imageurl} size="2xs"></Avatar>
                   </Heading>
-
                   <Heading fontWeight="thin" as="h5" size="s" paddingTop="5px">
                     <span role="img" aria-label="clock">
                       🕐

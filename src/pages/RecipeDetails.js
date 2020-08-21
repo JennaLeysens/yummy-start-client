@@ -135,7 +135,6 @@ export default function RecipeDetails() {
                   align="center"
                 />
               </Box>
-
               <Text className="text"></Text>
             </Box>
             <Box className="recipeText" mt="45px">
@@ -163,6 +162,9 @@ export default function RecipeDetails() {
               <Text className="text">
                 <Heading as="h4" size="md">
                   Whipped up by: {recipe.user ? recipe.user.name : null}
+                </Heading>
+                <Heading as="h4" size="md">
+                  Posted: {recipe.createdAt}
                 </Heading>
               </Text>
               <Text className="text">{recipe.description}</Text>{" "}
