@@ -8,7 +8,6 @@ export function storeTags(data) {
 export function fetchTags() {
   return async (dispatch, getState) => {
     const response = await axios.get(`${apiUrl}/tags`);
-
     dispatch(storeTags(response.data));
   };
 }
