@@ -1,6 +1,6 @@
 # YUMMY START CLIENT 🌿 🍩
 
-❕Click [here](https://yummy-start-app.netlify.app/) to view the deployed version ❕
+Click [here](https://yummy-start-app.netlify.app/) to view the deployed version
 
 Hello, I'm Jenna! This my portfolio project web application for my full stack bootcamp at Codaisseur.
 
@@ -13,9 +13,9 @@ Yummy Start is an app that helps people to have a 'yummy start' when it comes to
 
 ## App Demo
 
-![](https://media.giphy.com/media/S5bbx3773NMXAXTHJ6/giphy.gif)
+![](https://media.giphy.com/media/gfBc1FyTo9uY5iGXk3/giphy.gif)
 
-![](https://media.giphy.com/media/fT1bsFJ5r09NqtRvRT/giphy.gif)
+![](https://media.giphy.com/media/VdWOtERdrhKKMlVKP6/giphy.gif)
 
 ![](https://media.giphy.com/media/J4JZjAzyDBYzXc73tQ/giphy.gif)
 
@@ -43,7 +43,7 @@ Yummy Start is an app that helps people to have a 'yummy start' when it comes to
 - Apply what I have learned so far
 - Showcase a planned development approach of using a wireframe, uml and user stories
 - Practice disciplined [git usage](https://github.com/JennaLeysens/yummy-start-client/branches) (good commit messages, branching and pull requests with summaries)
-- I plan on continuing to work on this app, expanding on different technologies and functionality
+- I plan on continuing to work on this app, expanding it with different technologies and functionality
 
 ## Server
 
