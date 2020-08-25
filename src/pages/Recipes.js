@@ -105,7 +105,12 @@ export default function Recipes() {
         <div className="App"></div>
       </CloudinaryContext>
       <Stack fontFamily="playright script" fontSize="md" spacing={2} isInline>
-        <Tag className="tags" size="md" onClick={() => setSelectedTag(null)}>
+        <Tag
+          marginLeft={6}
+          className="tags"
+          size="md"
+          onClick={() => setSelectedTag(null)}
+        >
           All recipes
         </Tag>
         {tags
@@ -125,7 +130,7 @@ export default function Recipes() {
           <Select
             focusBorderColor="darkgray"
             placeholder="Sort by"
-            width="80%"
+            width="5cm"
             fontFamily="playright script"
             onChange={(event) =>
               event.target.value === "Most popular"
@@ -144,7 +149,7 @@ export default function Recipes() {
               focusBorderColor="darkgray"
               type="text"
               variant="outline"
-              width="160%"
+              width="120%"
               placeholder="Search by ingredient"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
