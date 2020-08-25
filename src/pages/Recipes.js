@@ -35,7 +35,7 @@ export default function Recipes() {
   const [selectedTag, setSelectedTag] = useState();
   const token = useSelector(selectToken);
   const user = useSelector(selectUser);
-  const [search, setSearch] = useState([]);
+  const [search, setSearch] = useState();
   const [, setImages] = useState([]);
 
   useEffect(() => {
@@ -55,25 +55,24 @@ export default function Recipes() {
       )
     : recipes;
 
-  const ingredients = recipes
-    ? recipes.map((recipe) => {
-        return recipe.ingredients;
-      })
-    : null;
+  // const ingredients = recipes
+  //   ? recipes.map((recipe) => {
+  //       return recipe.ingredients;
+  //     })
+  //   : null;
 
-  const allIngredients = ingredients.flat();
-  const joined = allIngredients.join();
+  // // const allIngredients = ingredients.flat();
+  // // const joined = allIngredients.join();
 
-  const filterIngredient = joined.includes(search);
+  // // const filterIngredient = joined.includes(search);
 
-  const searched = filterIngredient
+  const searched = search
     ? filteredRecipes.filter((recipe) =>
         recipe.ingredients.some((ingredient) =>
           ingredient ? ingredient.includes(search) : null
         )
       )
     : filteredRecipes;
-  console.log("s", searched);
 
   const userFavs = user.userFavourites
     ? user.userFavourites.map((recipe) => {
@@ -159,7 +158,7 @@ export default function Recipes() {
         </Stack>
       </Stack>
       <Box className="container">
-        {search && filterIngredient ? (
+        {searched.length ? (
           searched.map((recipe, i) => {
             return (
               <Box className="recipeCard">
