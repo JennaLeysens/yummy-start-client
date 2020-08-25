@@ -8,6 +8,7 @@ import { selectTags } from "../store/Tags/selectors";
 import "./Recipes.css";
 import { selectToken } from "../store/User/selectors";
 import { selectUser } from "../store/User/selectors";
+import { selectAppLoading } from "../store/Appstate/selectors";
 import { addToFavourites, deleteFavourite } from "../store/User/actions";
 import {
   Stack,
@@ -37,6 +38,7 @@ export default function Recipes() {
   const user = useSelector(selectUser);
   const [search, setSearch] = useState();
   const [, setImages] = useState([]);
+  const loading = useSelector(selectAppLoading);
 
   useEffect(() => {
     fetchPhotos("image", setImages);
@@ -54,17 +56,6 @@ export default function Recipes() {
         recipe.tags.some((tag) => tag.id === selectedTag.id)
       )
     : recipes;
-
-  // const ingredients = recipes
-  //   ? recipes.map((recipe) => {
-  //       return recipe.ingredients;
-  //     })
-  //   : null;
-
-  // // const allIngredients = ingredients.flat();
-  // // const joined = allIngredients.join();
-
-  // // const filterIngredient = joined.includes(search);
 
   const searched = search
     ? filteredRecipes.filter((recipe) =>
@@ -103,6 +94,10 @@ export default function Recipes() {
   useEffect(() => {
     dispatch(fetchRecipes());
   }, [dispatch]);
+
+  if (loading) {
+    return null;
+  }
 
   return (
     <Box>
@@ -154,6 +149,17 @@ export default function Recipes() {
               value={search}
               onChange={(e) => setSearch(e.target.value)}
             ></Input>
+            {search ? (
+              <Button
+                size="xs"
+                fontSize={11}
+                marginLeft={2}
+                p={0}
+                onClick={() => setSearch("")}
+              >
+                Clear
+              </Button>
+            ) : null}
           </InputGroup>
         </Stack>
       </Stack>
@@ -253,9 +259,11 @@ export default function Recipes() {
               </Box>
             );
           })
-        ) : (
-          <Heading>No recipes found</Heading>
-        )}
+        ) : search ? (
+          <Heading p={10} as="h5" size="sm">
+            No recipe found. Try searching for a different ingredient.
+          </Heading>
+        ) : null}
       </Box>
     </Box>
   );
