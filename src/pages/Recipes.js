@@ -23,6 +23,7 @@ import {
   Box,
   Avatar,
   Image,
+  Text,
 } from "@chakra-ui/core";
 import { fetchPhotos } from "../config/CloudinaryService";
 import { CloudinaryContext } from "cloudinary-react";
@@ -155,18 +156,27 @@ export default function Recipes() {
               onChange={(e) => setSearch(e.target.value)}
             ></Input>
             {search ? (
-              <Button
-                size="xs"
-                fontSize={11}
-                marginLeft={2}
-                p={0}
-                onClick={() => setSearch("")}
-              >
-                Clear
-              </Button>
+              <>
+                <Button
+                  size="xs"
+                  fontSize={11}
+                  marginTop={2}
+                  marginLeft={2}
+                  onClick={() => setSearch("")}
+                >
+                  Clear
+                </Button>
+              </>
             ) : null}
           </InputGroup>
         </Stack>
+      </Stack>
+      <Stack marginTop={5}>
+        {search ? (
+          <Text fontFamily="playright script">
+            {searched.length} recipe(s) found
+          </Text>
+        ) : null}
       </Stack>
       <Box className="container">
         {searched.length ? (
@@ -175,10 +185,9 @@ export default function Recipes() {
               <Box className="recipeCard">
                 <Link to={`/recipes/${recipe.id}`}>
                   <Box>
-                    {" "}
                     <Heading padding="8px" fontWeight="thin" as="h2" size="md">
-                      {recipe.title}{" "}
-                    </Heading>{" "}
+                      {recipe.title}
+                    </Heading>
                   </Box>
                   <center>
                     <Image
